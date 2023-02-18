@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="WPFUI.MVVM.View.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WPFUI.MVVM.View"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
+    <StackPanel>
+        <TextBlock Text="Good morning name.&#x0a;Your screen usage today is&#x0a;XX hours, XX minutes"
+                   Foreground="White"
+                   FontSize="40"
+                   HorizontalAlignment="Left"
+                   Margin="0 0 0 30">
+        </TextBlock>
+        
+        <TextBlock Text="Active Blocks"
+                   Foreground="White"
+                   FontSize="30"
+                   HorizontalAlignment="Left"
+                   Margin="0 0 0 20">
+        </TextBlock>
+        
+        <StackPanel Orientation="Horizontal">
+            <Border Width="250" Height="200" Background="Aqua" Margin="0 0 0 0">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,250,200"></RectangleGeometry>
+                </Border.Clip>
+            </Border>
+            <Border Width="250" Height="200" Background="Red" Margin="20 0 0 0">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,250,200"></RectangleGeometry>
+                </Border.Clip>
+            </Border>
+            <Border Width="250" Height="200" Background="Green" Margin="20 0 0 0">
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,250,200"></RectangleGeometry>
+                </Border.Clip>
+            </Border>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
