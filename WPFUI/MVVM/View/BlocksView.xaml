@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="WPFUI.MVVM.View.BlocksView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WPFUI.MVVM.View"
+             mc:Ignorable="d"
+             d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
+    <ScrollViewer VerticalScrollBarVisibility="Visible"
+                  Style="{StaticResource ScrollBarTheme}">
+        <StackPanel Margin="0 0 0 0">
+            <TextBlock Text="Blocks"
+                       Foreground="White"
+                       FontSize="40"
+                       HorizontalAlignment="Left"
+                       Margin="20 10 0 15">
+            </TextBlock>
+            <StackPanel Orientation="Vertical">
+                <Border Width="680" Height="150" Background="#494c56" Margin="0 0 0 15">
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,680,150"></RectangleGeometry>
+                    </Border.Clip>
+                    <TextBlock Text="Text"
+                             Foreground="White"
+                             Background="Transparent">
+                    </TextBlock>
+                </Border>
+                <Border Width="680" Height="150" Background="#494c56" Margin="0 0 0 15">
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,680,150"></RectangleGeometry>
+                    </Border.Clip>
+                </Border>
+                <Border Width="680" Height="150" Background="#494c56" Margin="0 0 0 15">
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,680,150"></RectangleGeometry>
+                    </Border.Clip>
+                </Border>
+                <Border Width="680" Height="150" Background="#494c56" Margin="0 0 0 15">
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,680,150"></RectangleGeometry>
+                    </Border.Clip>
+                </Border>
+                <Border Width="680" Height="150" Background="#494c56" Margin="0 0 0 15">
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,680,150"></RectangleGeometry>
+                    </Border.Clip>
+                </Border>
+                <Border Width="680" Height="150" Background="#494c56" Margin="0 0 0 15">
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,680,150"></RectangleGeometry>
+                    </Border.Clip>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

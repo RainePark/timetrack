@@ -25,9 +25,14 @@ namespace WPFUI
             InitializeComponent();
         }
 
-        private void TestButton1_OnClick(object sender, RoutedEventArgs e)
+        private void CloseWindowButton_OnClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Hello test");
+            Close();
+        }
+
+        private void TitleBar_DragWindow(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

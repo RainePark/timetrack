@@ -5,38 +5,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WPFUI.MVVM.View"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
-    <StackPanel>
-        <TextBlock Text="Good morning name.&#x0a;Your screen usage today is&#x0a;XX hours, XX minutes"
-                   Foreground="White"
-                   FontSize="40"
-                   HorizontalAlignment="Left"
-                   Margin="0 0 0 30">
-        </TextBlock>
-        
-        <TextBlock Text="Active Blocks"
-                   Foreground="White"
-                   FontSize="30"
-                   HorizontalAlignment="Left"
-                   Margin="0 0 0 20">
-        </TextBlock>
-        
-        <StackPanel Orientation="Horizontal">
-            <Border Width="250" Height="200" Background="Aqua" Margin="0 0 0 0">
-                <Border.Clip>
-                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,250,200"></RectangleGeometry>
-                </Border.Clip>
-            </Border>
-            <Border Width="250" Height="200" Background="Red" Margin="20 0 0 0">
-                <Border.Clip>
-                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,250,200"></RectangleGeometry>
-                </Border.Clip>
-            </Border>
-            <Border Width="250" Height="200" Background="Green" Margin="20 0 0 0">
-                <Border.Clip>
-                    <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,250,200"></RectangleGeometry>
-                </Border.Clip>
-            </Border>
+             d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
+
+    <ScrollViewer VerticalScrollBarVisibility="Visible"
+                  Style="{StaticResource ScrollBarTheme}">
+        <StackPanel Margin="20 10 0 0">
+            <TextBlock Text="Good morning name.&#x0a;Your screen usage today is&#x0a;XX hours, XX minutes"
+                       Foreground="White"
+                       FontSize="40"
+                       HorizontalAlignment="Left"
+                       Margin="0 0 0 30">
+            </TextBlock>
+            
+            <TextBlock Text="Active Blocks"
+                       Foreground="White"
+                       FontSize="30"
+                       HorizontalAlignment="Left"
+                       Margin="0 0 0 15">
+            </TextBlock>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Border Width="325" Height="200" Background="#494c56" Margin="0 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,325,200"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                    <Border Width="325" Height="200" Background="#494c56" Margin="20 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,325,200"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                    <Border Width="325" Height="200" Background="#494c56" Margin="0 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,325,200"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                    <Border Width="325" Height="200" Background="#494c56" Margin="20 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,325,200"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Text="bottom text"
+                       Foreground="White"
+                       FontSize="30"
+                       HorizontalAlignment="Left"
+                       Margin="0 20 0 20">
+            </TextBlock>
         </StackPanel>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -6,29 +6,27 @@
         xmlns:local="clr-namespace:WPFUI"
         xmlns:viewModel="clr-namespace:WPFUI.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="920" WindowStyle="None" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True">
+        Title="TimeTrack" Height="600" Width="920" WindowStyle="None" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True">
     
     <Window.DataContext>
         <viewModel:MainViewModel></viewModel:MainViewModel>
     </Window.DataContext>
     
-    <Border Background="DarkSlateBlue" CornerRadius="10">
+    <Border Background=" #141327 " CornerRadius="10">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"></ColumnDefinition>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="35"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             
             <Grid.RowDefinitions>
-                <RowDefinition Height="75"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="10"></RowDefinition>
             </Grid.RowDefinitions>
             
-            <TextBlock 
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
                 Text="TimeTrack" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center" 
@@ -36,7 +34,7 @@
                 FontSize="22">
             </TextBlock>
             
-            <StackPanel Grid.Column="0" Grid.Row="1" >
+            <StackPanel Grid.Column="0" Grid.Row="2" >
                 <RadioButton Content="Dashboard"
                              Height="50"
                              Foreground="White"
@@ -56,28 +54,61 @@
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource SidebarButtonTheme}">
+                             Style="{StaticResource SidebarButtonTheme}"
+                             Command="{Binding BlocksViewCommand}">
+                             
                 </RadioButton>
                 <RadioButton Content="Settings"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource SidebarButtonTheme}">
+                             Style="{StaticResource SidebarButtonTheme}"
+                             Command="{Binding SettingsViewCommand}">
                 </RadioButton>
             </StackPanel>
+            
+            <Border x:Name="TitleBar"
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2" 
+                    Grid.Row="0" 
+                    Background="#494c56" 
+                    CornerRadius="10"
+                    MouseLeftButtonDown="TitleBar_DragWindow">
+            </Border>
             
             <TextBlock
                 Grid.Column="1"
                 Grid.Row="0"
-                Width="250"
-                Height="40"
-                VerticalAlignment="Center"
-                Margin="5"
-                Text="Test">
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                Margin="0"
+                Text="TimeTrack"
+                Foreground="White"
+                Background="Transparent"
+                MouseLeftButtonDown="TitleBar_DragWindow">
             </TextBlock>
             
-            <ContentControl Grid.Row="1" Grid.Column="1" Margin="10 0 0 0" Content="{Binding CurrentView}">
-                
+            <Button
+                Grid.Column="2"
+                Grid.Row="0"
+                Name="CloseWindowButton"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                Margin="0"
+                Content="X"
+                Foreground="White"
+                Background="Transparent"
+                Click="CloseWindowButton_OnClick">
+            </Button>
+            
+            <ContentControl Grid.Row="1" 
+                            Grid.RowSpan="2" 
+                            Grid.Column="1" 
+                            Grid.ColumnSpan="2"
+                            Margin="0 0 0 0" 
+                            Width="720" 
+                            Height="565" 
+                            Content="{Binding CurrentView}">
             </ContentControl>
         </Grid>
     </Border>

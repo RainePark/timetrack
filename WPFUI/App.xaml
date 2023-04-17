@@ -9,6 +9,7 @@
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
                  <ResourceDictionary Source="Theme/SidebarButtonTheme.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="Theme/ScrollBarTheme.xaml"></ResourceDictionary>
              </ResourceDictionary.MergedDictionaries>
              
              <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
@@ -16,6 +17,12 @@
              </DataTemplate>
              <DataTemplate DataType="{x:Type viewModel:UsageViewModel}">
                  <view:UsageView></view:UsageView>
+             </DataTemplate>
+             <DataTemplate DataType="{x:Type viewModel:BlocksViewModel}">
+                 <view:BlocksView></view:BlocksView>
+             </DataTemplate>
+             <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+                 <view:SettingsView></view:SettingsView>
              </DataTemplate>
          </ResourceDictionary>
     </Application.Resources>
