@@ -13,4 +13,17 @@
       <Folder Include="MVVM\Model" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Images\test1.ico" />
+      <Resource Include="Images\test1.ico" />
+      <None Remove="Images\test2.ico" />
+      <Resource Include="Images\test2.ico" />
+      <None Remove="Images\iconbackground-white.ico" />
+      <Resource Include="Images\iconbackground-white.ico" />
+      <None Remove="Images\exit.ico" />
+      <Resource Include="Images\exit.ico" />
+      <None Remove="Images\exit3.ico" />
+      <Resource Include="Images\exit3.ico" />
+    </ItemGroup>
+
 </Project>

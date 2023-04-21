@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <Color x:Key="TestColour">Beige</Color>
+    <SolidColorBrush x:Key="TestColourBrush">Beige</SolidColorBrush>
+    <FontFamily x:Key="MainFont">/Fonts/</FontFamily>
+    
+    <Color x:Key="BGColour">#141327</Color>
+    <SolidColorBrush x:Key="BGColourBrush">#141327</SolidColorBrush>
+    
+    <system:Double x:Key="TitleFontSize">40</system:Double>
+    <system:Double x:Key="HeadingFontSize">30</system:Double>
+    <system:Double x:Key="SubheadingFontSize">20</system:Double>
+    <system:Double x:Key="TextFontSize">14</system:Double>
+    <system:Double x:Key="TitleContentGap">15</system:Double>
+</ResourceDictionary>

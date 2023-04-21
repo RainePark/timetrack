@@ -5,21 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/BlocksViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/Theme/ScrollBarTheme.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/Images/exit.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/Images/exit2.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/Images/exit3.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/Images/iconbackground-white.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/Images/iconbackground-white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/Images/test1.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/Images/test2.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/Theme/ExitButtonTheme.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/Theme/GlobalTheme.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/App.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MainWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/SidebarButtonTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/SidebarButtonTheme.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,11 +31,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/56bdcbd04d5e435a899f48fa2dd0180a2274a8/bb/2651040b/UnsafeNativeMethods.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5bd29bba09284189b54d034f6bd231c6f86c80/10/15abe402/Storyboard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5bd29bba09284189b54d034f6bd231c6f86c80/a1/47a37209/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d7feeea46f0a7edf6cb722578ee59fa71a0641fbdb2b3662221f519f8e9efe5/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectId" id="2LAI9peqQLBOBgisR5RYmQOTlH8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -100,8 +103,17 @@
       <workItem from="1677449436545" duration="1289000" />
       <workItem from="1677807406110" duration="1944000" />
       <workItem from="1678172866419" duration="103000" />
-      <workItem from="1681711711881" duration="2150000" />
+      <workItem from="1681711711881" duration="12504000" />
+      <workItem from="1681966612033" duration="12587000" />
     </task>
+    <task id="LOCAL-00001" summary="Rebase git before work resumes">
+      <created>1681714671916</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681714671916</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,5 +134,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Rebase git before work resumes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rebase git before work resumes" />
   </component>
 </project>

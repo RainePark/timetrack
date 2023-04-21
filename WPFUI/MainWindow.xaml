@@ -12,7 +12,7 @@
         <viewModel:MainViewModel></viewModel:MainViewModel>
     </Window.DataContext>
     
-    <Border Background=" #141327 " CornerRadius="10">
+    <Border Background="{StaticResource BGColourBrush}" CornerRadius="10">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"></ColumnDefinition>
@@ -88,17 +88,20 @@
                 MouseLeftButtonDown="TitleBar_DragWindow">
             </TextBlock>
             
-            <Button
-                Grid.Column="2"
-                Grid.Row="0"
-                Name="CloseWindowButton"
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Center"
-                Margin="0"
-                Content="X"
-                Foreground="White"
-                Background="Transparent"
-                Click="CloseWindowButton_OnClick">
+            <Button Style="{StaticResource ExitButtonTheme}"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Width="24"
+                    Height="24"
+                    Margin="0"
+                    Click="CloseWindowButton_OnClick">
+                <Image Style="{StaticResource ExitButtonImageTheme}" 
+                       Width="22"
+                       Height="22"
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Stretch="Uniform">
+                </Image>
             </Button>
             
             <ContentControl Grid.Row="1" 

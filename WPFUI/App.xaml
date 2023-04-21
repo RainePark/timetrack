@@ -10,6 +10,8 @@
              <ResourceDictionary.MergedDictionaries>
                  <ResourceDictionary Source="Theme/SidebarButtonTheme.xaml"></ResourceDictionary>
                  <ResourceDictionary Source="Theme/ScrollBarTheme.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="Theme/GlobalTheme.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="Theme/ExitButtonTheme.xaml"></ResourceDictionary>
              </ResourceDictionary.MergedDictionaries>
              
              <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">

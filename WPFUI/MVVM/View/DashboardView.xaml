@@ -12,7 +12,7 @@
         <StackPanel Margin="20 10 0 0">
             <TextBlock Text="Good morning name.&#x0a;Your screen usage today is&#x0a;XX hours, XX minutes"
                        Foreground="White"
-                       FontSize="40"
+                       FontSize="{StaticResource TitleFontSize}"
                        HorizontalAlignment="Left"
                        Margin="0 0 0 30">
             </TextBlock>
@@ -20,31 +20,40 @@
             <TextBlock Text="Active Blocks"
                        Foreground="White"
                        FontSize="30"
-                       HorizontalAlignment="Left"
-                       Margin="0 0 0 15">
+                       HorizontalAlignment="Left">
             </TextBlock>
             <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <Border Width="325" Height="200" Background="#494c56" Margin="0 0 0 0">
+                <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
+                    <Border Width="215" Height="125" Background="#494c56" Margin="0 0 0 0">
                         <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,325,200"></RectangleGeometry>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
                         </Border.Clip>
                     </Border>
-                    <Border Width="325" Height="200" Background="#494c56" Margin="20 0 0 0">
+                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
                         <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,325,200"></RectangleGeometry>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
                         </Border.Clip>
                     </Border>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-                    <Border Width="325" Height="200" Background="#494c56" Margin="0 0 0 0">
+                <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
+                    <Border Width="215" Height="125" Background="#494c56" Margin="0 0 0 0">
                         <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,325,200"></RectangleGeometry>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
                         </Border.Clip>
                     </Border>
-                    <Border Width="325" Height="200" Background="#494c56" Margin="20 0 0 0">
+                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
                         <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,325,200"></RectangleGeometry>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
                         </Border.Clip>
                     </Border>
                 </StackPanel>
@@ -53,7 +62,7 @@
                        Foreground="White"
                        FontSize="30"
                        HorizontalAlignment="Left"
-                       Margin="0 20 0 20">
+                       Margin="0 15 0 15">
             </TextBlock>
         </StackPanel>
     </ScrollViewer>
