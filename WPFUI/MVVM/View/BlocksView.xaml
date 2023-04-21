@@ -50,10 +50,7 @@
                                         <ImageBrush Stretch="UniformToFill" ImageSource="/Images/iconbackground-white.ico"/>
                                     </Border.Background>
                                 </Border>
-                                <Border Width="27" Height="27" BorderThickness="0">
-                                    <Border.Clip>
-                                        <RectangleGeometry RadiusX="20" RadiusY="10" Rect="0,0,27,27"></RectangleGeometry>
-                                    </Border.Clip>
+                                <Border Width="25" Height="25" BorderThickness="0">
                                     <Border.Background>
                                         <ImageBrush Stretch="UniformToFill" ImageSource="/Images/test1.ico"/>
                                     </Border.Background>
@@ -74,10 +71,7 @@
                                         <ImageBrush Stretch="UniformToFill" ImageSource="/Images/iconbackground-white.ico"/>
                                     </Border.Background>
                                 </Border>
-                                <Border Width="27" Height="27" BorderThickness="0">
-                                    <Border.Clip>
-                                        <RectangleGeometry RadiusX="20" RadiusY="10" Rect="0,0,27,27"></RectangleGeometry>
-                                    </Border.Clip>
+                                <Border Width="25" Height="25" BorderThickness="0">
                                     <Border.Background>
                                         <ImageBrush Stretch="UniformToFill" ImageSource="/Images/test2.ico"/>
                                     </Border.Background>

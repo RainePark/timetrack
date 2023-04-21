@@ -19,7 +19,7 @@
             
             <TextBlock Text="Active Blocks"
                        Foreground="White"
-                       FontSize="30"
+                       FontSize="{StaticResource HeadingFontSize}"
                        HorizontalAlignment="Left">
             </TextBlock>
             <StackPanel Orientation="Vertical">
