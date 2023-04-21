@@ -5,38 +5,48 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WPFUI.MVVM.View"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="720" Background="Transparent">
-    <ScrollViewer VerticalScrollBarVisibility="Visible"
-                  Style="{StaticResource ScrollBarTheme}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            
-            <TextBlock Text="Settings"
-                       Foreground="White"
-                       FontSize="40"
-                       HorizontalAlignment="Left"
-                       Margin="20 10 0 15">
-            </TextBlock>
-            
-            <StackPanel Grid.Row="1" Grid.Column="0">
-                <RadioButton Content="Category 1"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="25"
-                             Style="{StaticResource SidebarButtonTheme}"
-                             IsChecked="True"
-                             Command="{Binding DashboardViewCommand}">
-                </RadioButton>
-            </StackPanel>
-            
-            <StackPanel Grid.Row="1" Grid.Column="1"></StackPanel>
-        </Grid>
-    </ScrollViewer>
+             d:DesignHeight="565" d:DesignWidth="720" Background="Transparent">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="485"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230"></ColumnDefinition>
+            <ColumnDefinition Width="490"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Text="Settings"
+                   Foreground="White"
+                   FontSize="40"
+                   HorizontalAlignment="Left"
+                   Margin="20 10 0 15">
+        </TextBlock>
+        
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <RadioButton Content="Category 1"
+                         Height="50"
+                         FontSize="25"
+                         Style="{StaticResource SettingsMenuTheme}"
+                         IsChecked="True"
+                         Command="{Binding SettingsMenu1Command}">
+            </RadioButton>
+            <RadioButton Content="Category 2"
+                         Height="50"
+                         FontSize="25"
+                         Style="{StaticResource SettingsMenuTheme}"
+                         IsChecked="False"
+                         Command="{Binding SettingsMenu2Command}">
+            </RadioButton>
+        </StackPanel>
+        
+        <ContentControl Grid.Row="1" 
+                        Grid.Column="1" 
+                        Margin="0 0 0 0" 
+                        Width="490" 
+                        Height="485" 
+                        Content="{Binding CurrentSettingsMenu}">
+        </ContentControl>
+        <StackPanel Grid.Row="1" Grid.Column="1"></StackPanel>
+    </Grid>
 </UserControl>
