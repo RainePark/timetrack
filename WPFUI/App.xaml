@@ -13,6 +13,7 @@
                  <ResourceDictionary Source="Theme/GlobalTheme.xaml"></ResourceDictionary>
                  <ResourceDictionary Source="Theme/ExitButtonTheme.xaml"></ResourceDictionary>
                  <ResourceDictionary Source="Theme/SettingsMenuTheme.xaml"></ResourceDictionary>
+                 <ResourceDictionary Source="Theme/BlocksListEditButtonTheme.xaml"></ResourceDictionary>
              </ResourceDictionary.MergedDictionaries>
              
              <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">

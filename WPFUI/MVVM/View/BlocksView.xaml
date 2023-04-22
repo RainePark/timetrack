@@ -42,6 +42,8 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="33"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
+                                
+                                <!--Render background by creating white square from an image and clipping sides to create rounded corners-->
                                 <Border Width="31" Height="31" BorderThickness="0">
                                     <Border.Clip>
                                         <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
@@ -50,6 +52,7 @@
                                         <ImageBrush Stretch="UniformToFill" ImageSource="/Images/iconbackground-white.ico"/>
                                     </Border.Background>
                                 </Border>
+                                <!--Render icon inside the box created above-->
                                 <Border Width="25" Height="25" BorderThickness="0">
                                     <Border.Background>
                                         <ImageBrush Stretch="UniformToFill" ImageSource="/Images/test1.ico"/>
@@ -103,13 +106,16 @@
                                    Grid.Column="1">
                         </TextBlock>
                         
-                        <Border Width="31" Height="31" BorderThickness="0" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right">
+                        <Border Style="{StaticResource BlocksListEditButtonTheme}" 
+                                Width="31"
+                                Height="31"
+                                BorderThickness="0"
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                HorizontalAlignment="Right">
                             <Border.Clip>
                                 <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
                             </Border.Clip>
-                            <Border.Background>
-                                <ImageBrush Stretch="UniformToFill" ImageSource="/Images/iconbackground-white.ico"/>
-                            </Border.Background>
                         </Border>
                         
                         <TextBlock Text="Enabled"
