@@ -32,7 +32,6 @@ namespace WPFUI.MVVM.ViewModel
             UsageVM = new UsageViewModel();
             BlocksVM = new BlocksViewModel();
             SettingsVM = new SettingsViewModel();
-            
 
             CurrentView = DashboardVM;
 

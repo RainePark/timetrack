@@ -22,7 +22,42 @@
                        FontSize="{StaticResource HeadingFontSize}"
                        HorizontalAlignment="Left">
             </TextBlock>
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" Margin="0 0 0 20">
+                <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
+                    <Border Width="215" Height="125" Background="#494c56" Margin="0 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
+                        </Border.Clip>
+                        <TextBlock Foreground="White" Text="Test"></TextBlock>
+                    </Border>
+                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
+                    <Border Width="215" Height="125" Background="#494c56" Margin="0 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
+                        <Border.Clip>
+                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
+                        </Border.Clip>
+                    </Border>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
                     <Border Width="215" Height="125" Background="#494c56" Margin="0 0 0 0">
                         <Border.Clip>
@@ -58,12 +93,6 @@
                     </Border>
                 </StackPanel>
             </StackPanel>
-            <TextBlock Text="bottom text"
-                       Foreground="White"
-                       FontSize="30"
-                       HorizontalAlignment="Left"
-                       Margin="0 15 0 15">
-            </TextBlock>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

@@ -18,6 +18,10 @@
       <Resource Include="Images\iconbackground-white.ico" />
       <Resource Include="Images\exit.ico" />
       <Resource Include="Images\exit-hover.ico" />
+      <None Remove="Images\edit.ico" />
+      <Resource Include="Images\edit.ico" />
+      <None Remove="Images\edit-hover.ico" />
+      <Resource Include="Images\edit-hover.ico" />
     </ItemGroup>
 
 </Project>

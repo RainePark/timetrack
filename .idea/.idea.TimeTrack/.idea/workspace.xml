@@ -7,21 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Finish exit button">
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu2.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu2.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu1ViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu2ViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/Theme/SettingsMenuTheme.xaml" afterDir="false" />
+    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Implement basic settings menu">
+      <change afterPath="$PROJECT_DIR$/WPFUI/Theme/BlocksListEditButtonTheme.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/App.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +27,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/App.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/SettingsView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/ExitButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -58,7 +59,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
+    "settings.editor.selected.configurable": "HotReloadSettingsPage",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -114,7 +115,7 @@
       <workItem from="1681711711881" duration="12504000" />
       <workItem from="1681966612033" duration="12587000" />
       <workItem from="1682046689305" duration="139000" />
-      <workItem from="1682046869646" duration="11132000" />
+      <workItem from="1682046869646" duration="26032000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase git before work resumes">
       <created>1681714671916</created>
@@ -130,7 +131,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682062655969</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Small fixes">
+      <created>1682069541213</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682069541213</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Implement basic settings menu">
+      <created>1682069575809</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1682069575809</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +189,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Rebase git before work resumes" />
     <MESSAGE value="Finish exit button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finish exit button" />
+    <MESSAGE value="Small fixes" />
+    <MESSAGE value="Implement basic settings menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement basic settings menu" />
   </component>
 </project>
