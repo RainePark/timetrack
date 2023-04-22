@@ -5,11 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WPFUI.MVVM.View"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="720" Background="Green">
+             d:DesignHeight="450" d:DesignWidth="720" Background="Transparent">
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
         <Grid>
-            <TextBlock Text="asjdjklasdklasd"></TextBlock>
+            <Grid.RowDefinitions>
+                
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Text="Usage"
+                       Foreground="White"
+                       FontSize="40"
+                       HorizontalAlignment="Left"
+                       Margin="20 10 0 15">
+            </TextBlock>
+
         </Grid>
     </ScrollViewer>
 </UserControl>
