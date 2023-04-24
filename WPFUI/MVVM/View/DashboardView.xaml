@@ -9,87 +9,678 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
-        <StackPanel Margin="20 10 0 0">
-            <TextBlock Text="Good morning name.&#x0a;Your screen usage today is&#x0a;XX hours, XX minutes"
+        <StackPanel Margin="20 13 0 0">
+            <TextBlock Text="Good evening Raine.&#x0a;Your screen usage today is&#x0a;23 hours 59 minutes"
                        Foreground="White"
                        FontSize="{StaticResource TitleFontSize}"
+                       FontFamily="{StaticResource MainFont}"
+                       FontWeight="Light"
                        HorizontalAlignment="Left"
                        Margin="0 0 0 30">
             </TextBlock>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="25"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Active Blocks"
+                           Foreground="White"
+                           FontSize="{StaticResource HeadingFontSize}"
+                           FontFamily="{StaticResource MainFont}"
+                           FontWeight="Medium"
+                           HorizontalAlignment="Left">
+                </TextBlock>
+                <Border Grid.Column="1" Style="{StaticResource NextButtonTheme}" 
+                        Width="31"
+                        Height="31"
+                        Margin="10 3 0 0"
+                        BorderThickness="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
+                    <Border.Clip>
+                        <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
+                    </Border.Clip>
+                </Border>
+            </Grid>
             
-            <TextBlock Text="Active Blocks"
-                       Foreground="White"
-                       FontSize="{StaticResource HeadingFontSize}"
-                       HorizontalAlignment="Left">
-            </TextBlock>
             <StackPanel Orientation="Vertical" Margin="0 0 0 20">
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
-                    <Border Width="215" Height="125" Background="#494c56" Margin="0 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
-                        <TextBlock Foreground="White" Text="Test"></TextBlock>
+                    <Border Style="{StaticResource DashboardActiveBlocksTheme}"
+                            Background="{StaticResource GreenBlockGradientBrush}">
+                        <Grid Margin="13 14 10 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="25"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Text="Block 1"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource SubheadingFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Regular"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                                    Width="25"
+                                    Height="25"
+                                    BorderThickness="0"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right">
+                                <Border.Clip>
+                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
+                                </Border.Clip>
+                            </Border>
+                            <TextBlock Text="23hr 10min remaining today"
+                                       Foreground="LightGreen"
+                                       Background="Transparent"
+                                       FontSize="12.5"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="0 4 0 0"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3">
+                            </TextBlock>
+                            
+                            <Image Source="/Images/time-fraction.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="2"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Type"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="6 7 0 0"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Image Source="/Images/clock.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="3"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Details/Schedule"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="5 8 0 0"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                        </Grid>
                     </Border>
-                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
+                    <Border Style="{StaticResource DashboardActiveBlocksTheme}"
+                            Background="{StaticResource RedBlockGradientBrush}">
+                        <Grid Margin="13 14 10 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="25"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Text="Block 2"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource SubheadingFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Regular"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                                    Width="25"
+                                    Height="25"
+                                    BorderThickness="0"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right">
+                                <Border.Clip>
+                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
+                                </Border.Clip>
+                            </Border>
+                            <TextBlock Text="Locked until tomorrow"
+                                       Foreground="#FF9191"
+                                       Background="Transparent"
+                                       FontSize="12.5"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="0 5 0 0"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3">
+                            </TextBlock>
+                            
+                            <Image Source="/Images/calendar.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="2"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Type"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="6 7 0 0"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Image Source="/Images/clock.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="3"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Details/Schedule"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="5 8 0 0"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                        </Grid>
                     </Border>
-                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
+                    <Border Style="{StaticResource DashboardActiveBlocksTheme}"
+                            Background="{StaticResource GreenBlockGradientBrush}">
+                        <Grid Margin="13 14 10 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="25"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Text="Block 3"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource SubheadingFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Regular"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                                    Width="25"
+                                    Height="25"
+                                    BorderThickness="0"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right">
+                                <Border.Clip>
+                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
+                                </Border.Clip>
+                            </Border>
+                            <TextBlock Text="15min remaining this hour"
+                                       Foreground="LightGreen"
+                                       Background="Transparent"
+                                       FontSize="12.5"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="0 5 0 0"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3">
+                            </TextBlock>
+                            
+                            <Image Source="/Images/launch.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="2"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Type"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="6 7 0 0"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Image Source="/Images/clock.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="3"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Details/Schedule"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="5 8 0 0"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                        </Grid>
                     </Border>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
-                    <Border Width="215" Height="125" Background="#494c56" Margin="0 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
+                    <Border Style="{StaticResource DashboardActiveBlocksTheme}"
+                            Background="{StaticResource GreenBlockGradientBrush}">
+                        <Grid Margin="13 14 10 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="25"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Text="Block 4"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource SubheadingFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Regular"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                                    Width="25"
+                                    Height="25"
+                                    BorderThickness="0"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right">
+                                <Border.Clip>
+                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
+                                </Border.Clip>
+                            </Border>
+                            <TextBlock Text="Unlocked until 5:30pm"
+                                       Foreground="LightGreen"
+                                       Background="Transparent"
+                                       FontSize="12.5"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="0 5 0 0"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3">
+                            </TextBlock>
+                            
+                            <Image Source="/Images/stopwatch.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="2"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Type"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="6 7 0 0"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Image Source="/Images/clock.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="3"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Details/Schedule"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="5 8 0 0"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                        </Grid>
                     </Border>
-                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
+                    <Border Style="{StaticResource DashboardActiveBlocksTheme}"
+                            Background="{StaticResource GreenBlockGradientBrush}">
+                        <Grid Margin="13 14 10 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="25"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Text="Block 5"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource SubheadingFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Regular"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                                    Width="25"
+                                    Height="25"
+                                    BorderThickness="0"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right">
+                                <Border.Clip>
+                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
+                                </Border.Clip>
+                            </Border>
+                            <TextBlock Text="99 launches remaining today"
+                                       Foreground="LightGreen"
+                                       Background="Transparent"
+                                       FontSize="12.5"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="0 5 0 0"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3">
+                            </TextBlock>
+                            
+                            <Image Source="/Images/timer.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="2"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Type"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="6 7 0 0"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Image Source="/Images/clock.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="3"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Details/Schedule"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="5 8 0 0"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                        </Grid>
                     </Border>
-                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
+                    <Border Style="{StaticResource DashboardActiveBlocksTheme}"
+                            Background="{StaticResource RedBlockGradientBrush}">
+                        <Grid Margin="13 14 10 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="25"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Text="Block 6"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource SubheadingFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Regular"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                                    Width="25"
+                                    Height="25"
+                                    BorderThickness="0"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right">
+                                <Border.Clip>
+                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
+                                </Border.Clip>
+                            </Border>
+                            <TextBlock Text="Locked until 4:07am"
+                                       Foreground="#FF9191"
+                                       Background="Transparent"
+                                       FontSize="12.5"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="0 5 0 0"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3">
+                            </TextBlock>
+                            
+                            <Image Source="/Images/time-fraction.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="2"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Type"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="6 7 0 0"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Image Source="/Images/clock.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="3"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Details/Schedule"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="5 8 0 0"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                        </Grid>
                     </Border>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
-                    <Border Width="215" Height="125" Background="#494c56" Margin="0 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
-                    </Border>
-                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
-                    </Border>
-                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
-                    </Border>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
-                    <Border Width="215" Height="125" Background="#494c56" Margin="0 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
-                    </Border>
-                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
-                    </Border>
-                    <Border Width="215" Height="125" Background="#494c56" Margin="15 0 0 0">
-                        <Border.Clip>
-                            <RectangleGeometry RadiusX="10" RadiusY="10" Rect="0,0,215,125"></RectangleGeometry>
-                        </Border.Clip>
+                    <Border Style="{StaticResource DashboardActiveBlocksTheme}"
+                            Background="{StaticResource RedBlockGradientBrush}">
+                        <Grid Margin="13 14 10 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="25"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Text="Block 7"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource SubheadingFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Regular"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                                    Width="25"
+                                    Height="25"
+                                    BorderThickness="0"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right">
+                                <Border.Clip>
+                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
+                                </Border.Clip>
+                            </Border>
+                            <TextBlock Text="Locked until 7:00pm"
+                                       Foreground="#FF9191"
+                                       Background="Transparent"
+                                       FontSize="12.5"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="0 5 0 0"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3">
+                            </TextBlock>
+                            
+                            <Image Source="/Images/time-fraction.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="2"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Type"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="6 7 0 0"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                            <Image Source="/Images/clock.ico"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Height="15"
+                                   Stretch="Uniform"
+                                   Margin="0 7 0 0"
+                                   Grid.Row="3"
+                                   Grid.Column="0">
+                            </Image>
+                            <TextBlock Text="Block Details/Schedule"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="5 8 0 0"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       Grid.ColumnSpan="2">
+                            </TextBlock>
+                        </Grid>
                     </Border>
                 </StackPanel>
             </StackPanel>

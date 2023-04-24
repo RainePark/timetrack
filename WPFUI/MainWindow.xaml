@@ -41,22 +41,24 @@
                              FontSize="14"
                              Style="{StaticResource SidebarButtonTheme}"
                              IsChecked="True"
-                             Command="{Binding DashboardViewCommand}">
+                             Command="{Binding DashboardViewCommand}"
+                             Tag="/Images/dashboard.ico">
                 </RadioButton>
                 <RadioButton Content="Usage"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource SidebarButtonTheme}"
-                             Command="{Binding UsageViewCommand}">
+                             Command="{Binding UsageViewCommand}"
+                             Tag="/Images/usage.ico">
                 </RadioButton>
                 <RadioButton Content="Blocks"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource SidebarButtonTheme}"
-                             Command="{Binding BlocksViewCommand}">
-                             
+                             Command="{Binding BlocksViewCommand}"
+                             Tag="/Images/blocks.ico">
                 </RadioButton>
                 <RadioButton Content="Settings"
                              Height="50"
@@ -71,7 +73,7 @@
                     Grid.Column="1" 
                     Grid.ColumnSpan="2" 
                     Grid.Row="0" 
-                    Background="#494c56" 
+                    Background="{StaticResource SecondaryColourBrush}" 
                     CornerRadius="10"
                     MouseLeftButtonDown="TitleBar_DragWindow">
             </Border>
@@ -83,6 +85,9 @@
                 HorizontalAlignment="Center"
                 Margin="0"
                 Text="TimeTrack"
+                FontSize="12"
+                FontFamily="{StaticResource MainFont}"
+                FontWeight="Light"
                 Foreground="White"
                 Background="Transparent"
                 MouseLeftButtonDown="TitleBar_DragWindow">
