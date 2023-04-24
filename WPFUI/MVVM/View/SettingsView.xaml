@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:WPFUI.MVVM.View"
              mc:Ignorable="d"
              d:DesignHeight="565" d:DesignWidth="720" Background="Transparent">
-    <Grid>
+    <Grid Margin="0 3 0 0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
             <RowDefinition Height="485"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -18,7 +18,9 @@
         
         <TextBlock Text="Settings"
                    Foreground="White"
-                   FontSize="40"
+                   FontSize="{StaticResource TitleFontSize}"
+                   FontFamily="{StaticResource MainFont}"
+                   FontWeight="Medium"
                    HorizontalAlignment="Left"
                    Margin="20 10 0 15">
         </TextBlock>

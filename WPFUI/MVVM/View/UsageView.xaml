@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="720" Background="Transparent">
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
-        <Grid>
+        <Grid Margin="0 3 0 0">
             <Grid.RowDefinitions>
                 
             </Grid.RowDefinitions>
@@ -19,7 +19,9 @@
             
             <TextBlock Text="Usage"
                        Foreground="White"
-                       FontSize="40"
+                       FontSize="{StaticResource TitleFontSize}"
+                       FontFamily="{StaticResource MainFont}"
+                       FontWeight="Medium"
                        HorizontalAlignment="Left"
                        Margin="20 10 0 15">
             </TextBlock>
