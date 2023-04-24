@@ -53,8 +53,8 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="20"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="60"></ColumnDefinition>
-                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="70"></ColumnDefinition>
+                            <ColumnDefinition Width="40"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         
                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0 0 5 0">
@@ -189,11 +189,13 @@
                                    FontSize="{StaticResource TextFontSize}"
                                    FontFamily="{StaticResource MainFont}"
                                    FontWeight="Light"
-                                   Margin="0 5 0 0"
+                                   Margin="0 5 5 0"
                                    TextAlignment="Right"
                                    Grid.Row="3"
                                    Grid.Column="2">
                         </TextBlock>
+                        <ToggleButton Grid.Row="3" Grid.Column="3" Margin="0 4 0 0" Style="{StaticResource ToggleButtonTheme}" Height="18" Width="36" HorizontalAlignment="Right">
+                        </ToggleButton>
                     </Grid>
                 </Border>
             </StackPanel>

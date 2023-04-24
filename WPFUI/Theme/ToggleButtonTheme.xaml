@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type ToggleButton}" x:Key="ToggleButtonTheme">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="BackgroundComponent"
+                            Background="CornflowerBlue"
+                            CornerRadius="9" Padding="1">
+                        <Border x:Name="CircleComponent" Background="White"
+                                Width="{TemplateBinding Height}"
+                                CornerRadius="9" HorizontalAlignment="Left">
+                            <ContentPresenter/>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CircleComponent" Property="HorizontalAlignment" Value="Right"/>
+                            <Setter TargetName="BackgroundComponent" Property="Background" Value="lime"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
