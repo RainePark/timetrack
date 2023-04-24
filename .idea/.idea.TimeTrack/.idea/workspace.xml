@@ -7,16 +7,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Implement basic settings menu">
-      <change afterPath="$PROJECT_DIR$/WPFUI/Theme/BlocksListEditButtonTheme.xaml" afterDir="false" />
+    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Add new theme resource files">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/App.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/GlobalTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/GlobalTheme.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/ScrollBarTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/ScrollBarTheme.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/SettingsMenuTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/SettingsMenuTheme.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/SidebarButtonTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/SidebarButtonTheme.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,49 +28,60 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d7feeea46f0a7edf6cb722578ee59fa71a0641fbdb2b3662221f519f8e9efe5/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/App.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/SettingsView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/ExitButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WPFUI/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WPFUI/Theme/DashboardActiveBlocksTheme.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WPFUI/Theme/GlobalTheme.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WPFUI/Theme/SidebarButtonTheme.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/SidebarButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
+  </component>
   <component name="ProjectId" id="2LAI9peqQLBOBgisR5RYmQOTlH8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "HotReloadSettingsPage",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;HotReloadSettingsPage&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Raine\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Raine\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Raine\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Raine\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Raine\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Raine\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="WPFUI" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -115,7 +127,8 @@
       <workItem from="1681711711881" duration="12504000" />
       <workItem from="1681966612033" duration="12587000" />
       <workItem from="1682046689305" duration="139000" />
-      <workItem from="1682046869646" duration="26032000" />
+      <workItem from="1682046869646" duration="26173000" />
+      <workItem from="1682237098934" duration="31230000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase git before work resumes">
       <created>1681714671916</created>
@@ -145,7 +158,70 @@
       <option name="project" value="LOCAL" />
       <updated>1682069575809</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add edit button to blocks view">
+      <created>1682177115464</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682177115464</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Minor fixes">
+      <created>1682177147502</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682177147502</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Create base of usage view">
+      <created>1682177158962</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682177158962</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Create demo settings submenu">
+      <created>1682177173538</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682177173538</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Initial commit">
+      <created>1682346965706</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682346965706</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Update resource directories">
+      <created>1682347004926</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682347004926</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Initial commit">
+      <created>1682347012629</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682347012629</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Initial commit">
+      <created>1682347041057</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682347041057</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Add new theme resource files">
+      <created>1682347058419</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1682347058419</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +267,13 @@
     <MESSAGE value="Finish exit button" />
     <MESSAGE value="Small fixes" />
     <MESSAGE value="Implement basic settings menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement basic settings menu" />
+    <MESSAGE value="Add edit button to blocks view" />
+    <MESSAGE value="Minor fixes" />
+    <MESSAGE value="Create base of usage view" />
+    <MESSAGE value="Create demo settings submenu" />
+    <MESSAGE value="Update resource directories" />
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Add new theme resource files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add new theme resource files" />
   </component>
 </project>
