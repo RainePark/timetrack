@@ -74,7 +74,7 @@
                             <BeginStoryboard>
                                 <!-- Revert the styling of the scroll bar when mouse not hovered -->
                                 <Storyboard>
-                                    <DoubleAnimation To="0.4" Duration="0:0:0.25" Storyboard.TargetName="PART_Track" Storyboard.TargetProperty="Opacity" />
+                                    <DoubleAnimation To="0.3" Duration="0:0:0.25" Storyboard.TargetName="PART_Track" Storyboard.TargetProperty="Opacity" />
                                     <DoubleAnimation To="6" Duration="0:0:0.1" Storyboard.TargetName="PART_Track" Storyboard.TargetProperty="Width" />
                                     <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Padding" BeginTime="00:00:00">
                                         <SplineThicknessKeyFrame KeyTime="0:0:0" Value="0, 0, 3, 0" />
