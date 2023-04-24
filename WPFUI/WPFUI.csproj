@@ -13,15 +13,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="Images\test1.ico" />
-      <Resource Include="Images\test2.ico" />
-      <Resource Include="Images\iconbackground-white.ico" />
-      <Resource Include="Images\exit.ico" />
-      <Resource Include="Images\exit-hover.ico" />
-      <None Remove="Images\edit.ico" />
-      <Resource Include="Images\edit.ico" />
-      <None Remove="Images\edit-hover.ico" />
-      <Resource Include="Images\edit-hover.ico" />
+      <Resource Include="Images\*" />
+      <Resource Include="Fonts\*" />
     </ItemGroup>
 
 </Project>
