@@ -7,12 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Fix blocks view padding">
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BooleanToBlockBackgroundConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BooleanToStateTextConverter.cs" afterDir="false" />
+    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Automatically block status text based on ToggleButton">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +139,7 @@
       <workItem from="1681966612033" duration="12587000" />
       <workItem from="1682046689305" duration="139000" />
       <workItem from="1682046869646" duration="26173000" />
-      <workItem from="1682237098934" duration="52026000" />
+      <workItem from="1682237098934" duration="54813000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase git before work resumes">
       <created>1681714671916</created>
@@ -298,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682403570359</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Automatically block status text based on ToggleButton">
+      <created>1682432268104</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1682432268104</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,6 +363,7 @@
     <MESSAGE value="Add toggle button and complete blocks view" />
     <MESSAGE value="Update workspace.xml" />
     <MESSAGE value="Fix blocks view padding" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix blocks view padding" />
+    <MESSAGE value="Automatically block status text based on ToggleButton" />
+    <option name="LAST_COMMIT_MESSAGE" value="Automatically block status text based on ToggleButton" />
   </component>
 </project>
