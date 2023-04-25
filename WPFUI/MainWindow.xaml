@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:WPFUI"
         xmlns:viewModel="clr-namespace:WPFUI.MVVM.ViewModel"
         mc:Ignorable="d"
-        Title="TimeTrack" Height="600" Width="920" WindowStyle="None" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True">
+        Title="TimeTrack"
+        Icon="/Images/logo.png"
+        Height="600"
+        Width="920"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
     
     <Window.DataContext>
         <viewModel:MainViewModel></viewModel:MainViewModel>
@@ -25,14 +32,26 @@
                 <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" 
+                        Grid.Row="0" 
+                        Grid.RowSpan="2" 
+                        Orientation="Horizontal" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Center">
+                <Image Source="/Images/logo.png" 
+                       Height="22">
+                </Image>
+                <TextBlock Text="TimeTrack" 
+                           Foreground="White" 
+                           FontSize="20"
+                           FontFamily="{StaticResource MainFont}"
+                           FontWeight="Medium"
+                           VerticalAlignment="Center"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           Margin="6 0 0 0">
+                </TextBlock>
+            </StackPanel>
             
-            <TextBlock Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
-                Text="TimeTrack" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Center" 
-                Foreground="White" 
-                FontSize="22">
-            </TextBlock>
             
             <StackPanel Grid.Column="0" Grid.Row="2" >
                 <RadioButton Content="Dashboard"
@@ -65,7 +84,8 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource SidebarButtonTheme}"
-                             Command="{Binding SettingsViewCommand}">
+                             Command="{Binding SettingsViewCommand}"
+                             Tag="/Images/settings.ico">
                 </RadioButton>
             </StackPanel>
             
