@@ -8,7 +8,7 @@
              d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
-        <Grid Margin="20 13 25 0">
+        <Grid Margin="20 13 25 5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
