@@ -17,4 +17,10 @@
       <Resource Include="Fonts\*" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="MVVM\View\BooleanToStateTextConverter.cs">
+        <DependentUpon>BlocksView.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

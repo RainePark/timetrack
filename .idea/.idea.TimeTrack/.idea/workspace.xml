@@ -7,11 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Add themed toggle button">
+    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Fix blocks view padding">
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BooleanToBlockBackgroundConverter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BooleanToStateTextConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MainWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/ToggleButtonTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/ToggleButtonTheme.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +31,12 @@
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
@@ -38,6 +44,7 @@
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/SettingsView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/UsageView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
@@ -50,13 +57,15 @@
     <setting file="file://$PROJECT_DIR$/WPFUI/Theme/SidebarButtonTheme.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/SidebarButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/SidebarButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/ToggleButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/ToggleButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2LAI9peqQLBOBgisR5RYmQOTlH8" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -133,7 +142,7 @@
       <workItem from="1681966612033" duration="12587000" />
       <workItem from="1682046689305" duration="139000" />
       <workItem from="1682046869646" duration="26173000" />
-      <workItem from="1682237098934" duration="44803000" />
+      <workItem from="1682237098934" duration="52026000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase git before work resumes">
       <created>1681714671916</created>
@@ -261,7 +270,35 @@
       <option name="project" value="LOCAL" />
       <updated>1682352200596</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Add logo and settings icon">
+      <created>1682402653908</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1682402653908</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Add toggle button and complete blocks view">
+      <created>1682402670432</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1682402670432</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Update workspace.xml">
+      <created>1682402678458</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1682402678458</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Fix blocks view padding">
+      <created>1682403570359</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1682403570359</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,8 +354,11 @@
     <MESSAGE value="Update scrollbar colour" />
     <MESSAGE value="Update font" />
     <MESSAGE value="Update font and work on theme" />
-    <MESSAGE value="Update workspace.xml" />
     <MESSAGE value="Add themed toggle button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add themed toggle button" />
+    <MESSAGE value="Add logo and settings icon" />
+    <MESSAGE value="Add toggle button and complete blocks view" />
+    <MESSAGE value="Update workspace.xml" />
+    <MESSAGE value="Fix blocks view padding" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix blocks view padding" />
   </component>
 </project>

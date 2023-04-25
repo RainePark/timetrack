@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:WPFUI.MVVM.View"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
+    <UserControl.Resources>
+        <local:BooleanToStateTextConverter x:Key="BooleanToStateTextConverter"></local:BooleanToStateTextConverter>
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
         <Grid Margin="20 13 25 5">
@@ -166,7 +169,7 @@
                             </Border.Clip>
                         </Border>
                         
-                        <TextBlock Text="Enabled"
+                        <TextBlock Text="{Binding IsChecked, ElementName=togglebutton1, Converter={StaticResource BooleanToStateTextConverter}}"
                                    Foreground="White"
                                    Background="Transparent"
                                    FontSize="{StaticResource TextFontSize}"
@@ -178,6 +181,7 @@
                                    Grid.Column="2">
                         </TextBlock>
                         <ToggleButton Style="{StaticResource ToggleButtonTheme}"
+                                      x:Name="togglebutton1"
                                       HorizontalAlignment="Right"
                                       Margin="0 4.5 0 0"
                                       Grid.Row="3"
@@ -559,7 +563,7 @@
                             </Border.Clip>
                         </Border>
                         
-                        <TextBlock Text="Disabled"
+                        <TextBlock Text="{Binding IsChecked, ElementName=togglebutton2, Converter={StaticResource BooleanToStateTextConverter}}"
                                    Foreground="White"
                                    Background="Transparent"
                                    FontSize="{StaticResource TextFontSize}"
@@ -571,6 +575,7 @@
                                    Grid.Column="2">
                         </TextBlock>
                         <ToggleButton Style="{StaticResource ToggleButtonTheme}"
+                                      x:Name="togglebutton2"
                                       HorizontalAlignment="Right"
                                       Margin="0 4.5 0 0"
                                       Grid.Row="3"
@@ -788,7 +793,7 @@
                             </Border.Clip>
                         </Border>
                         
-                        <TextBlock Text="Disabled"
+                        <TextBlock Text="{Binding IsChecked, ElementName=togglebutton3, Converter={StaticResource BooleanToStateTextConverter}}"
                                    Foreground="White"
                                    Background="Transparent"
                                    FontSize="{StaticResource TextFontSize}"
@@ -800,6 +805,7 @@
                                    Grid.Column="2">
                         </TextBlock>
                         <ToggleButton Style="{StaticResource ToggleButtonTheme}"
+                                      x:Name="togglebutton3"
                                       HorizontalAlignment="Right"
                                       Margin="0 4.5 0 0"
                                       Grid.Row="3"
@@ -996,7 +1002,7 @@
                             </Border.Clip>
                         </Border>
                         
-                        <TextBlock Text="Enabled"
+                        <TextBlock Text="{Binding IsChecked, ElementName=togglebutton4, Converter={StaticResource BooleanToStateTextConverter}}"
                                    Foreground="White"
                                    Background="Transparent"
                                    FontSize="{StaticResource TextFontSize}"
@@ -1008,6 +1014,7 @@
                                    Grid.Column="2">
                         </TextBlock>
                         <ToggleButton Style="{StaticResource ToggleButtonTheme}"
+                                      x:Name="togglebutton4"
                                       HorizontalAlignment="Right"
                                       Margin="0 4.5 0 0"
                                       Grid.Row="3"
@@ -1121,7 +1128,7 @@
                             </Border.Clip>
                         </Border>
                         
-                        <TextBlock Text="Enabled"
+                        <TextBlock Text="{Binding IsChecked, ElementName=togglebutton5, Converter={StaticResource BooleanToStateTextConverter}}"
                                    Foreground="White"
                                    Background="Transparent"
                                    FontSize="{StaticResource TextFontSize}"
@@ -1133,6 +1140,7 @@
                                    Grid.Column="2">
                         </TextBlock>
                         <ToggleButton Style="{StaticResource ToggleButtonTheme}"
+                                      x:Name="togglebutton5"
                                       HorizontalAlignment="Right"
                                       Margin="0 4.5 0 0"
                                       Grid.Row="3"
