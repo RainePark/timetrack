@@ -1,12 +1,21 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="{x:Type ToggleButton}" x:Key="ToggleButtonTheme">
+        <Setter Property="Height" Value="18"></Setter>
+        <Setter Property="Width" Value="36"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Border x:Name="BackgroundComponent"
-                            Background="CornflowerBlue"
                             CornerRadius="9" Padding="1">
+                        <Border.Background>
+                            <LinearGradientBrush>
+                                <LinearGradientBrush.GradientStops>
+                                    <GradientStop Offset="0.08" Color="#6F0B0B"/>
+                                    <GradientStop Offset="1" Color="#EA1E1E"/>
+                                </LinearGradientBrush.GradientStops>
+                            </LinearGradientBrush>
+                        </Border.Background>
                         <Border x:Name="CircleComponent" Background="White"
                                 Width="{TemplateBinding Height}"
                                 CornerRadius="9" HorizontalAlignment="Left">
@@ -16,7 +25,16 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="CircleComponent" Property="HorizontalAlignment" Value="Right"/>
-                            <Setter TargetName="BackgroundComponent" Property="Background" Value="lime"/>
+                            <Setter TargetName="BackgroundComponent" Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush>
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Offset="0.1" Color="#3BD445"/>
+                                            <GradientStop Offset="1" Color="#2F4C31"/>
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
