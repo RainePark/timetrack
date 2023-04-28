@@ -1,42 +1,31 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using WPFUI.Core;
 
 namespace WPFUI.MVVM.ViewModel
 {
-    class SettingsViewModel : ObservableObject
-    {
-        public RelayCommand SettingsMenu1Command { get; set; }
-        public RelayCommand SettingsMenu2Command { get; set; }
-        public SettingsMenu1ViewModel SettingsMenu1VM { get; set; }
-        public SettingsMenu2ViewModel SettingsMenu2VM { get; set; }
-
-        private object _currentSettingsMenu;
-
-        public object CurrentSettingsMenu
+    class SettingsViewModel : IPage
+    { 
+        private string _pageTitle;   
+        public string PageTitle
         {
-            get { return _currentSettingsMenu; }
-            set
-            {
-                _currentSettingsMenu = value;
+            get => this._pageTitle;
+            set 
+            { 
+                this._pageTitle = value; 
                 OnPropertyChanged();
             }
         }
         
         public SettingsViewModel()
         {
-            SettingsMenu1VM = new SettingsMenu1ViewModel();
-            SettingsMenu2VM = new SettingsMenu2ViewModel();
-
-            CurrentSettingsMenu = SettingsMenu1VM;
-
-            SettingsMenu1Command = new RelayCommand(o =>
-            {
-                CurrentSettingsMenu = SettingsMenu1VM;
-            });
-            SettingsMenu2Command = new RelayCommand(o =>
-            {
-                CurrentSettingsMenu = SettingsMenu2VM;
-            });
+            this.PageTitle = "Settings";
+        }
+        
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

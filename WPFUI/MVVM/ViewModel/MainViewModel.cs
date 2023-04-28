@@ -1,56 +1,49 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using WPFUI.Core;
 
 namespace WPFUI.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
-        public RelayCommand DashboardViewCommand { get; set; }
-        public RelayCommand UsageViewCommand { get; set; }
-        public RelayCommand BlocksViewCommand { get; set; }
-        public RelayCommand SettingsViewCommand { get; set; }
-        public DashboardViewModel DashboardVM { get; set; }
-        public UsageViewModel UsageVM { get; set; }
-        public BlocksViewModel BlocksVM { get; set; }
-        public SettingsViewModel SettingsVM { get; set; }
-        
-        private object _currentView;
+        public ICommand SelectPageCommand => new RelayCommand(SelectPage);
 
-        public object CurrentView
+        private Dictionary<PageName, IPage> Pages { get; }
+
+        private IPage _selectedPage;   
+        public IPage SelectedPage
         {
-            get { return _currentView; }
-            set
-            {
-                _currentView = value;
+            get => this._selectedPage;
+            set 
+            { 
+                this._selectedPage = value; 
                 OnPropertyChanged();
             }
         }
-        
         public MainViewModel()
         {
-            DashboardVM = new DashboardViewModel();
-            UsageVM = new UsageViewModel();
-            BlocksVM = new BlocksViewModel();
-            SettingsVM = new SettingsViewModel();
+            this.Pages = new Dictionary<PageName, IPage>
+            {
+                { PageName.Dashboard, new DashboardViewModel() },
+                { PageName.Usage, new UsageViewModel() },
+                { PageName.Blocks, new BlocksViewModel() },
+                { PageName.Settings, new SettingsViewModel() }
+            };
 
-            CurrentView = DashboardVM;
-
-            DashboardViewCommand = new RelayCommand(o =>
+            this.SelectedPage = this.Pages.First().Value;
+        }
+        
+        public void SelectPage(object param)
+        {
+            if (param is PageName pageName 
+                && this.Pages.TryGetValue(pageName, out IPage _selectedPage))
             {
-                CurrentView = DashboardVM;
-            });
-            UsageViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = UsageVM;
-            });
-            BlocksViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = BlocksVM;
-            });
-            SettingsViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = SettingsVM;
-            });
+                this.SelectedPage = _selectedPage;
+            }
         }
     }
 }

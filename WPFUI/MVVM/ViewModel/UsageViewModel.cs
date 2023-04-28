@@ -1,6 +1,31 @@
-﻿namespace WPFUI.MVVM.ViewModel;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using WPFUI.Core;
 
-public class UsageViewModel
+namespace WPFUI.MVVM.ViewModel
 {
-    
+    class UsageViewModel : IPage
+    { 
+        private string _pageTitle;   
+        public string PageTitle
+        {
+            get => this._pageTitle;
+            set 
+            { 
+                this._pageTitle = value; 
+                OnPropertyChanged();
+            }
+        }
+        
+        public UsageViewModel()
+        {
+            this.PageTitle = "Usage";
+        }
+        
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

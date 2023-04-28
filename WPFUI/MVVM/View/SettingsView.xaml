@@ -16,7 +16,7 @@
             <ColumnDefinition Width="490"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
-        <TextBlock Text="Settings"
+        <TextBlock Text="{Binding PageTitle}"
                    Foreground="White"
                    FontSize="{StaticResource TitleFontSize}"
                    FontFamily="{StaticResource MainFont}"

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI"
         xmlns:viewModel="clr-namespace:WPFUI.MVVM.ViewModel"
+        xmlns:core="clr-namespace:WPFUI.Core"
         mc:Ignorable="d"
         Title="TimeTrack"
         Icon="/Images/logo.png"
@@ -60,7 +61,8 @@
                              FontSize="14"
                              Style="{StaticResource SidebarButtonTheme}"
                              IsChecked="True"
-                             Command="{Binding DashboardViewCommand}"
+                             Command="{Binding SelectPageCommand}"
+                             CommandParameter="{x:Static core:PageName.Dashboard}"
                              Tag="/Images/dashboard.ico">
                 </RadioButton>
                 <RadioButton Content="Usage"
@@ -68,7 +70,8 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource SidebarButtonTheme}"
-                             Command="{Binding UsageViewCommand}"
+                             Command="{Binding SelectPageCommand}"
+                             CommandParameter="{x:Static core:PageName.Usage}"
                              Tag="/Images/usage.ico">
                 </RadioButton>
                 <RadioButton Content="Blocks"
@@ -76,7 +79,8 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource SidebarButtonTheme}"
-                             Command="{Binding BlocksViewCommand}"
+                             Command="{Binding SelectPageCommand}"
+                             CommandParameter="{x:Static core:PageName.Blocks}" 
                              Tag="/Images/blocks.ico">
                 </RadioButton>
                 <RadioButton Content="Settings"
@@ -84,7 +88,8 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource SidebarButtonTheme}"
-                             Command="{Binding SettingsViewCommand}"
+                             Command="{Binding SelectPageCommand}"
+                             CommandParameter="{x:Static core:PageName.Settings}"
                              Tag="/Images/settings.ico">
                 </RadioButton>
             </StackPanel>
@@ -136,7 +141,7 @@
                             Margin="0 0 0 0" 
                             Width="720" 
                             Height="565" 
-                            Content="{Binding CurrentView}">
+                            Content="{Binding SelectedPage}">
             </ContentControl>
         </Grid>
     </Border>
