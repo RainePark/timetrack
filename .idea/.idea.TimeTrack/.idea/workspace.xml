@@ -7,9 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Automatically block status text based on ToggleButton">
+    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/app.manifest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,42 +25,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d7feeea46f0a7edf6cb722578ee59fa71a0641fbdb2b3662221f519f8e9efe5/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/06eb0d84c7594f1b874d648244456d6616480/46/f2be167a/INotifyPropertyChanged.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/App.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/App.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/SettingsView.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/UsageView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MainWindow.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/Theme/DashboardActiveBlocksTheme.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/Theme/GlobalTheme.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/GlobalTheme.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/ScrollBarTheme.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/SettingsMenuTheme.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/Theme/SidebarButtonTheme.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/SidebarButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/SidebarButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/ToggleButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/Theme/ToggleButtonTheme.xaml" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -82,7 +61,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;HotReloadSettingsPage&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -140,6 +119,8 @@
       <workItem from="1682046689305" duration="139000" />
       <workItem from="1682046869646" duration="26173000" />
       <workItem from="1682237098934" duration="54813000" />
+      <workItem from="1683382734035" duration="10846000" />
+      <workItem from="1683525409321" duration="10013000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase git before work resumes">
       <created>1681714671916</created>
@@ -302,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682432268104</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Refactor menu code">
+      <created>1682650762542</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1682650762542</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,6 +352,11 @@
     <MESSAGE value="Update workspace.xml" />
     <MESSAGE value="Fix blocks view padding" />
     <MESSAGE value="Automatically block status text based on ToggleButton" />
-    <option name="LAST_COMMIT_MESSAGE" value="Automatically block status text based on ToggleButton" />
+    <MESSAGE value="Refactor menu code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor menu code" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
