@@ -5,11 +5,17 @@
         <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <Company>Raine Park</Company>
+        <Product>TimeTrack</Product>
+        <AssemblyName>TimeTrack</AssemblyName>
+        <IsPackable>false</IsPackable>
+        <PackageId>TimeTrack</PackageId>
+        <Authors>Raine Park</Authors>
+        <!--<ApplicationManifest>app.manifest</ApplicationManifest>-->
     </PropertyGroup>
 
     <ItemGroup>
       <Folder Include="Fonts" />
-      <Folder Include="MVVM\Model" />
     </ItemGroup>
 
     <ItemGroup>
