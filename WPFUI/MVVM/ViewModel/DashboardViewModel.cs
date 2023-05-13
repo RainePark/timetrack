@@ -16,40 +16,16 @@ namespace WPFUI.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        
-        private ProgramUsageModel _programUsageModel;
 
         public DashboardViewModel()
         {
             this.PageTitle = "Dashboard";
-
-            _programUsageModel = new ProgramUsageModel();
-            _programUsageModel.PropertyChanged += ProgramUsageModel_PropertyChanged;
         }
-
-        private string _currentProgram;
-        public string CurrentProgram
-        {
-            get { return _programUsageModel.CurrentProgram; }
-            set
-            {
-                _programUsageModel.CurrentProgram = value;
-                OnPropertyChanged();
-            }
-        }
-
+        
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        
-        private void ProgramUsageModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ProgramUsageModel.CurrentProgram))
-            {
-                OnPropertyChanged(nameof(CurrentProgram));
-            }
         }
     }
 }

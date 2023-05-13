@@ -33,8 +33,11 @@ namespace WPFUI.MVVM.ViewModel
                 { PageName.Blocks, new BlocksViewModel() },
                 { PageName.Settings, new SettingsViewModel() }
             };
-
             this.SelectedPage = this.Pages.First().Value;
+            
+            /*MORE TESTING*/
+            _programUsageModel = new ProgramUsageModel();
+            _programUsageModel.PropertyChanged += ProgramUsageModel_PropertyChanged;
         }
         
         public void SelectPage(object param)
@@ -43,6 +46,28 @@ namespace WPFUI.MVVM.ViewModel
                 && this.Pages.TryGetValue(pageName, out IPage _selectedPage))
             {
                 this.SelectedPage = _selectedPage;
+            }
+        }
+        
+        /*TESTING SECTION*/
+        private ProgramUsageModel _programUsageModel;
+        
+        private string _currentProgram;
+        public string CurrentProgram
+        {
+            get { return _programUsageModel.CurrentProgram; }
+            set
+            {
+                _programUsageModel.CurrentProgram = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        private void ProgramUsageModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ProgramUsageModel.CurrentProgram))
+            {
+                OnPropertyChanged(nameof(CurrentProgram));
             }
         }
     }

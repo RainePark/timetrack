@@ -10,9 +10,6 @@
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
         <StackPanel Margin="20 13 0 0">
-            <TextBlock Text="{Binding CurrentProgram}"
-                       Foreground="White"
-                       FontSize="{StaticResource HeadingFontSize}"></TextBlock>
             <TextBlock Text="Good evening Raine.&#x0a;Your screen usage today is&#x0a;23 hours 59 minutes"
                        Foreground="White"
                        FontSize="{StaticResource TitleFontSize}"
