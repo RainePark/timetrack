@@ -6,17 +6,17 @@ namespace WPFUI.MVVM.Model;
 
 public class BlocksModel
 {
-    public Dictionary<string,Block> GetAllBlocks()
+    public static Dictionary<string,Block> GetAllBlocks()
     {
-        var allBlocks = JsonConvert.DeserializeObject<Dictionary<string,Block>>(File.ReadAllText("user\\blocks.json"));
-        return (allBlocks);
+        var blockList = JsonConvert.DeserializeObject<Dictionary<string,Block>>(File.ReadAllText("user\\blocks.json"));
+        return (blockList);
     }
 
-    public void CreateNewBlock(string name, List<string> programs, List<BlockCondition> conditions)
+    public static void CreateNewBlock(string name, string type, List<string> programs, List<BlockCondition> conditions)
     {
         var existingBlocks = JsonConvert.DeserializeObject<Dictionary<string,Block>>(File.ReadAllText("user\\blocks.json"));
-        existingBlocks[name] = new Block { Status = true, Programs = programs, Conditions = conditions};
-        using (StreamWriter writer = new StreamWriter("programlist.json"))
+        existingBlocks[name] = new Block { Status = true, Type = type, Programs = programs, Conditions = conditions};
+        using (StreamWriter writer = new StreamWriter("user\\blocks.json"))
         {
             writer.WriteLine(JsonConvert.SerializeObject(existingBlocks));
         }
@@ -32,13 +32,13 @@ public class BlocksModel
 public class Block
 {
     public bool Status;
+    public string Type;
     public List<string> Programs;
     public List<BlockCondition> Conditions;
 }
 
 public class BlockCondition
 {
-    public string Type;
     public List<string> Criteria;
     public List<string> Days;
 }
