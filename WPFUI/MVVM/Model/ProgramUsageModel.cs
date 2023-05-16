@@ -84,7 +84,8 @@ public class ProgramUsageModel : ObservableObject
 
         this.CurrentProgram = windowTitle;
 
-        var knownPrograms = JsonConvert.DeserializeObject<Dictionary<string, ProgramDetails>>(File.ReadAllText("user\\programlist.json"));
+        Dictionary<string, ProgramDetails> knownPrograms = GetKnownPrograms();
+        
         if (knownPrograms.ContainsKey(processName) == false)
         {
             bool system;
@@ -107,6 +108,11 @@ public class ProgramUsageModel : ObservableObject
         }
 
         LogToDatabase(processName, windowTitle, DateTime.Now);
+    }
+
+     public static Dictionary<string, ProgramDetails> GetKnownPrograms()
+    {
+        return (JsonConvert.DeserializeObject<Dictionary<string, ProgramDetails>>(File.ReadAllText("user\\programlist.json")));
     }
 
     static int GetActiveWindowProcessId()
@@ -155,6 +161,8 @@ public class ProgramUsageModel : ObservableObject
         using (SQLiteConnection connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
         {
             connection.Open();
+            
+            /* Update detailed usage database with timestamp, program at current second, and window title. */
             string insertDetailedQuery = "INSERT INTO detailed_usage (time, program, windowtitle) VALUES (@time, @program, @windowtitle)";
             using (SQLiteCommand detailedcommand = new SQLiteCommand(insertDetailedQuery, connection))
             {
@@ -163,7 +171,8 @@ public class ProgramUsageModel : ObservableObject
                 detailedcommand.Parameters.AddWithValue("@windowtitle", windowtitle);
                 detailedcommand.ExecuteNonQuery();
             }
-
+            
+            /* Update long term usage database with program usage */
             string searchSql = "SELECT * FROM lt_usage WHERE date = @date AND program = @program";
             using (SQLiteCommand ltcommand = new SQLiteCommand(searchSql, connection))
             {
