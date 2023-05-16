@@ -56,6 +56,7 @@
             
             <StackPanel Grid.Column="0" Grid.Row="2" >
                 <RadioButton Content="Dashboard"
+                             x:Name="DashboardSidebarRadioButton"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
@@ -66,6 +67,7 @@
                              Tag="/Images/dashboard.ico">
                 </RadioButton>
                 <RadioButton Content="Usage"
+                             x:Name="UsageSidebarRadioButton"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
@@ -75,6 +77,7 @@
                              Tag="/Images/usage.ico">
                 </RadioButton>
                 <RadioButton Content="Blocks"
+                             x:Name="BlocksSidebarRadioButton"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
@@ -84,6 +87,7 @@
                              Tag="/Images/blocks.ico">
                 </RadioButton>
                 <RadioButton Content="Settings"
+                             x:Name="SettingsSidebarRadioButton"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
