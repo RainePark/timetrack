@@ -7,13 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="">
+    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Create dynamic blocks page">
+      <change afterPath="$PROJECT_DIR$/WPFUI/PageToBooleanConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,15 +23,17 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/06eb0d84c7594f1b874d648244456d6616480/46/f2be167a/INotifyPropertyChanged.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/988b2501ef31424db5a7b168105df188b4000/c7/50981c12/ImageMetadataReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1daa50925976862c96017a6999d2d8caf49968f2ae15596b7e6f26defc6f94/BitmapImage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49ef8291abed80b2c763f38d31547434e702decaffdfeceded3cb80e687ef/ResourcePart.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f3b9684f72bc2cc435eb694f7cc86eca8c240d2d1cefa1e8697a61f1f2f27f/SafeFileHandle.Windows.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/Model/BlocksModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/Model/ProgramUsageModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/BlocksView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/ViewModel/MainViewModel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/ViewModel/BlocksViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/Theme/DashboardActiveBlocksTheme.xaml" root0="FORCE_HIGHLIGHTING" />
@@ -55,30 +53,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Raine\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Raine\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\Raine\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Raine\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Raine\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Raine\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="WPFUI" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -130,7 +128,11 @@
       <workItem from="1683525409321" duration="12755000" />
       <workItem from="1683588808420" duration="5899000" />
       <workItem from="1683845656902" duration="7968000" />
-      <workItem from="1683864456488" duration="20776000" />
+      <workItem from="1683864456488" duration="21003000" />
+      <workItem from="1683971577357" duration="826000" />
+      <workItem from="1684068062879" duration="1427000" />
+      <workItem from="1684111751089" duration="6343000" />
+      <workItem from="1684122765019" duration="30934000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase git before work resumes">
       <created>1681714671916</created>
@@ -335,7 +337,70 @@
       <option name="project" value="LOCAL" />
       <updated>1683537653457</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Add logo to build">
+      <created>1683970749264</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1683970749264</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Create program logging database">
+      <created>1683970782930</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1683970782930</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Create base of Blocks model and class">
+      <created>1683970869952</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1683970869952</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Update test code for current program">
+      <created>1683970885974</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1683970885974</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Update workspace configs">
+      <created>1683970909040</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1683970909040</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Create function to get programs">
+      <created>1684226518133</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1684226518133</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Auto update selected menu">
+      <created>1684226581329</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1684226581329</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Switch Borders to Buttons">
+      <created>1684226657147</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1684226657147</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Create dynamic blocks page">
+      <created>1684226709540</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1684226709540</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,14 +442,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Rebase git before work resumes" />
-    <MESSAGE value="Finish exit button" />
-    <MESSAGE value="Small fixes" />
-    <MESSAGE value="Implement basic settings menu" />
-    <MESSAGE value="Add edit button to blocks view" />
-    <MESSAGE value="Minor fixes" />
-    <MESSAGE value="Create base of usage view" />
-    <MESSAGE value="Create demo settings submenu" />
     <MESSAGE value="Update resource directories" />
     <MESSAGE value="Add new theme resource files" />
     <MESSAGE value="Update scrollbar colour" />
@@ -401,7 +458,16 @@
     <MESSAGE value="Add program tracking" />
     <MESSAGE value="Update workspace.xml" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Add logo to build" />
+    <MESSAGE value="Create program logging database" />
+    <MESSAGE value="Create base of Blocks model and class" />
+    <MESSAGE value="Update test code for current program" />
+    <MESSAGE value="Update workspace configs" />
+    <MESSAGE value="Create function to get programs" />
+    <MESSAGE value="Auto update selected menu" />
+    <MESSAGE value="Switch Borders to Buttons" />
+    <MESSAGE value="Create dynamic blocks page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create dynamic blocks page" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
