@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WPFUI.MVVM.View"
+             xmlns:core="clr-namespace:WPFUI.Core"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
 
@@ -33,17 +34,19 @@
                            FontWeight="Medium"
                            HorizontalAlignment="Left">
                 </TextBlock>
-                <Border Grid.Column="1" Style="{StaticResource NextButtonTheme}" 
+                <Button Grid.Column="1" Style="{StaticResource NextButtonTheme}" 
                         Width="31"
                         Height="31"
                         Margin="10 3 0 0"
                         BorderThickness="0"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Center">
-                    <Border.Clip>
+                        VerticalAlignment="Center"
+                        Command="{Binding DataContext.SelectPageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                        CommandParameter="{x:Static core:PageName.Blocks}">
+                    <Button.Clip>
                         <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
-                    </Border.Clip>
-                </Border>
+                    </Button.Clip>
+                </Button>
             </Grid>
             
             <StackPanel Orientation="Vertical" Margin="0 0 0 20">
@@ -73,17 +76,17 @@
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2">
                             </TextBlock>
-                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                            <Button Style="{StaticResource ExpandButtonTheme}" 
                                     Width="25"
                                     Height="25"
                                     BorderThickness="0"
                                     Grid.Row="0"
                                     Grid.Column="2"
                                     HorizontalAlignment="Right">
-                                <Border.Clip>
+                                <Button.Clip>
                                     <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
-                                </Border.Clip>
-                            </Border>
+                                </Button.Clip>
+                            </Button>
                             <TextBlock Text="23hr 10min remaining today"
                                        Foreground="LightGreen"
                                        Background="Transparent"
@@ -163,17 +166,17 @@
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2">
                             </TextBlock>
-                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                            <Button Style="{StaticResource ExpandButtonTheme}" 
                                     Width="25"
                                     Height="25"
                                     BorderThickness="0"
                                     Grid.Row="0"
                                     Grid.Column="2"
                                     HorizontalAlignment="Right">
-                                <Border.Clip>
+                                <Button.Clip>
                                     <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
-                                </Border.Clip>
-                            </Border>
+                                </Button.Clip>
+                            </Button>
                             <TextBlock Text="Locked until tomorrow"
                                        Foreground="#FF9191"
                                        Background="Transparent"
@@ -253,17 +256,17 @@
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2">
                             </TextBlock>
-                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                            <Button Style="{StaticResource ExpandButtonTheme}" 
                                     Width="25"
                                     Height="25"
                                     BorderThickness="0"
                                     Grid.Row="0"
                                     Grid.Column="2"
                                     HorizontalAlignment="Right">
-                                <Border.Clip>
+                                <Button.Clip>
                                     <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
-                                </Border.Clip>
-                            </Border>
+                                </Button.Clip>
+                            </Button>
                             <TextBlock Text="15min remaining this hour"
                                        Foreground="LightGreen"
                                        Background="Transparent"
@@ -345,17 +348,17 @@
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2">
                             </TextBlock>
-                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                            <Button Style="{StaticResource ExpandButtonTheme}" 
                                     Width="25"
                                     Height="25"
                                     BorderThickness="0"
                                     Grid.Row="0"
                                     Grid.Column="2"
                                     HorizontalAlignment="Right">
-                                <Border.Clip>
+                                <Button.Clip>
                                     <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
-                                </Border.Clip>
-                            </Border>
+                                </Button.Clip>
+                            </Button>
                             <TextBlock Text="Unlocked until 5:30pm"
                                        Foreground="LightGreen"
                                        Background="Transparent"
@@ -435,17 +438,17 @@
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2">
                             </TextBlock>
-                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                            <Button Style="{StaticResource ExpandButtonTheme}" 
                                     Width="25"
                                     Height="25"
                                     BorderThickness="0"
                                     Grid.Row="0"
                                     Grid.Column="2"
                                     HorizontalAlignment="Right">
-                                <Border.Clip>
+                                <Button.Clip>
                                     <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
-                                </Border.Clip>
-                            </Border>
+                                </Button.Clip>
+                            </Button>
                             <TextBlock Text="99 launches remaining today"
                                        Foreground="LightGreen"
                                        Background="Transparent"
@@ -525,17 +528,17 @@
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2">
                             </TextBlock>
-                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                            <Button Style="{StaticResource ExpandButtonTheme}" 
                                     Width="25"
                                     Height="25"
                                     BorderThickness="0"
                                     Grid.Row="0"
                                     Grid.Column="2"
                                     HorizontalAlignment="Right">
-                                <Border.Clip>
+                                <Button.Clip>
                                     <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
-                                </Border.Clip>
-                            </Border>
+                                </Button.Clip>
+                            </Button>
                             <TextBlock Text="Locked until 4:07am"
                                        Foreground="#FF9191"
                                        Background="Transparent"
@@ -617,17 +620,17 @@
                                        Grid.Column="0"
                                        Grid.ColumnSpan="2">
                             </TextBlock>
-                            <Border Style="{StaticResource ExpandButtonTheme}" 
+                            <Button Style="{StaticResource ExpandButtonTheme}" 
                                     Width="25"
                                     Height="25"
                                     BorderThickness="0"
                                     Grid.Row="0"
                                     Grid.Column="2"
                                     HorizontalAlignment="Right">
-                                <Border.Clip>
+                                <Button.Clip>
                                     <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
-                                </Border.Clip>
-                            </Border>
+                                </Button.Clip>
+                            </Button>
                             <TextBlock Text="Locked until 7:00pm"
                                        Foreground="#FF9191"
                                        Background="Transparent"
