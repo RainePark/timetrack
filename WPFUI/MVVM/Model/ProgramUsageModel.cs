@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -11,20 +11,63 @@ using System.Timers;
 using WPFUI.Core;
 using Newtonsoft.Json;
 using System.Data.SQLite;
+using WPFUI.MVVM.Model;
 
 public class ProgramUsageModel : ObservableObject
 {
     private Timer _timer;
-    private string _currentProgram;
+    private int _usageHours;
+    private int _usageMinutes;
+    private int _totalUsageSeconds;
 
-    public string CurrentProgram
+    public int UsageHours
     {
-        get { return _currentProgram; }
+        get { return _usageHours; }
         set
         {
-            if (_currentProgram != value)
+            if (_usageHours != value)
             {
-                _currentProgram = value;
+                _usageHours = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    
+    public int UsageMinutes
+    {
+        get { return _usageMinutes; }
+        set
+        {
+            if (_usageMinutes != value)
+            {
+                _usageMinutes = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    
+    public int TotalUsageSeconds
+    {
+        get { return _totalUsageSeconds; }
+        set
+        {
+            if (_totalUsageSeconds != value)
+            {
+                _totalUsageSeconds = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    
+    private ObservableCollection<Block> _activeBlocksCollection;
+    public ObservableCollection<Block> ActiveBlocksCollection
+    {
+        get { return _activeBlocksCollection; }
+        set
+        {
+            if (_activeBlocksCollection != value)
+            {
+                _activeBlocksCollection = value;
                 OnPropertyChanged();
             }
         }
@@ -50,23 +93,21 @@ public class ProgramUsageModel : ObservableObject
                 command.ExecuteNonQuery();
             }
 
-            string createLTTableQuery =
-                "CREATE TABLE IF NOT EXISTS lt_usage (date INTEGER, program TEXT, usage INTEGER)";
+            string createLTTableQuery = "CREATE TABLE IF NOT EXISTS lt_usage (date INTEGER, program TEXT, usage INTEGER)";
             using (SQLiteCommand command = new SQLiteCommand(createLTTableQuery, connection))
             {
                 command.ExecuteNonQuery();
             }
-
             connection.Close();
         }
-
+        
         _timer = new Timer(1000);
         _timer.Elapsed += async (sender, args) => await UpdateActiveApplication();
         _timer.AutoReset = true;
         _timer.Enabled = true;
     }
 
-    private async Task UpdateActiveApplication()
+    public async Task UpdateActiveApplication()
     {
         int currentPid = GetActiveWindowProcessId();
         string processName = GetProcessNameByPID(currentPid);
@@ -81,9 +122,7 @@ public class ProgramUsageModel : ObservableObject
         {
             executabledescription = executableDetails.FileDescription;
         }
-
-        this.CurrentProgram = windowTitle;
-
+        
         Dictionary<string, ProgramDetails> knownPrograms = GetKnownPrograms();
         
         if (knownPrograms.ContainsKey(processName) == false)
@@ -108,12 +147,34 @@ public class ProgramUsageModel : ObservableObject
         }
 
         LogToDatabase(processName, windowTitle, DateTime.Now);
+        this.TotalUsageSeconds = GetUsageSinceMidnight();
+        TimeSpan totalDayUsage = TimeSpan.FromSeconds(this.TotalUsageSeconds);
+        this.UsageHours = (int)totalDayUsage.TotalHours;
+        this.UsageMinutes = (int)totalDayUsage.Minutes;
+        this.ActiveBlocksCollection = new ObservableCollection<Block>(BlocksModel.GetAllActiveBlocks());
+        BlocksModel.CheckAllBlocks(processName, currentPid);
     }
 
      public static Dictionary<string, ProgramDetails> GetKnownPrograms()
     {
         return (JsonConvert.DeserializeObject<Dictionary<string, ProgramDetails>>(File.ReadAllText("user\\programlist.json")));
     }
+
+     public int GetUsageSinceMidnight()
+     {
+         int secondCount;
+         using (var connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
+         {
+             connection.Open();
+             string query = "SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time;";
+             using (var command = new SQLiteCommand(query, connection))
+             {
+                 command.Parameters.AddWithValue("@specified_time", DateTime.Now.Date.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"));
+                 secondCount = Convert.ToInt32(command.ExecuteScalar());
+             }
+         }
+         return secondCount;
+     }
 
     static int GetActiveWindowProcessId()
     {
