@@ -44,6 +44,8 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
         
+        public ICommand BlockToggleCommand { get; set; }
+        
         public BlocksViewModel()
         {
             this.PageTitle = "Blocks";
@@ -53,6 +55,7 @@ namespace WPFUI.MVVM.ViewModel
             */
             RefreshBlocksPage();
             /*set on property change and trigger a refresh when anything is updated*/
+            BlockToggleCommand = new RelayCommand(BlockToggleButton_Clicked);
         }
 
         public void RefreshBlocksPage()
@@ -60,7 +63,19 @@ namespace WPFUI.MVVM.ViewModel
             var blockList = BlocksModel.GetAllBlocks();
             BlocksStackPanel = CreateBlockStackPanel(blockList);
         }
-        
+
+        private void BlockToggleButton_Clicked(object sender)
+        {
+            string blockName = ((ToggleButton)sender).Tag.ToString();
+            Block block = BlocksModel.GetAllBlocks()[blockName];
+            if (block != null)
+            {
+                block.Status = !block.Status;
+                BlocksModel.UpdateBlock(blockName, block);
+            }
+            RefreshBlocksPage();
+        }
+
         public StackPanel CreateBlockStackPanel(Dictionary<string, Block> blockList)
         {
             List<string> keyList = blockList.Keys.ToList();
@@ -180,7 +195,8 @@ namespace WPFUI.MVVM.ViewModel
             ToggleButton blockStatusToggle = new ToggleButton {
                 Style = (Style)Application.Current.Resources["ToggleButtonTheme"], 
                 HorizontalAlignment = HorizontalAlignment.Right, 
-                Margin = new Thickness(0, 4.5, 0, 0)
+                Margin = new Thickness(0, 4.5, 0, 0),
+                Tag = blockName
             };
             if (block.Status) { blockStatusToggle.IsChecked = true; }
             else { blockStatusToggle.IsChecked = false; }
