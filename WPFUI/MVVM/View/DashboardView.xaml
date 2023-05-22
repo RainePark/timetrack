@@ -1,4 +1,4 @@
-<UserControl x:Class="WPFUI.MVVM.View.DashboardView"
+﻿<UserControl x:Class="WPFUI.MVVM.View.DashboardView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,7 +7,9 @@
              xmlns:core="clr-namespace:WPFUI.Core"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
-
+    <UserControl.Resources>
+        <local:BlockToPathConverter x:Key="BlockToPathConverter"></local:BlockToPathConverter>
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
         <StackPanel Margin="20 13 0 0">
@@ -108,7 +110,7 @@
                                                Grid.ColumnSpan="3">
                                     </TextBlock>
                                     
-                                    <Image Source="/Images/time-fraction.ico"
+                                    <Image Source="{Binding Type, Converter={StaticResource BlockToPathConverter}}"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
                                            Height="15"

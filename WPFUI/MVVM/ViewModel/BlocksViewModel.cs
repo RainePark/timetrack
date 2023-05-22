@@ -126,7 +126,7 @@ namespace WPFUI.MVVM.ViewModel
             newBlockPanelGrid.Children.Add(newBlockPanelTitleText);
             
             Image blockTypeImage = new Image{HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Height = 15, Stretch = Stretch.Uniform, Margin = new Thickness(0, 5, 0, 0)};
-            if (block.Type == "usage-limit") { blockTypeImage.Source = BitmapImageFromUri(new Uri("pack://application:,,,/TimeTrack;component/Images/stopwatch.ico")); }
+            if ((block.Type == "usage-limit-total") || (block.Type == "usage-limit-perapp")) { blockTypeImage.Source = BitmapImageFromUri(new Uri("pack://application:,,,/TimeTrack;component/Images/stopwatch.ico")); }
             else { blockTypeImage.Source = BitmapImageFromUri(new Uri("pack://application:,,,/TimeTrack;component/Images/iconbackground-white.ico")); }
             Grid.SetRow(blockTypeImage, 2);
             Grid.SetColumn(blockTypeImage, 0);

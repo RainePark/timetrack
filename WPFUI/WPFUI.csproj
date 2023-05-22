@@ -28,9 +28,6 @@
       <Compile Update="MVVM\View\BooleanToStateTextConverter.cs">
         <DependentUpon>BlocksView.xaml</DependentUpon>
       </Compile>
-      <Compile Update="PageToBooleanConverter.cs">
-        <DependentUpon>MainWindow.xaml</DependentUpon>
-      </Compile>
     </ItemGroup>
 
     <ItemGroup>
