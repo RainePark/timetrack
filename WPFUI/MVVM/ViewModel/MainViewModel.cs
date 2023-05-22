@@ -40,10 +40,6 @@ namespace WPFUI.MVVM.ViewModel
                 { PageName.Settings, new SettingsViewModel() }
             };
             this.SelectedPage = this.Pages.First().Value;
-            
-            /*MORE TESTING*/
-            _programUsageModel = new ProgramUsageModel();
-            _programUsageModel.PropertyChanged += ProgramUsageModel_PropertyChanged;
         }
 
         public void SelectPage(object param)
@@ -83,28 +79,6 @@ namespace WPFUI.MVVM.ViewModel
             {
                 var dashboardSidebarRadioButton = (RadioButton)mainWindow.FindName("DashboardSidebarRadioButton");
                 dashboardSidebarRadioButton.IsChecked = true;
-            }
-        }
-
-        /*TESTING SECTION*/
-        private ProgramUsageModel _programUsageModel;
-        
-        private string _currentProgram;
-        public string CurrentProgram
-        {
-            get { return _programUsageModel.CurrentProgram; }
-            set
-            {
-                _programUsageModel.CurrentProgram = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        private void ProgramUsageModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(ProgramUsageModel.CurrentProgram))
-            {
-                OnPropertyChanged(nameof(CurrentProgram));
             }
         }
     }
