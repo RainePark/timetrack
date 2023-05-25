@@ -32,24 +32,13 @@ namespace WPFUI.MVVM.ViewModel
         
         private ProgramUsageModel _programUsageModel;
         
-        private int _usageHours;
-        public int UsageHours
+        private string _dashboardText;
+        public string DashboardText
         {
-            get { return _programUsageModel.UsageHours; }
+            get { return _programUsageModel.DashboardText; }
             set
             {
-                _programUsageModel.UsageHours = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        private int _usageMinutes;
-        public int UsageMinutes
-        {
-            get { return _programUsageModel.UsageMinutes; }
-            set
-            {
-                _programUsageModel.UsageMinutes = value;
+                _programUsageModel.DashboardText = value;
                 OnPropertyChanged();
             }
         }
@@ -69,13 +58,9 @@ namespace WPFUI.MVVM.ViewModel
         
         private void ProgramUsageModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ProgramUsageModel.UsageHours))
+            if (e.PropertyName == nameof(ProgramUsageModel.DashboardText))
             {
-                OnPropertyChanged(nameof(UsageHours));
-            }
-            if (e.PropertyName == nameof(ProgramUsageModel.UsageMinutes))
-            {
-                OnPropertyChanged(nameof(UsageMinutes));
+                OnPropertyChanged(nameof(DashboardText));
             }
             if (e.PropertyName == nameof(ProgramUsageModel.ActiveBlocksCollection))
             {

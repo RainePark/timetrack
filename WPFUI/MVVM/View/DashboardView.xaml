@@ -14,12 +14,12 @@
                   Style="{StaticResource ScrollBarTheme}">
         <StackPanel Margin="20 13 0 0">
             <TextBlock Foreground="White"
+                       Text="{Binding DashboardText}"
                        FontSize="{StaticResource TitleFontSize}"
                        FontFamily="{StaticResource MainFont}"
                        FontWeight="Light"
                        HorizontalAlignment="Left"
                        Margin="0 0 0 30">
-                <Run Text="Good evening Raine.&#x0a;Your screen usage today is&#x0a;"></Run><Run Text="{Binding UsageHours, StringFormat='{}{0} hours, '}"></Run><Run Text="{Binding UsageMinutes, StringFormat='{}{0} minutes'}"></Run>
             </TextBlock>
 
             <Grid>
