@@ -6,7 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Newtonsoft.Json;
 using WPFUI.Core;
+using WPFUI.MVVM.Model;
+using WPFUI.MVVM.View;
 
 namespace WPFUI.MVVM.ViewModel
 {
@@ -32,6 +35,59 @@ namespace WPFUI.MVVM.ViewModel
         public MainViewModel()
         {
             SelectPageCommand = new RelayCommand(SelectPage);
+
+            // Create configuration files if they don't exist
+            if (!Directory.Exists("user"))
+            {
+                Directory.CreateDirectory("user");
+            }
+
+            try
+            {
+                JsonConvert.DeserializeObject<Dictionary<string, ProgramDetails>>(File.ReadAllText("user\\programlist.json"));
+            }
+            catch
+            {
+                using (StreamWriter writer = new StreamWriter("user\\programlist.json"))
+                {
+                    writer.WriteLine("{}");
+                } 
+            }
+            
+            try
+            {
+                JsonConvert.DeserializeObject<Dictionary<string,Block>>(File.ReadAllText("user\\blocks.json"));
+            }
+            catch
+            {
+                using (StreamWriter writer = new StreamWriter("user\\blocks.json"))
+                {
+                    writer.WriteLine("{}");
+                } 
+            }
+
+            try
+            {
+                JsonConvert.DeserializeObject<Dictionary<string,object>>(File.ReadAllText("user\\blockstatus.json"));
+            }
+            catch
+            {
+                using (StreamWriter writer = new StreamWriter("user\\blockstatus.json"))
+                {
+                    writer.WriteLine("{}");
+                } 
+            }
+            
+            try
+            {
+                SettingsModel.GetUserSettings();
+            }
+            catch
+            {
+                WelcomeView welcomeView = new WelcomeView();
+                welcomeView.ShowDialog();
+            }
+            
             this.Pages = new Dictionary<PageName, IPage>
             {
                 { PageName.Dashboard, new DashboardViewModel() },
