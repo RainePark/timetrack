@@ -115,24 +115,27 @@ public class BlocksModel : ObservableObject
         /* Go through each block again and check if the current program needs to be blocked */
         foreach (Block block in blockList.Values)
         {
-            if (block.Programs.Contains(program))
+            if (block.Status)
             {
-                Dictionary<string, object> blockStatus = GetBlockStatus();
-                if (block.Type == "usage-limit-total")
+                if (block.Programs.Contains(program))
                 {
-                    Dictionary<string, int> blockDict = ((JObject)blockStatus[block.Name]).ToObject<Dictionary<string, int>>();
-                    int totalUsage = 0;
-                    foreach (int value in blockDict.Values)
+                    Dictionary<string, object> blockStatus = GetBlockStatus();
+                    if (block.Type == "usage-limit-total")
                     {
-                        totalUsage += value;
-                    }
-                    foreach (BlockCondition blockCondition in block.Conditions.Values)
-                    {
-                        if (blockCondition.TimeCriteria.Contains(DateTime.Now.ToString("dddd")))
+                        Dictionary<string, int> blockDict = ((JObject)blockStatus[block.Name]).ToObject<Dictionary<string, int>>();
+                        int totalUsage = 0;
+                        foreach (int value in blockDict.Values)
                         {
-                            if (totalUsage > Convert.ToInt32(blockCondition.Criteria[0]))
+                            totalUsage += value;
+                        }
+                        foreach (BlockCondition blockCondition in block.Conditions.Values)
+                        {
+                            if (blockCondition.TimeCriteria.Contains(DateTime.Now.ToString("dddd")))
                             {
-                                TerminateProgramByPID(pid);
+                                if (totalUsage > Convert.ToInt32(blockCondition.Criteria[0]))
+                                {
+                                    TerminateProgramByPID(pid);
+                                }
                             }
                         }
                     }
@@ -148,7 +151,6 @@ public class BlocksModel : ObservableObject
             System.Diagnostics.Process.GetProcessById(pid).Kill();
         }
     }
-
 
     public static Dictionary<string, object> GetBlockStatus()
     {
