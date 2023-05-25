@@ -80,12 +80,34 @@ namespace WPFUI.MVVM.ViewModel
         {
             List<string> keyList = blockList.Keys.ToList();
             StackPanel blockStackPanel = new StackPanel{Orientation = Orientation.Vertical};
-            for (int i = 0; i < keyList.Count; i++)
+            if (keyList.Count > 0)
             {
-                Border newBlockPanel = CreateBlockPanel(blockList[keyList[i]], keyList[i]);
-                blockStackPanel.Children.Add(newBlockPanel);
+                for (int i = 0; i < keyList.Count; i++)
+                {
+                    Border newBlockPanel = CreateBlockPanel(blockList[keyList[i]], keyList[i]);
+                    blockStackPanel.Children.Add(newBlockPanel);
+                }
+            }
+            else
+            {
+                blockStackPanel.Children.Add(CreateNoBlocksText());
             }
             return blockStackPanel;
+        }
+
+        public TextBlock CreateNoBlocksText()
+        {
+            TextBlock newTextBlock = new TextBlock{
+                Text = "You have not created a block yet. Press the + to create one!",
+                HorizontalAlignment = HorizontalAlignment.Center, 
+                Foreground = Brushes.White, 
+                Background = Brushes.Transparent, 
+                FontSize = (Double)Application.Current.Resources["SubheadingFontSize"], 
+                FontFamily = (System.Windows.Media.FontFamily)Application.Current.Resources["MainFont"], 
+                FontWeight = FontWeights.Regular, 
+                Margin = new Thickness(0, 5, 0, 0)
+            };
+            return newTextBlock;
         }
         
         public Border CreateBlockPanel(Block block, string blockName)
