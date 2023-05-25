@@ -11,6 +11,7 @@ using System.Timers;
 using WPFUI.Core;
 using Newtonsoft.Json;
 using System.Data.SQLite;
+using System.Globalization;
 using WPFUI.MVVM.Model;
 
 public class ProgramUsageModel : ObservableObject
@@ -58,6 +59,20 @@ public class ProgramUsageModel : ObservableObject
             }
         }
     }
+
+    private string _dashboardText;
+    public string DashboardText
+    {
+        get { return _dashboardText; }
+        set
+        {
+            if (_dashboardText != value)
+            {
+                _dashboardText = value;
+                OnPropertyChanged();
+            }
+        }
+    }
     
     private ObservableCollection<Block> _activeBlocksCollection;
     public ObservableCollection<Block> ActiveBlocksCollection
@@ -100,6 +115,13 @@ public class ProgramUsageModel : ObservableObject
             }
             connection.Close();
         }
+        
+        this.TotalUsageSeconds = GetUsageSinceMidnight();
+        TimeSpan totalDayUsage = TimeSpan.FromSeconds(this.TotalUsageSeconds);
+        this.UsageHours = (int)totalDayUsage.TotalHours;
+        this.UsageMinutes = (int)totalDayUsage.Minutes;
+        this.ActiveBlocksCollection = new ObservableCollection<Block>(BlocksModel.GetAllActiveBlocks());
+        UpdateDashboardText();
         
         _timer = new Timer(1000);
         _timer.Elapsed += async (sender, args) => await UpdateActiveApplication();
@@ -152,13 +174,53 @@ public class ProgramUsageModel : ObservableObject
         this.UsageHours = (int)totalDayUsage.TotalHours;
         this.UsageMinutes = (int)totalDayUsage.Minutes;
         this.ActiveBlocksCollection = new ObservableCollection<Block>(BlocksModel.GetAllActiveBlocks());
+        UpdateDashboardText();
         BlocksModel.CheckAllBlocks(processName, currentPid);
     }
 
-     public static Dictionary<string, ProgramDetails> GetKnownPrograms()
+    public static Dictionary<string, ProgramDetails> GetKnownPrograms()
     {
         return (JsonConvert.DeserializeObject<Dictionary<string, ProgramDetails>>(File.ReadAllText("user\\programlist.json")));
     }
+
+     public void UpdateDashboardText()
+     {
+        Settings userSettings = SettingsModel.GetUserSettings();
+        DateTime currentTime = DateTime.Now;string input = userSettings.UserName;
+
+        if (currentTime.Hour >= 5 && currentTime.Hour < 12)
+        {
+            this.DashboardText = "Good morning, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+        }
+        else if (currentTime.Hour >= 12 && currentTime.Hour < 17)
+        {
+            this.DashboardText = "Good afternoon, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+        }
+        else if (currentTime.Hour >= 17 && currentTime.Hour < 22)
+        {
+            this.DashboardText = "Good evening, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+        }
+        else
+        {
+            this.DashboardText = "Good night, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+        }
+        if (this.UsageHours == 1)
+        {
+            this.DashboardText += this.UsageHours + " hour, ";
+        }
+        else
+        {
+            this.DashboardText += this.UsageHours + " hours, ";
+        }
+        if (this.UsageMinutes == 1)
+        {
+            this.DashboardText += this.UsageMinutes + " minute.";
+        }
+        else
+        {
+            this.DashboardText += this.UsageMinutes + " minutes.";
+        }
+     }
 
      public int GetUsageSinceMidnight()
      {
