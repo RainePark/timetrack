@@ -26,19 +26,23 @@
         </TextBlock>
         
         <StackPanel Grid.Row="1" Grid.Column="0">
-            <RadioButton Content="Category 1"
+            <RadioButton Content="User"
+                         x:Name="UserSettingsSidebarRadioButton"
                          Height="50"
                          FontSize="25"
                          Style="{StaticResource SettingsMenuTheme}"
-                         IsChecked="True"
-                         Command="{Binding SettingsMenu1Command}">
+                         IsChecked="{Binding IsUserSettingsSidebarRadioButtonChecked}"
+                         Command="{Binding SelectSettingsMenuCommand}"
+                         CommandParameter="User">
             </RadioButton>
-            <RadioButton Content="Category 2"
+            <RadioButton Content="Blocks"
+                         x:Name="BlocksSettingsSidebarRadioButton"
                          Height="50"
                          FontSize="25"
                          Style="{StaticResource SettingsMenuTheme}"
-                         IsChecked="False"
-                         Command="{Binding SettingsMenu2Command}">
+                         IsChecked="{Binding IsBlocksSettingsSidebarRadioButtonChecked}"
+                         Command="{Binding SelectSettingsMenuCommand}"
+                         CommandParameter="Blocks">
             </RadioButton>
         </StackPanel>
         

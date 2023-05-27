@@ -3,6 +3,8 @@
     <Style TargetType="{x:Type Button}"
            x:Key="ExpandButtonTheme">
         <Style.Setters>
+            <Setter Property="Command" Value="{Binding EditBlockCommand}"></Setter>
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}}"></Setter>
             <Setter Property="Background">
                 <Setter.Value>
                     <ImageBrush Stretch="UniformToFill" ImageSource="/Images/expand.ico"/>
@@ -81,6 +83,35 @@
                 <Setter Property="Background">
                     <Setter.Value>
                         <ImageBrush Stretch="UniformToFill" ImageSource="/Images/next-hover.ico"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="{x:Type Button}"
+           x:Key="TickButtonTheme">
+        <Style.Setters>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="/Images/tick.ico"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="/Images/tick-hover.ico"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>

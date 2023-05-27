@@ -1,6 +1,23 @@
-﻿namespace WPFUI.MVVM.ViewModel;
+﻿using WPFUI.MVVM.Model;
+using WPFUI.Core;
 
-public class SettingsMenu2ViewModel
+namespace WPFUI.MVVM.ViewModel;
+
+public class SettingsMenu2ViewModel : ObservableObject
 {
-    
+    private Settings _userSettings;
+    public Settings UserSettings
+    {
+        get => _userSettings;
+        set
+        {
+            _userSettings = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public SettingsMenu2ViewModel(Settings userSettings)
+    {
+        UserSettings = userSettings;
+    }
 }

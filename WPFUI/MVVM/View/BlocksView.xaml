@@ -35,7 +35,8 @@
                     BorderThickness="0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
-                    Margin="0 10 0 0">
+                    Margin="0 10 0 0"
+                    Command="{Binding NewBlockCommand}">
                 <Button.Clip>
                     <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
                 </Button.Clip>

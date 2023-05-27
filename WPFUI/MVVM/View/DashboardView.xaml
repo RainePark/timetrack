@@ -83,21 +83,27 @@
                                        FontSize="{StaticResource SubheadingFontSize}"
                                        FontFamily="{StaticResource MainFont}"
                                        FontWeight="Regular"
+                                       Margin="0 0 4 0"
                                        Grid.Row="0"
                                        Grid.Column="0"
-                                       Grid.ColumnSpan="2">
+                                       Grid.ColumnSpan="3">
                                     </TextBlock>
-                                    <Button Style="{StaticResource ExpandButtonTheme}" 
+                                    <!-- Was originally going to have a button to go to edit the block from here however there it sometimes did not sync with the Blocks page, causing crashes as the Blocks page was confused by where the Blocks were -->
+                                    <!-- This is due to my bad implementation of the submenus which use 1 instance of the ViewModels created on launch rather than creating a fresh viewmodel each time the submenu is opened -->
+                                    <!-- The advantage of my approach is that it saves the state of the pages and can be faster, but at the tradeoff of being prone to syncing issues with other Views/ViewModels -->
+                                    <!--<Button Style="{StaticResource ExpandButtonTheme}" 
+                                            Command="{Binding DataContext.EditBlockCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                             Width="25"
                                             Height="25"
                                             BorderThickness="0"
                                             Grid.Row="0"
                                             Grid.Column="2"
-                                            HorizontalAlignment="Right">
+                                            HorizontalAlignment="Right"
+                                            Tag="{Binding Name}">
                                         <Button.Clip>
                                             <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
                                         </Button.Clip>
-                                    </Button>
+                                    </Button>-->
                                     <TextBlock Text="23hr 10min remaining today"
                                                Foreground="LightGreen"
                                                Background="Transparent"

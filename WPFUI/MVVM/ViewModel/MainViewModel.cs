@@ -16,6 +16,7 @@ namespace WPFUI.MVVM.ViewModel
     class MainViewModel : ObservableObject
     {
         public ICommand SelectPageCommand { get; set; }
+        public ICommand EditBlockCommand { get; set; }
 
         private Dictionary<PageName, IPage> Pages { get; }
 
@@ -35,7 +36,8 @@ namespace WPFUI.MVVM.ViewModel
         public MainViewModel()
         {
             SelectPageCommand = new RelayCommand(SelectPage);
-
+            EditBlockCommand = new RelayCommand(EditBlock_Clicked);
+            
             // Create configuration files if they don't exist
             if (!Directory.Exists("user"))
             {
@@ -105,6 +107,17 @@ namespace WPFUI.MVVM.ViewModel
             {
                 this.SelectedPage = _selectedPage;
                 UpdateRadioButtonIsChecked();
+            }
+        }
+        
+        private void EditBlock_Clicked(object sender)
+        {
+            string blockName = ((Button)sender).Tag.ToString();
+            Block block = BlocksModel.GetAllBlocks()[blockName];
+            if (block != null)
+            {
+                EditBlockView editBlock = new EditBlockView(new EditBlockViewModel(block, this));
+                editBlock.ShowDialog();
             }
         }
 

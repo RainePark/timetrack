@@ -15,6 +15,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using WPFUI.Core;
 using WPFUI.MVVM.Model;
+using WPFUI.MVVM.View;
 using Brushes = System.Windows.Media.Brushes;
 using Image = System.Windows.Controls.Image;
 
@@ -45,23 +46,30 @@ namespace WPFUI.MVVM.ViewModel
         }
         
         public ICommand BlockToggleCommand { get; set; }
-        
+        public ICommand NewBlockCommand { get; set; }
+        public ICommand EditBlockCommand { get; set; }
+        public ICommand RefreshBlocksCommand { get; set; }
+
         public BlocksViewModel()
         {
             this.PageTitle = "Blocks";
-            /*
-            List<string> templist = new List<string>{"rider64","firefox"};
-            BlocksModel.CreateNewBlock("test", "usage-limit", templist, new List<BlockCondition>());
-            */
             RefreshBlocksPage();
             /*set on property change and trigger a refresh when anything is updated*/
             BlockToggleCommand = new RelayCommand(BlockToggleButton_Clicked);
+            NewBlockCommand = new RelayCommand(CreateNewBlock_Clicked);
+            EditBlockCommand = new RelayCommand(EditBlock_Clicked);
+            RefreshBlocksCommand = new RelayCommand(RefreshBlocksCommand_Function);
         }
 
         public void RefreshBlocksPage()
         {
             var blockList = BlocksModel.GetAllBlocks();
             BlocksStackPanel = CreateBlockStackPanel(blockList);
+        }
+        
+        private void RefreshBlocksCommand_Function(object parameter)
+        {
+            RefreshBlocksPage();
         }
 
         private void BlockToggleButton_Clicked(object sender)
@@ -75,10 +83,30 @@ namespace WPFUI.MVVM.ViewModel
             }
             RefreshBlocksPage();
         }
+        
+        private void CreateNewBlock_Clicked(object sender)
+        {
+            Block newBlock = new Block();
+            EditBlockView editNewBlock = new EditBlockView(new EditBlockViewModel(new Block(), this, RefreshBlocksCommand));
+            editNewBlock.ShowDialog();
+        }
+        
+        private void EditBlock_Clicked(object sender)
+        {
+            string blockName = ((Button)sender).Tag.ToString();
+            Block block = BlocksModel.GetAllBlocks()[blockName];
+            if (block != null)
+            {
+                EditBlockView editBlock = new EditBlockView(new EditBlockViewModel(block, this, RefreshBlocksCommand));
+                editBlock.ShowDialog();
+            }
+        }
 
         public StackPanel CreateBlockStackPanel(Dictionary<string, Block> blockList)
         {
             List<string> keyList = blockList.Keys.ToList();
+            // Order the list of blocks alphabetically
+            keyList = keyList.OrderBy(key => key).ToList();
             StackPanel blockStackPanel = new StackPanel{Orientation = Orientation.Vertical};
             if (keyList.Count > 0)
             {
@@ -193,7 +221,8 @@ namespace WPFUI.MVVM.ViewModel
                 Height = 31, 
                 BorderThickness = new Thickness(0), 
                 HorizontalAlignment = HorizontalAlignment.Right, 
-                Clip = new RectangleGeometry{RadiusX = 8, RadiusY = 8, Rect = new Rect(0, 0, 31, 31)}
+                Clip = new RectangleGeometry{RadiusX = 8, RadiusY = 8, Rect = new Rect(0, 0, 31, 31)}, 
+                Tag = blockName
             };
             Grid.SetRow(blockDetailsExpandButton, 0);
             Grid.SetColumn(blockDetailsExpandButton, 3);
@@ -270,7 +299,7 @@ namespace WPFUI.MVVM.ViewModel
             return newGrid;
         }
 
-        public BitmapImage GetExecutableIcon(string exePath)
+        public static BitmapImage GetExecutableIcon(string exePath)
         {
             Icon exeIcon = Icon.ExtractAssociatedIcon(exePath);
 
@@ -302,7 +331,7 @@ namespace WPFUI.MVVM.ViewModel
             bitmapImage.EndInit();
             return bitmapImage;
         }
-
+        
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

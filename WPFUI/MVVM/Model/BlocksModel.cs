@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
@@ -74,6 +75,15 @@ public class BlocksModel : ObservableObject
     {
         var existingBlocks = JsonConvert.DeserializeObject<Dictionary<string,Block>>(File.ReadAllText("user\\blocks.json"));
         existingBlocks[blockName] = block;
+        using (StreamWriter writer = new StreamWriter("user\\blocks.json"))
+        {
+            writer.WriteLine(JsonConvert.SerializeObject(existingBlocks));
+        }
+    }
+
+    public static void DeleteBlock(string name){
+        var existingBlocks = JsonConvert.DeserializeObject<Dictionary<string,Block>>(File.ReadAllText("user\\blocks.json"));
+        existingBlocks.Remove(name);
         using (StreamWriter writer = new StreamWriter("user\\blocks.json"))
         {
             writer.WriteLine(JsonConvert.SerializeObject(existingBlocks));
@@ -167,13 +177,33 @@ public class BlocksModel : ObservableObject
     }
 }
 
-public class Block
+public class Block : INotifyPropertyChanged
 {
     public string Name { get; set; }
     public bool Status { get; set; }
     public string Type { get; set; }
-    public List<string> Programs { get; set; }
+    private List<string> _programs;
+
+    public List<string> Programs
+    {
+        get { return _programs; }
+        set
+        {
+            if (_programs != value)
+            {
+                _programs = value;
+                OnPropertyChanged(nameof(Programs));
+            }
+        }
+    }
     public Dictionary<int,BlockCondition> Conditions { get; set; }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }
 
 public class BlockCondition

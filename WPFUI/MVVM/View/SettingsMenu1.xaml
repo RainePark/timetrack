@@ -11,7 +11,7 @@
         <StackPanel>
             <TextBlock Foreground="White" 
                        FontSize="{StaticResource SubheadingFontSize}"
-                       Text="Sub-category">
+                       Text="{Binding UserSettings.UserName}">
             </TextBlock>
             <Grid Margin="0 5 0 0">
                 <Grid.RowDefinitions>

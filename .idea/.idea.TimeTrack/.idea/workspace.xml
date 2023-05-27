@@ -7,18 +7,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlockToPathConverter.cs" afterDir="false" />
+    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Add no block created warning">
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/ProgramToIconConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TimeTrack.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/TimeTrack.sln.DotSettings.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/BlocksViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/BlocksViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/ToggleButtonTheme.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/ToggleButtonTheme.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu1ViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu1ViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu2ViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu2ViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,10 +36,14 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/06eb0d84c7594f1b874d648244456d6616480/46/f2be167a/INotifyPropertyChanged.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/988b2501ef31424db5a7b168105df188b4000/c7/50981c12/ImageMetadataReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/06eb0d84c7594f1b874d648244456d6616480/_d965b/INotifyPropertyChanged.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/0b5567882521e02aa3d40a7bce81b7235ccac4db588866e3498e614c3bc/CastHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1daa50925976862c96017a6999d2d8caf49968f2ae15596b7e6f26defc6f94/BitmapImage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d7feeea46f0a7edf6cb722578ee59fa71a0641fbdb2b3662221f519f8e9efe5/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49ef8291abed80b2c763f38d31547434e702decaffdfeceded3cb80e687ef/ResourcePart.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8fe52f1bf1ee29b6c94fb85a1f97067262b4392db8cb73c5a8e41666b2457/Binding.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f3b9684f72bc2cc435eb694f7cc86eca8c240d2d1cefa1e8697a61f1f2f27f/SafeFileHandle.Windows.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" root0="FORCE_HIGHLIGHTING" />
@@ -143,6 +152,11 @@
       <workItem from="1684474187813" duration="4374000" />
       <workItem from="1684678469662" duration="10902000" />
       <workItem from="1684741682410" duration="2827000" />
+      <workItem from="1684745563790" duration="29684000" />
+      <workItem from="1684969723164" duration="2018000" />
+      <workItem from="1684980753475" duration="5608000" />
+      <workItem from="1684998326628" duration="10528000" />
+      <workItem from="1685070133401" duration="14343000" />
     </task>
     <task id="LOCAL-00001" summary="Rebase git before work resumes">
       <created>1681714671916</created>
@@ -424,7 +438,70 @@
       <option name="project" value="LOCAL" />
       <updated>1684226744323</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Dynamically update block icon">
+      <created>1684748229355</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1684748229355</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Remove unused converter">
+      <created>1684748248998</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1684748248998</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Create settings model">
+      <created>1685004021092</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1685004021092</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Dynamically create dashboard text">
+      <created>1685004042030</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1685004042030</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Create config files on startup">
+      <created>1685004137842</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1685004137842</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Correctly show dashboard greeting">
+      <created>1685004166086</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1685004166086</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Fix inactive block bug">
+      <created>1685004353133</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1685004353133</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Create startup menu">
+      <created>1685004365327</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1685004365327</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Add no block created warning">
+      <created>1685004386172</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1685004386172</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -466,15 +543,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Add new theme resource files" />
-    <MESSAGE value="Update scrollbar colour" />
-    <MESSAGE value="Update font" />
-    <MESSAGE value="Update font and work on theme" />
-    <MESSAGE value="Add themed toggle button" />
-    <MESSAGE value="Add logo and settings icon" />
-    <MESSAGE value="Add toggle button and complete blocks view" />
-    <MESSAGE value="Fix blocks view padding" />
-    <MESSAGE value="Automatically block status text based on ToggleButton" />
     <MESSAGE value="Refactor menu code" />
     <MESSAGE value="Update dependencies" />
     <MESSAGE value="Update build settings" />
@@ -491,7 +559,16 @@
     <MESSAGE value="Create dynamic blocks page" />
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Update project files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update project files" />
+    <MESSAGE value="Dynamically update block icon" />
+    <MESSAGE value="Remove unused converter" />
+    <MESSAGE value="Create settings model" />
+    <MESSAGE value="Dynamically create dashboard text" />
+    <MESSAGE value="Create config files on startup" />
+    <MESSAGE value="Correctly show dashboard greeting" />
+    <MESSAGE value="Fix inactive block bug" />
+    <MESSAGE value="Create startup menu" />
+    <MESSAGE value="Add no block created warning" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add no block created warning" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
