@@ -40,7 +40,6 @@ public class BlocksModel : ObservableObject
 
     public static Block CreateNewBlock(string name, string type, List<string> programs)
     {
-        /*CHECK IF SELECTED PROGRAM IS IN DATABASE AND IF NOT THEN ADD TO DATABASE*/
         return new Block { Name = name, Status = true, Type = type, Programs = programs, Conditions = new Dictionary<int, BlockCondition>()};
     }
     
@@ -54,9 +53,9 @@ public class BlocksModel : ObservableObject
         }
     }
 
-    public static Block CreateNewBlockCondition(string blocktype, Block block, List<string> criteria, List<string> timecriteria)
+    public static Dictionary<int, BlockCondition> CreateNewBlockCondition(string blocktype, Dictionary<int, BlockCondition> blockConditions, List<string> criteria, List<string> timecriteria)
     {
-        List<int> blockConditionKeys = block.Conditions.Keys.ToList();
+        List<int> blockConditionKeys = blockConditions.Keys.ToList();
         int newBlockConditionID;
         if (blockConditionKeys.Count > 0)
         {
@@ -66,9 +65,9 @@ public class BlocksModel : ObservableObject
         {
             newBlockConditionID = 1;
         }
-        BlockCondition blockCondition = new BlockCondition{ Criteria = criteria, TimeCriteria = timecriteria };
-        block.Conditions[newBlockConditionID] = blockCondition;
-        return block;
+        BlockCondition newBlockCondition = new BlockCondition{ Criteria = criteria, TimeCriteria = timecriteria };
+        blockConditions[newBlockConditionID] = newBlockCondition;
+        return blockConditions;
     }
 
     public static void UpdateBlock(string blockName, Block block)
@@ -97,29 +96,7 @@ public class BlocksModel : ObservableObject
         {
             if (iBlock.Programs.Contains(program))
             {
-                Dictionary<string, object> blockStatus = GetBlockStatus();
-                if ((iBlock.Type == "usage-limit-total") || (iBlock.Type == "usage-limit-perapp"))
-                {
-                    if (blockStatus.ContainsKey(iBlock.Name))
-                    {
-                        Dictionary<string, int> iBlockDict = ((JObject)blockStatus[iBlock.Name]).ToObject<Dictionary<string, int>>();
-                        if (iBlockDict.ContainsKey(program))
-                        {
-                            iBlockDict[program] = iBlockDict[program] + 1;
-                        }
-                        else
-                        {
-                            iBlockDict[program] = 1;
-                        }
-                        blockStatus[iBlock.Name] = iBlockDict;
-                    }
-                    else
-                    {
-                        blockStatus[iBlock.Name] = new Dictionary<string, int>{{program, 1}}; 
-                    }
-                    WriteBlockStatus(blockStatus);
-                }
-                /*parse more conditions here later*/
+                UpdateBlockStatus(iBlock, program, 1);
             }
         }
         /* Go through each block again and check if the current program needs to be blocked */
@@ -130,7 +107,7 @@ public class BlocksModel : ObservableObject
                 if (block.Programs.Contains(program))
                 {
                     Dictionary<string, object> blockStatus = GetBlockStatus();
-                    if (block.Type == "usage-limit-total")
+                    if (block.Type == "Usage Limit (Combined)")
                     {
                         Dictionary<string, int> blockDict = ((JObject)blockStatus[block.Name]).ToObject<Dictionary<string, int>>();
                         int totalUsage = 0;
@@ -140,9 +117,23 @@ public class BlocksModel : ObservableObject
                         }
                         foreach (BlockCondition blockCondition in block.Conditions.Values)
                         {
-                            if (blockCondition.TimeCriteria.Contains(DateTime.Now.ToString("dddd")))
+                            if (blockCondition.TimeCriteria.Contains(DateTime.Now.ToString("dddd").Substring(0, 3)))
                             {
-                                if (totalUsage > Convert.ToInt32(blockCondition.Criteria[0]))
+                                if (totalUsage > ((Convert.ToInt32(blockCondition.Criteria[0])*60*60)+(Convert.ToInt32(blockCondition.Criteria[1])*60)))
+                                {
+                                    TerminateProgramByPID(pid);
+                                }
+                            }
+                        }
+                    }
+                    else if (block.Type == "Usage Limit (Per App)")
+                    {
+                        Dictionary<string, int> blockDict = ((JObject)blockStatus[block.Name]).ToObject<Dictionary<string, int>>();
+                        foreach (BlockCondition blockCondition in block.Conditions.Values)
+                        {
+                            if (blockCondition.TimeCriteria.Contains(DateTime.Now.ToString("dddd").Substring(0, 3)))
+                            {
+                                if (blockDict[program] > ((Convert.ToInt32(blockCondition.Criteria[0])*60*60)+(Convert.ToInt32(blockCondition.Criteria[1])*60)))
                                 {
                                     TerminateProgramByPID(pid);
                                 }
@@ -175,6 +166,45 @@ public class BlocksModel : ObservableObject
             writer.WriteLine(JsonConvert.SerializeObject(input));
         } 
     }
+
+    public static void UpdateBlockStatus(Block block, string program, int add)
+    {
+        Dictionary<string, object> blockStatus = GetBlockStatus();
+        if ((block.Type == "Usage Limit (Combined)") || (block.Type == "Usage Limit (Per App)"))
+        {
+            if (blockStatus.ContainsKey(block.Name))
+            {
+                Dictionary<string, int> blockDict = ((JObject)blockStatus[block.Name]).ToObject<Dictionary<string, int>>();
+                if (blockDict.ContainsKey(program))
+                {
+                    blockDict[program] = blockDict[program] + add;
+                }
+                else
+                {
+                    blockDict[program] = ProgramUsageModel.GetProgramUsageSinceMidnight(program) + add;
+                }
+                blockStatus[block.Name] = blockDict;
+            }
+            else
+            {
+                blockStatus[block.Name] = new Dictionary<string, int>{{program, ProgramUsageModel.GetProgramUsageSinceMidnight(program) + add}}; 
+            }
+            WriteBlockStatus(blockStatus);
+        }
+        /*parse more conditions here later*/
+    }
+    
+    public static void RenameBlockStatus(string oldname, string newname)
+    {
+        Dictionary<string, object> blockstatus = GetBlockStatus();
+        if (blockstatus.ContainsKey(oldname))
+        {
+            object value = blockstatus[oldname];
+            blockstatus.Remove(oldname);
+            blockstatus.Add(newname, value);
+            WriteBlockStatus(blockstatus);
+        }
+    }
 }
 
 public class Block : INotifyPropertyChanged
@@ -182,8 +212,8 @@ public class Block : INotifyPropertyChanged
     public string Name { get; set; }
     public bool Status { get; set; }
     public string Type { get; set; }
+    
     private List<string> _programs;
-
     public List<string> Programs
     {
         get { return _programs; }
@@ -196,10 +226,37 @@ public class Block : INotifyPropertyChanged
             }
         }
     }
-    public Dictionary<int,BlockCondition> Conditions { get; set; }
+    
+    private Dictionary<int, BlockCondition> _conditions;
+    public Dictionary<int, BlockCondition> Conditions
+    {
+        get { return _conditions; }
+        set
+        {
+            if (_conditions != value)
+            {
+                _conditions = value;
+                OnPropertyChanged(nameof(Conditions));
+            }
+        }
+    }
+    
+    public Block()
+    {
+        Name = string.Empty;
+        Status = true;
+        Type = "Usage Limit (Combined)";
+        Programs = new List<string>();
+        Conditions = new Dictionary<int, BlockCondition>{
+            {1, new BlockCondition{
+                Criteria = new List<string>{"0", "0"},
+                TimeCriteria = new List<string>()
+                }
+            }
+        };
+    }
 
     public event PropertyChangedEventHandler PropertyChanged;
-
     protected virtual void OnPropertyChanged(string propertyName)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -208,6 +265,6 @@ public class Block : INotifyPropertyChanged
 
 public class BlockCondition
 {
-    public List<string> Criteria;
-    public List<string> TimeCriteria;
+    public List<string> Criteria { get; set; }
+    public List<string> TimeCriteria { get; set; }
 }

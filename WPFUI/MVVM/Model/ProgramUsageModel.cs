@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -131,43 +132,12 @@ public class ProgramUsageModel : ObservableObject
 
     public async Task UpdateActiveApplication()
     {
-        int currentPid = GetActiveWindowProcessId();
-        string processName = GetProcessNameByPID(currentPid);
-        FileVersionInfo executableDetails = GetExecutableDetailsByPID(currentPid);
-        string windowTitle = GetActiveWindowTitle();
-        string executabledescription;
-        if (executableDetails.FileDescription == "")
-        {
-            executabledescription = executableDetails.FileName.Split("\\").Last();
-        }
-        else
-        {
-            executabledescription = executableDetails.FileDescription;
-        }
-        
-        Dictionary<string, ProgramDetails> knownPrograms = GetKnownPrograms();
-        
-        if (knownPrograms.ContainsKey(processName) == false)
-        {
-            bool system;
-            if (executableDetails.FileName.Contains("C:\\Windows\\")) { system = true; }
-            else { system = false; }
-
-            knownPrograms[processName] = new ProgramDetails
-            {
-                executableDescription = executabledescription, path = GetExecutablePathByPID(currentPid),
-                system = system, monitored = false
-            };
-            using (StreamWriter writer = new StreamWriter("user\\programlist.json"))
-            {
-                writer.WriteLine(JsonConvert.SerializeObject(knownPrograms));
-            }
-        }
-        else
-        {
-            /*CHECK IF THE CURRENT PROGRAM MATCHES DATABASE AND IF ANY FIELDS ARE BLANK HERE*/
-        }
-
+        List<string> currentWindowDetails = GetActiveWindowDetails();
+        int currentPid = Convert.ToInt32(currentWindowDetails[0]);
+        string executablePath = currentWindowDetails[1];
+        string processName = currentWindowDetails[2];
+        string windowTitle = currentWindowDetails[3];
+        AppendProgramDetails(executablePath, processName);
         LogToDatabase(processName, windowTitle, DateTime.Now);
         this.TotalUsageSeconds = GetUsageSinceMidnight();
         TimeSpan totalDayUsage = TimeSpan.FromSeconds(this.TotalUsageSeconds);
@@ -221,7 +191,7 @@ public class ProgramUsageModel : ObservableObject
             this.DashboardText += this.UsageMinutes + " minutes.";
         }
      }
-
+    // implement system apps toggle here
      public int GetUsageSinceMidnight()
      {
          int secondCount;
@@ -238,44 +208,53 @@ public class ProgramUsageModel : ObservableObject
          return secondCount;
      }
 
-    static int GetActiveWindowProcessId()
-    {
-        IntPtr hwnd = GetForegroundWindow();
-        uint processId;
-        GetWindowThreadProcessId(hwnd, out processId);
-        return (int)processId;
-    }
+     public static int GetProgramUsageSinceMidnight(string name)
+     {
+         int secondCount;
+         using (var connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
+         {
+             connection.Open();
+             string query = "SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time AND program = @program_name;";
+             using (var command = new SQLiteCommand(query, connection))
+             {
+                 command.Parameters.AddWithValue("@specified_time", DateTime.Now.Date.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"));
+                 command.Parameters.AddWithValue("@program_name", name);
+                 secondCount = Convert.ToInt32(command.ExecuteScalar());
+             }
+         }
+         return secondCount;
+     }
 
-    static string GetProcessNameByPID(int pid)
+    static List<string> GetActiveWindowDetails()
     {
-        Process process = Process.GetProcessById(pid);
-        return process.ProcessName;
-    }
-
-    static string GetActiveWindowTitle()
-    {
+        // Get PID and Process object of active window
         IntPtr hwnd = GetForegroundWindow();
         uint processId;
         GetWindowThreadProcessId(hwnd, out processId);
         Process process = Process.GetProcessById((int)processId);
+        
+        // Get window title
         StringBuilder builder = new StringBuilder(1024);
         GetWindowText(hwnd, builder, 1024);
         string windowTitle = builder.ToString();
-        return windowTitle.Replace(process.ProcessName + " - ", "");
-    }
+        windowTitle.Replace(process.ProcessName + " - ", "");
+        
+        // Get executable path
+        string processPath;
+        try
+        {
+            ProcessModule mainModule = process.Modules.Cast<ProcessModule>().FirstOrDefault(m => m.FileName == process.MainModule.FileName);
+            processPath = mainModule?.FileName;
+        }
+        catch
+        {
+            processPath = null;
+        }
 
-    static FileVersionInfo GetExecutableDetailsByPID(int pid)
-    {
-        Process process = Process.GetProcessById(pid);
-        string filePath = process.MainModule.FileName;
-        FileVersionInfo fileInfo = FileVersionInfo.GetVersionInfo(filePath);
-        return fileInfo;
-    }
-
-    static string GetExecutablePathByPID(int pid)
-    {
-        Process process = Process.GetProcessById(pid);
-        return process.MainModule.FileName;
+        // Get process name
+        string processName = process.ProcessName;
+        
+        return new List<string>{((int)processId).ToString(), processPath, processName, windowTitle};
     }
 
     static void LogToDatabase(string program, string windowtitle, DateTime datetime)
@@ -329,7 +308,77 @@ public class ProgramUsageModel : ObservableObject
                 }
                 connection.Close();
             }
+        }
+    }
 
+    static public void AppendProgramDetails(string executablePath, string processName)
+    {
+        Dictionary<string, ProgramDetails> knownPrograms = GetKnownPrograms();
+        if (!knownPrograms.ContainsKey(processName))
+        {
+            if (executablePath != null)
+            {
+                FileVersionInfo executableDetails = FileVersionInfo.GetVersionInfo(executablePath); 
+                string executableDescription;
+                
+                if (String.IsNullOrEmpty(executableDetails.FileDescription))
+                {
+                    executableDescription = executableDetails.FileName.Split("\\").Last();
+                }
+                else
+                {
+                    executableDescription = executableDetails.FileDescription;
+                }
+                bool system = executablePath.Contains("C:\\Windows\\");
+                knownPrograms[processName] = new ProgramDetails
+                {
+                    executableDescription = executableDescription, 
+                    path = executablePath,
+                    system = system
+                };
+                using (StreamWriter writer = new StreamWriter("user\\programlist.json"))
+                {
+                    writer.WriteLine(JsonConvert.SerializeObject(knownPrograms));
+                }
+            }
+            else
+            {
+                string errorWithTimestamp = $"[E] {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Could not access new process \"{processName}\"";
+                using (StreamWriter writer = File.AppendText("user\\log.txt"))
+                {
+                    writer.WriteLine(errorWithTimestamp);
+                }
+            }
+        }
+        // Check for any changes to the executable
+        else
+        {
+            ProgramDetails programDetails = knownPrograms[processName];
+            ProgramDetails newProgramDetails = programDetails.Clone();
+            // NEED TO CHECK IF PATH ACTUALLY EXISTS FIRST - ALSO NEED TO CHECK ALL REFERENCES TO PATH TO IGNORE PATH NOT FOUND
+            if (programDetails.path != executablePath)
+            {
+                newProgramDetails.path = executablePath;
+            }
+            FileVersionInfo executableDetails = FileVersionInfo.GetVersionInfo(executablePath); 
+            if (String.IsNullOrEmpty(executableDetails.FileDescription))
+            {
+                newProgramDetails.executableDescription = executableDetails.FileName.Split("\\").Last();
+            }
+            else
+            {
+                newProgramDetails.executableDescription = executableDetails.FileDescription;
+            }
+            newProgramDetails.system = executablePath.Contains("C:\\Windows\\");
+            
+            if (!programDetails.HasSameValuesAs(newProgramDetails))
+            {
+                knownPrograms[processName] = newProgramDetails;
+                using (StreamWriter writer = new StreamWriter("user\\programlist.json"))
+                {
+                    writer.WriteLine(JsonConvert.SerializeObject(knownPrograms));
+                }
+            }
         }
     }
 }
@@ -339,5 +388,14 @@ public class ProgramDetails
     public string executableDescription;
     public string path;
     public bool system;
-    public bool monitored;
+        
+    public ProgramDetails Clone()
+    {
+        return new ProgramDetails { executableDescription = executableDescription, path = path, system = system };
+    }
+
+    public bool HasSameValuesAs(ProgramDetails other)
+    {
+        return executableDescription == other.executableDescription && path == other.path && system == other.system;
+    }
 }

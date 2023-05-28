@@ -8,7 +8,9 @@
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
     <UserControl.Resources>
-        <local:BlockToPathConverter x:Key="BlockToPathConverter"></local:BlockToPathConverter>
+        <local:BlockToPathConverter x:Key="BlockToPathConverter" />
+        <local:CriteriaToStringConverter x:Key="CriteriaToStringConverter" />
+        <local:TimeCriteriaToStringConverter x:Key="TimeCriteriaToStringConverter" />
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
@@ -90,7 +92,7 @@
                                     </TextBlock>
                                     <!-- Was originally going to have a button to go to edit the block from here however there it sometimes did not sync with the Blocks page, causing crashes as the Blocks page was confused by where the Blocks were -->
                                     <!-- This is due to my bad implementation of the submenus which use 1 instance of the ViewModels created on launch rather than creating a fresh viewmodel each time the submenu is opened -->
-                                    <!-- The advantage of my approach is that it saves the state of the pages and can be faster, but at the tradeoff of being prone to syncing issues with other Views/ViewModels -->
+                                    <!-- The advantage of my approach is that it saves the state of the pages and can be faster as I don't need to re-render, but at the tradeoff of being prone to syncing issues with other Views/ViewModels -->
                                     <!--<Button Style="{StaticResource ExpandButtonTheme}" 
                                             Command="{Binding DataContext.EditBlockCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                             Width="25"
@@ -104,7 +106,7 @@
                                             <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
                                         </Button.Clip>
                                     </Button>-->
-                                    <TextBlock Text="23hr 10min remaining today"
+                                    <TextBlock Text="{Binding Path=., Converter={StaticResource CriteriaToStringConverter}}"
                                                Foreground="LightGreen"
                                                Background="Transparent"
                                                FontSize="12.5"
@@ -125,7 +127,7 @@
                                            Grid.Row="2"
                                            Grid.Column="0">
                                     </Image>
-                                    <TextBlock Text="Block Type"
+                                    <TextBlock Text="{Binding Type}"
                                                Foreground="White"
                                                Background="Transparent"
                                                FontSize="{StaticResource TextFontSize}"
@@ -141,11 +143,11 @@
                                            VerticalAlignment="Center"
                                            Height="15"
                                            Stretch="Uniform"
-                                           Margin="0 7 0 0"
+                                           Margin="0 8 0 0"
                                            Grid.Row="3"
                                            Grid.Column="0">
                                     </Image>
-                                    <TextBlock Text="Block Details/Schedule"
+                                    <TextBlock Text="{Binding Conditions[1].TimeCriteria, Converter={StaticResource TimeCriteriaToStringConverter}}"
                                                Foreground="White"
                                                Background="Transparent"
                                                FontSize="{StaticResource TextFontSize}"

@@ -3,7 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:local="clr-namespace:WPFUI.MVVM.View"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="TimeTrack" 
         Height="650" 
@@ -18,23 +21,17 @@
     </Window.Resources>
     <Border Background="{StaticResource BGColourBrush}" CornerRadius="10" BorderBrush="White" BorderThickness="2">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="15"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"></RowDefinition>
-                <RowDefinition Height="15"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
             <Border x:Name="TitleBar"
                     Grid.Column="0" 
-                    Grid.ColumnSpan="3" 
+                    Grid.ColumnSpan="2" 
                     Grid.Row="0" 
                     Background="{StaticResource SecondaryColourBrush}" 
                     CornerRadius="10"
@@ -42,7 +39,7 @@
             </Border>
             <TextBlock
                 Grid.Column="0"
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="2"
                 Grid.Row="0"
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Center"
@@ -55,107 +52,337 @@
                 Background="Transparent"
                 MouseLeftButtonDown="TitleBar_DragWindow">
             </TextBlock>
-            
-            <StackPanel Grid.Column="1"
-                        Grid.Row="2"
-                        Orientation="Vertical"
-                        VerticalAlignment="Top"
-                        Margin="0 0 0 15">
-                <TextBlock Text="Block Name"
-                           Foreground="White" 
-                           FontSize="{StaticResource SubheadingFontSize}"
-                           FontFamily="{StaticResource MainFont}"
-                           FontWeight="Medium"
-                           HorizontalAlignment="Left"
-                           RenderOptions.BitmapScalingMode="HighQuality">
-                </TextBlock>
-                <TextBox Margin="0 5 0 0"
-                         HorizontalAlignment="Left"
-                         Width="250" Height="30" FontSize="20" FontFamily="{StaticResource MainFont}" 
-                         MaxLength="20" 
-                         Text="{Binding UpdatedBlockData.Block.Name, Mode=TwoWay}">
-                    <!--<TextBox.InputBindings>
-                        <KeyBinding Key="Enter" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=StartProgram}" />
-                    </TextBox.InputBindings>-->
-                </TextBox>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch">
-                <TextBlock Text="Applications"
-                           Foreground="White" 
-                           FontSize="{StaticResource SubheadingFontSize}"
-                           FontFamily="{StaticResource MainFont}"
-                           FontWeight="Medium"
-                           HorizontalAlignment="Left"
-                           RenderOptions.BitmapScalingMode="HighQuality">
-                </TextBlock>
-                <ItemsControl x:Name="EditBlockViewItemsControl"
-                              ItemsSource="{Binding UpdatedBlockData.Block.Programs, Mode=TwoWay}"
-                              HorizontalAlignment="Stretch"
-                              Margin="0 5 0 0">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid HorizontalAlignment="Left"
-                                  Margin="0 5 0 0"
-                                  Background="White"
-                                  Height="30"
-                                  Width="510">
-                                <Grid.Clip>
-                                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,510,30"></RectangleGeometry>
-                                </Grid.Clip>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0"
-                                        Height="22"
-                                        Width="22"
-                                        BorderThickness="0"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Left"
-                                        Margin="5 0 0 0">
-                                    <Border.Background>
-                                        <ImageBrush Stretch="UniformToFill">
-                                            <ImageBrush.ImageSource>
-                                                <MultiBinding Converter="{StaticResource ProgramToIconConverter}">
-                                                    <Binding Path="." />
-                                                    <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
-                                                </MultiBinding>
-                                            </ImageBrush.ImageSource>
-                                        </ImageBrush>
-                                    </Border.Background>
-                                </Border>
-                                <TextBlock Grid.Column="1" Text="{Binding}"
-                                           Margin="5 0 0 0"
-                                           VerticalAlignment="Center"
-                                           FontSize="20"
-                                           FontFamily="{StaticResource MainFont}">
-                                </TextBlock>
-                                <Button Grid.Column="2" HorizontalAlignment="Right"
-                                        Content="X" 
-                                        Command="{Binding DataContext.RemoveExecutablePathCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                        CommandParameter="{Binding}">
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-            <Button Style="{StaticResource TickButtonTheme}"
+            <Button Style="{StaticResource ExitButtonTheme}"
                     Grid.Column="1"
-                    Grid.Row="7"
-                    Width="31"
-                    Height="31"
-                    Margin="10 3 6 0"
-                    BorderThickness="0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Command="{Binding SaveBlockCommand}"
-                    CommandParameter="{Binding UpdatedBlockData}">
-                <Button.Clip>
-                    <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
-                </Button.Clip>
+                    Grid.Row="0"
+                    Width="24"
+                    Height="24"
+                    Margin="0"
+                    Click="CloseWindowButton_OnClick">
+                <Image Style="{StaticResource ExitButtonImageTheme}" 
+                       Width="22"
+                       Height="22"
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Stretch="Uniform">
+                </Image>
             </Button>
+            
+            <ScrollViewer Grid.Row="1"
+                          Grid.Column="0"
+                          Grid.ColumnSpan="2"
+                          VerticalScrollBarVisibility="Visible"
+                          Style="{StaticResource ScrollBarTheme}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="15"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="15"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.Column="1"
+                                Grid.Row="1"
+                                Orientation="Vertical"
+                                VerticalAlignment="Top">
+                        <TextBlock Text="Block Name"
+                                   Foreground="White" 
+                                   FontSize="{StaticResource SubheadingFontSize}"
+                                   FontFamily="{StaticResource MainFont}"
+                                   FontWeight="Medium"
+                                   HorizontalAlignment="Left"
+                                   RenderOptions.BitmapScalingMode="HighQuality">
+                        </TextBlock>
+                        <TextBox Margin="0 5 0 0"
+                                 HorizontalAlignment="Left"
+                                 Width="250" Height="30" FontSize="20" FontFamily="{StaticResource MainFont}" 
+                                 MaxLength="20" 
+                                 Text="{Binding UpdatedBlockData.Block.Name, Mode=TwoWay}">
+                        </TextBox>
+                    </StackPanel>
+                    <TextBlock Text="Applications"
+                               Grid.Column="1"
+                               Grid.Row="2"
+                               Foreground="White" 
+                               FontSize="{StaticResource SubheadingFontSize}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontWeight="Medium"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="0 15 0 0"
+                               RenderOptions.BitmapScalingMode="HighQuality">
+                    </TextBlock>
+                    <Button Style="{StaticResource AddButtonTheme}"
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            Width="31"
+                            Height="31"
+                            Margin="10 0 6 0"
+                            BorderThickness="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Command="{Binding AddExecutablePathCommand}">
+                        <Button.Clip>
+                            <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
+                        </Button.Clip>
+                    </Button>
+                    <StackPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch">
+                        <ItemsControl x:Name="EditBlockViewItemsControl"
+                                      ItemsSource="{Binding UpdatedBlockData.Programs}"
+                                      HorizontalAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Left"
+                                          Margin="0 5 0 0"
+                                          Background="White"
+                                          Height="30"
+                                          Width="510">
+                                        <Grid.Clip>
+                                            <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,510,30"></RectangleGeometry>
+                                        </Grid.Clip>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0"
+                                                Height="22"
+                                                Width="22"
+                                                BorderThickness="0"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Left"
+                                                Margin="5 0 0 0">
+                                            <Border.Background>
+                                                <ImageBrush Stretch="UniformToFill">
+                                                    <ImageBrush.ImageSource>
+                                                        <MultiBinding Converter="{StaticResource ProgramToIconConverter}">
+                                                            <Binding Path="." />
+                                                            <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                        </MultiBinding>
+                                                    </ImageBrush.ImageSource>
+                                                </ImageBrush>
+                                            </Border.Background>
+                                        </Border>
+                                        <TextBlock Grid.Column="1" Text="{Binding}"
+                                                   Margin="5 0 0 0"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="20"
+                                                   FontFamily="{StaticResource MainFont}">
+                                        </TextBlock>
+                                        <Button Grid.Column="2" HorizontalAlignment="Right"
+                                                Content="X" 
+                                                Command="{Binding DataContext.RemoveExecutablePathCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                CommandParameter="{Binding}">
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                    <TextBlock Text="Block Type"
+                               Grid.Column="1"
+                               Grid.Row="4"
+                               Foreground="White" 
+                               FontSize="{StaticResource SubheadingFontSize}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontWeight="Medium"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="0 15 0 0"
+                               RenderOptions.BitmapScalingMode="HighQuality">
+                    </TextBlock>
+                    <ComboBox ItemsSource="{Binding UpdatedBlockData.BlockTypeOptions}" 
+                              SelectedItem="{Binding UpdatedBlockData.Type, Mode=TwoWay}"
+                              Grid.Column="1"
+                              Grid.Row="5"
+                              Margin="0 5 0 0"
+                              HorizontalAlignment="Left"
+                              Width="510" Height="30" FontSize="20" FontFamily="{StaticResource MainFont}">
+                              <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <cmd:EventToCommand Command="{Binding DataContext.BlockTypeChangedCommand, RelativeSource={RelativeSource AncestorType=Window}}" PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                    </ComboBox>
+                    <TextBlock Text="Block Criteria"
+                               Grid.Column="1"
+                               Grid.Row="6"
+                               Foreground="White" 
+                               FontSize="{StaticResource SubheadingFontSize}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontWeight="Medium"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="0 15 0 0"
+                               RenderOptions.BitmapScalingMode="HighQuality">
+                    </TextBlock>
+                    <ContentControl Content="{Binding UpdatedBlockData, Mode=TwoWay}"
+                                    Grid.Column="1"
+                                    Grid.Row="7"
+                                    Margin="0 5 0 0">
+                        <ContentControl.Resources>
+                            <DataTemplate x:Key="UsageBlockTemplate">
+                                <Grid>
+                                    <ItemsControl ItemsSource="{Binding Conditions, Mode=TwoWay}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid HorizontalAlignment="Left"
+                                                      Margin="0 5 0 0"
+                                                      Background="White"
+                                                      Height="135"
+                                                      Width="510">
+                                                    <Grid.Clip>
+                                                        <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,510,135"></RectangleGeometry>
+                                                    </Grid.Clip>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="10"></RowDefinition>
+                                                        <RowDefinition Height="Auto"></RowDefinition>
+                                                        <RowDefinition Height="Auto"></RowDefinition>
+                                                        <RowDefinition Height="Auto"></RowDefinition>
+                                                        <RowDefinition Height="Auto"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Grid.Row="1" 
+                                                               Text="Allowed Usage Per Day"
+                                                               Margin="10 0 0 0"
+                                                               VerticalAlignment="Center"
+                                                               FontSize="20"
+                                                               FontFamily="{StaticResource MainFont}">
+                                                    </TextBlock>
+                                                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 5 0 0">
+                                                        <TextBox Margin="10 0 5 0"
+                                                                 HorizontalAlignment="Left"
+                                                                 Width="25" Height="20" FontSize="15" FontFamily="{StaticResource MainFont}" 
+                                                                 MaxLength="2" 
+                                                                 Text="{Binding Value.Criteria[0], Mode=TwoWay}">
+                                                        </TextBox>
+                                                        <TextBlock Grid.Row="1" 
+                                                                   Text="hours,"
+                                                                   VerticalAlignment="Center"
+                                                                   Margin="0 0 5 0"
+                                                                   FontSize="15"
+                                                                   FontFamily="{StaticResource MainFont}">
+                                                        </TextBlock>
+                                                        <TextBox Margin="10 0 5 0"
+                                                                 HorizontalAlignment="Left"
+                                                                 Width="25" Height="20" FontSize="15" FontFamily="{StaticResource MainFont}" 
+                                                                 MaxLength="2" 
+                                                                 Text="{Binding Value.Criteria[1], Mode=TwoWay}">
+                                                        </TextBox>
+                                                        <TextBlock Grid.Row="1" 
+                                                                   Text="minutes"
+                                                                   VerticalAlignment="Center"
+                                                                   FontSize="15"
+                                                                   FontFamily="{StaticResource MainFont}">
+                                                        </TextBlock>
+                                                    </StackPanel>
+                                                    <TextBlock Grid.Row="3" 
+                                                               Text="Days Active"
+                                                               Margin="10 10 0 0"
+                                                               VerticalAlignment="Center"
+                                                               FontSize="20"
+                                                               FontFamily="{StaticResource MainFont}">
+                                                    </TextBlock>
+                                                    <ListBox Grid.Row="4" 
+                                                             Margin="10 5 10 0" 
+                                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                                             SelectionMode="Multiple"
+                                                             FontSize="15"
+                                                             FontFamily="{StaticResource MainFont}"
+                                                             BorderThickness="0"
+                                                             Width="490"
+                                                             x:Name="TimeCriteriaListBox"
+                                                             Loaded="TimeCriteriaListBox_Loaded"
+                                                             SelectionChanged="TimeCriteriaListBox_SelectionChanged">
+                                                        <ListBox.ItemsPanel>
+                                                            <ItemsPanelTemplate>
+                                                                <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                                            </ItemsPanelTemplate>
+                                                        </ListBox.ItemsPanel>
+                                                        <ListBox.Resources>
+                                                            <Style TargetType="ListBoxItem">
+                                                                <Setter Property="Margin" Value=" 0 0 5 0" />
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="ListBoxItem">
+                                                                            <Border Name="Border" Padding="2" SnapsToDevicePixels="true">
+                                                                                <ContentPresenter />
+                                                                            </Border>
+                                                                            <ControlTemplate.Triggers>
+                                                                                <Trigger Property="IsSelected" Value="true">
+                                                                                    <Setter TargetName="Border" Property="Background"
+                                                                                        Value="{StaticResource SecondaryColourBrush}"/>
+                                                                                </Trigger>
+                                                                            </ControlTemplate.Triggers>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Style>
+                                                        </ListBox.Resources>
+                                                        <ListBox.ItemsSource>
+                                                            <x:Array Type="{x:Type sys:String}">
+                                                                <sys:String>Mon</sys:String>
+                                                                <sys:String>Tue</sys:String>
+                                                                <sys:String>Wed</sys:String>
+                                                                <sys:String>Thu</sys:String>
+                                                                <sys:String>Fri</sys:String>
+                                                                <sys:String>Sat</sys:String>
+                                                                <sys:String>Sun</sys:String>
+                                                            </x:Array>
+                                                        </ListBox.ItemsSource>
+                                                    </ListBox>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Grid>
+                            </DataTemplate>
+                            <DataTemplate x:Key="TimeBlockStatus">
+                                <Grid>
+                                    <TextBlock Foreground="White" Text="test"></TextBlock>
+                                </Grid>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                        <ContentControl.Style>
+                            <Style TargetType="ContentControl">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding UpdatedBlockData.Type}" Value="Usage Limit (Combined)">
+                                        <Setter Property="ContentTemplate" Value="{StaticResource UsageBlockTemplate}" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding UpdatedBlockData.Type}" Value="Usage Limit (Per App)">
+                                        <Setter Property="ContentTemplate" Value="{StaticResource UsageBlockTemplate}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+                    <Button Style="{StaticResource TickButtonTheme}"
+                            Grid.Column="1"
+                            Grid.Row="8"
+                            Width="31"
+                            Height="31"
+                            Margin="10 15 6 0"
+                            BorderThickness="0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Command="{Binding SaveBlockCommand}"
+                            CommandParameter="{Binding UpdatedBlockData}">
+                        <Button.Clip>
+                            <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
+                        </Button.Clip>
+                    </Button>
+                </Grid>
+            </ScrollViewer>
         </Grid>
     </Border>
 </Window>

@@ -9,7 +9,7 @@ public class BlockToPathConverter : IValueConverter
     {
         string input = value as string;
 
-        if ((input == "usage-limit-total") || (input == "usage-limit-perapp"))
+        if ((input == "Usage Limit (Combined)") || (input == "Usage Limit (Per App)"))
         {
             return "/Images/stopwatch.ico";
         }

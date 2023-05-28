@@ -8,22 +8,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Add no block created warning">
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/ProgramToIconConverter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/CriteriaToStringConverter.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/TimeCriteriaToStringConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/BlockToPathConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlockToPathConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/BlocksViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/BlocksViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu1ViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu1ViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu2ViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu2ViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/EditBlockViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/EditBlockViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,17 +30,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/06eb0d84c7594f1b874d648244456d6616480/46/f2be167a/INotifyPropertyChanged.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/988b2501ef31424db5a7b168105df188b4000/c7/50981c12/ImageMetadataReader.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/06eb0d84c7594f1b874d648244456d6616480/_d965b/INotifyPropertyChanged.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/0b5567882521e02aa3d40a7bce81b7235ccac4db588866e3498e614c3bc/CastHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1daa50925976862c96017a6999d2d8caf49968f2ae15596b7e6f26defc6f94/BitmapImage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2d4ba875b43619fabcb3269ac82cf228d3b858bbdb0f4fa489d91152312683/IValueConverter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3874f59d9efba5c2107687cddbc6532c4f8c9f1db79355b8cd313165ea11e6/Process.Windows.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d7feeea46f0a7edf6cb722578ee59fa71a0641fbdb2b3662221f519f8e9efe5/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49ef8291abed80b2c763f38d31547434e702decaffdfeceded3cb80e687ef/ResourcePart.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8fe52f1bf1ee29b6c94fb85a1f97067262b4392db8cb73c5a8e41666b2457/Binding.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f3b9684f72bc2cc435eb694f7cc86eca8c240d2d1cefa1e8697a61f1f2f27f/SafeFileHandle.Windows.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9cc0fd93f11dc3f0f139a3dc823e71117f934342f6f7f7af21d70fa694bc762/IMultiValueConverter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b6f38579d53ac41e10383ded5e9159339cd0ffd18fb4d756faea93154ba/Window.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" root0="FORCE_HIGHLIGHTING" />

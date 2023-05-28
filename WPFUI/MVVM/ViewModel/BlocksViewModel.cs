@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -45,6 +46,8 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
         
+        public ObservableCollection<string> SelectedTimeCriteria { get; set; }
+        
         public ICommand BlockToggleCommand { get; set; }
         public ICommand NewBlockCommand { get; set; }
         public ICommand EditBlockCommand { get; set; }
@@ -59,6 +62,7 @@ namespace WPFUI.MVVM.ViewModel
             NewBlockCommand = new RelayCommand(CreateNewBlock_Clicked);
             EditBlockCommand = new RelayCommand(EditBlock_Clicked);
             RefreshBlocksCommand = new RelayCommand(RefreshBlocksCommand_Function);
+            SelectedTimeCriteria = new ObservableCollection<string>();
         }
 
         public void RefreshBlocksPage()
@@ -158,7 +162,7 @@ namespace WPFUI.MVVM.ViewModel
             StackPanel newBlockPanelProgramList = CreateProgramListStackPanel(block.Programs);
             Grid.SetRow(newBlockPanelProgramList, 0);
             Grid.SetColumn(newBlockPanelProgramList, 0);
-            Grid.SetColumnSpan(newBlockPanelProgramList, 2);
+            Grid.SetColumnSpan(newBlockPanelProgramList, 3);
             newBlockPanelGrid.Children.Add(newBlockPanelProgramList);
 
             TextBlock newBlockPanelTitleText = new TextBlock {
@@ -176,7 +180,7 @@ namespace WPFUI.MVVM.ViewModel
             newBlockPanelGrid.Children.Add(newBlockPanelTitleText);
             
             Image blockTypeImage = new Image{HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Height = 15, Stretch = Stretch.Uniform, Margin = new Thickness(0, 5, 0, 0)};
-            if ((block.Type == "usage-limit-total") || (block.Type == "usage-limit-perapp")) { blockTypeImage.Source = BitmapImageFromUri(new Uri("pack://application:,,,/TimeTrack;component/Images/stopwatch.ico")); }
+            if ((block.Type == "Usage Limit (Combined)") || (block.Type == "Usage Limit (Per App)")) { blockTypeImage.Source = BitmapImageFromUri(new Uri("pack://application:,,,/TimeTrack;component/Images/stopwatch.ico")); }
             else { blockTypeImage.Source = BitmapImageFromUri(new Uri("pack://application:,,,/TimeTrack;component/Images/iconbackground-white.ico")); }
             Grid.SetRow(blockTypeImage, 2);
             Grid.SetColumn(blockTypeImage, 0);
@@ -188,10 +192,9 @@ namespace WPFUI.MVVM.ViewModel
                 FontSize = (Double)Application.Current.Resources["TextFontSize"], 
                 FontFamily = (System.Windows.Media.FontFamily)Application.Current.Resources["MainFont"], 
                 FontWeight = FontWeights.Light, 
-                Margin = new Thickness(4, 5, 0, 0)
+                Margin = new Thickness(4, 5, 0, 0), 
+                Text = $"{block.Type} - {block.Conditions[1].Criteria[0]} hour, {block.Conditions[1].Criteria[1]} minute limit"
             };
-            if (block.Type == "usage-limit") { blockTypeText.Text = "Usage Limit"; }
-            else { blockTypeText.Text = "Block Type"; }
             Grid.SetRow(blockTypeText,2);
             Grid.SetColumn(blockTypeText, 1);
             newBlockPanelGrid.Children.Add(blockTypeText);
@@ -208,9 +211,9 @@ namespace WPFUI.MVVM.ViewModel
                 FontSize = (Double)Application.Current.Resources["TextFontSize"], 
                 FontFamily = (System.Windows.Media.FontFamily)Application.Current.Resources["MainFont"], 
                 FontWeight = FontWeights.Light, 
-                Margin = new Thickness(4, 5, 0, 0)
+                Margin = new Thickness(4, 5, 0, 0), 
+                Text = string.Join(", ", block.Conditions[1].TimeCriteria)
             };
-            blockDetailsText.Text = "TEMPORARY";
             Grid.SetRow(blockDetailsText, 3);
             Grid.SetColumn(blockDetailsText, 1);
             newBlockPanelGrid.Children.Add(blockDetailsText);
@@ -263,7 +266,7 @@ namespace WPFUI.MVVM.ViewModel
         {
             var knownPrograms = ProgramUsageModel.GetKnownPrograms();
             StackPanel newStackPanel = new StackPanel {Orientation = Orientation.Horizontal, Margin = new Thickness(0, 0, 5, 0)};
-            if (programs.Count < 14)
+            if (programs.Count < 15)
             {
                 for (int i = 0; i < programs.Count; i++)
                 {
@@ -273,12 +276,21 @@ namespace WPFUI.MVVM.ViewModel
             }
             else
             {
-                for (int i = 0; i < 13; i++)
+                for (int i = 0; i < 14; i++)
                 {
                     Grid newProgramIcon = CreateProgramIcon(knownPrograms[programs[i]].path);
                     newStackPanel.Children.Add(newProgramIcon);
                 }
-                /* Add more options button */
+                // Generate overflow icon that indicates there are additional programs
+                Grid programOverflow = new Grid{Margin = new Thickness(0, 0, 5, 0)};
+                programOverflow.RowDefinitions.Add(new RowDefinition{Height = new GridLength(33)});
+                programOverflow.ColumnDefinitions.Add(new ColumnDefinition(){Width = new GridLength(33)});
+                Border overflowBorder = new Border{Width = 31, Height = 31, BorderThickness = new Thickness(0)};
+                overflowBorder.Clip = new RectangleGeometry{RadiusX = 8, RadiusY = 8, Rect = new Rect(0, 0, 31, 31)};
+                BitmapImage overflowBitmap = BitmapImageFromUri(new Uri("pack://application:,,,/TimeTrack;component/Images/app-overflow.ico"));
+                overflowBorder.Background = new ImageBrush{Stretch = System.Windows.Media.Stretch.UniformToFill, ImageSource = overflowBitmap};
+                programOverflow.Children.Add(overflowBorder);
+                newStackPanel.Children.Add(programOverflow);
             }
             return newStackPanel;
         }
