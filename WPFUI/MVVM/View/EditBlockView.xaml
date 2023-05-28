@@ -88,6 +88,7 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="15"></RowDefinition>
                     </Grid.RowDefinitions>
@@ -321,7 +322,7 @@
                                                                             <ControlTemplate.Triggers>
                                                                                 <Trigger Property="IsSelected" Value="true">
                                                                                     <Setter TargetName="Border" Property="Background"
-                                                                                        Value="{StaticResource SecondaryColourBrush}"/>
+                                                                                        Value="#9999ab"/>
                                                                                 </Trigger>
                                                                             </ControlTemplate.Triggers>
                                                                         </ControlTemplate>
@@ -368,7 +369,22 @@
                     </ContentControl>
                     <Button Style="{StaticResource TickButtonTheme}"
                             Grid.Column="1"
-                            Grid.Row="8"
+                            Grid.Row="9"
+                            Width="31"
+                            Height="31"
+                            Margin="6 15 10 0"
+                            BorderThickness="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Command="{Binding DeleteBlockCommand}"
+                            CommandParameter="{Binding UpdatedBlockData}">
+                        <Button.Clip>
+                            <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
+                        </Button.Clip>
+                    </Button>
+                    <Button Style="{StaticResource TickButtonTheme}"
+                            Grid.Column="1"
+                            Grid.Row="9"
                             Width="31"
                             Height="31"
                             Margin="10 15 6 0"

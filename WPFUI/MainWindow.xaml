@@ -19,6 +19,13 @@
     <Window.DataContext>
         <viewModel:MainViewModel></viewModel:MainViewModel>
     </Window.DataContext>
+
+    <Window.Resources>
+        <ContextMenu x:Key="TaskbarIconContextMenu">
+            <MenuItem Header="Open" Click="TaskbarIcon_TrayMouseDoubleClick"/>
+            <MenuItem Header="Exit" Click="ExitProgram"/>
+        </ContextMenu>
+    </Window.Resources>
     
     <Border Background="{StaticResource BGColourBrush}" CornerRadius="10">
         <Grid>

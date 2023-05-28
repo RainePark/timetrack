@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WPFUI.Core;
@@ -11,6 +13,11 @@ namespace WPFUI.MVVM.Model;
 
 public class BlocksModel : ObservableObject
 {
+    [DllImport("user32.dll")]
+    private static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
+
+    private const int SW_MINIMIZE = 6;
+    
     public BlocksModel()
     {
         
@@ -25,14 +32,18 @@ public class BlocksModel : ObservableObject
     public static List<Block> GetAllActiveBlocks()
     {
         var fullBlockList = GetAllBlocks();
-        List<string> keyList = fullBlockList.Keys.ToList();
         List<Block> activeBlocks = new List<Block>();
-        for (int i = 0; i < keyList.Count; i++)
+        foreach (Block block in fullBlockList.Values)
         {
-            Block iBlock = fullBlockList[keyList[i]];
-            if (iBlock.Status)
+            if (block.Status)
             {
-               activeBlocks.Add(iBlock);
+                if ((block.Type == "Usage Limit (Combined)") || (block.Type == "Usage Limit (Per App)"))
+                {
+                    if (block.Conditions[1].TimeCriteria.Contains(DateTime.Now.ToString("dddd").Substring(0, 3)))
+                    {
+                        activeBlocks.Add(block);
+                    }
+                }
             }
         }
         return activeBlocks;
@@ -92,11 +103,11 @@ public class BlocksModel : ObservableObject
     public static void CheckAllBlocks(string program, int pid)
     {
         var blockList = GetAllBlocks();
-        foreach (Block iBlock in blockList.Values)
+        foreach (Block block in blockList.Values)
         {
-            if (iBlock.Programs.Contains(program))
+            if (block.Programs.Contains(program))
             {
-                UpdateBlockStatus(iBlock, program, 1);
+                UpdateBlockStatus(block, program, 1);
             }
         }
         /* Go through each block again and check if the current program needs to be blocked */
@@ -147,9 +158,32 @@ public class BlocksModel : ObservableObject
 
     public static void TerminateProgramByPID(int pid)
     {
-        if (System.Diagnostics.Process.GetProcesses().Any(x => x.Id == pid))
+        try
         {
-            System.Diagnostics.Process.GetProcessById(pid).Kill();
+            Settings userSettings = SettingsModel.GetUserSettings();
+            if (userSettings.BlockType == "Exit Program")
+            {
+                if (System.Diagnostics.Process.GetProcesses().Any(x => x.Id == pid))
+                {
+                    System.Diagnostics.Process.GetProcessById(pid).Kill();
+                }
+            }
+            else if (userSettings.BlockType == "Minimise Window")
+            {
+                Process process = Process.GetProcessById(pid);
+                if (process != null)
+                {
+                    ShowWindowAsync(process.MainWindowHandle, SW_MINIMIZE);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            string errorWithTimestamp = $"[E] {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Error terminating PID {pid} - {e}";
+            using (StreamWriter writer = File.AppendText("user\\log.txt"))
+            {
+                writer.WriteLine(errorWithTimestamp);
+            }
         }
     }
 
@@ -202,6 +236,17 @@ public class BlocksModel : ObservableObject
             object value = blockstatus[oldname];
             blockstatus.Remove(oldname);
             blockstatus.Add(newname, value);
+            WriteBlockStatus(blockstatus);
+        }
+    }
+    
+    public static void DeleteBlockStatus(string oldname)
+    {
+        Dictionary<string, object> blockstatus = GetBlockStatus();
+        if (blockstatus.ContainsKey(oldname))
+        {
+            object value = blockstatus[oldname];
+            blockstatus.Remove(oldname);
             WriteBlockStatus(blockstatus);
         }
     }

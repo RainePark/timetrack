@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
@@ -23,6 +25,19 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
         
+        private string _dashboardGreeting;   
+        public string DashboardGreeting
+        {
+            get => this._dashboardGreeting;
+            set 
+            { 
+                this._dashboardGreeting = value; 
+                OnPropertyChanged();
+            }
+        }
+        
+        private ProgramUsageModel _programUsageModel;
+        
         private ObservableCollection<Block> _activeBlocks;   
         public ObservableCollection<Block> ActiveBlocks
         {
@@ -34,12 +49,10 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
         
-        private ProgramUsageModel _programUsageModel;
-        
         private string _dashboardText;
         public string DashboardText
         {
-            get { return _programUsageModel.DashboardText; }
+            get { return _dashboardGreeting + _programUsageModel.DashboardText; }
             set
             {
                 _programUsageModel.DashboardText = value;
@@ -47,11 +60,37 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
 
-        public DashboardViewModel()
+        public DashboardViewModel(ProgramUsageModel programUsageModel)
         {
             this.PageTitle = "Dashboard";
-            _programUsageModel = new ProgramUsageModel();
+            this.DashboardGreeting = CreateDashboardGreeting();
+            this._programUsageModel = programUsageModel;
             _programUsageModel.PropertyChanged += ProgramUsageModel_PropertyChanged;
+        }
+
+        public string CreateDashboardGreeting()
+        {
+            string dashboardGreeting;
+            Settings userSettings = SettingsModel.GetUserSettings();
+            DateTime currentTime = DateTime.Now;string input = userSettings.UserName;
+
+            if (currentTime.Hour >= 5 && currentTime.Hour < 12)
+            {
+                dashboardGreeting = "Good morning, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+            }
+            else if (currentTime.Hour >= 12 && currentTime.Hour < 17)
+            {
+                dashboardGreeting = "Good afternoon, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+            }
+            else if (currentTime.Hour >= 17 && currentTime.Hour < 22)
+            {
+                dashboardGreeting = "Good evening, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+            }
+            else
+            {
+                dashboardGreeting = "Good night, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+            }
+            return dashboardGreeting;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

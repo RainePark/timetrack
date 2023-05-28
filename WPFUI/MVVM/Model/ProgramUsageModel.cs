@@ -18,10 +18,8 @@ using WPFUI.MVVM.Model;
 public class ProgramUsageModel : ObservableObject
 {
     private Timer _timer;
+    
     private int _usageHours;
-    private int _usageMinutes;
-    private int _totalUsageSeconds;
-
     public int UsageHours
     {
         get { return _usageHours; }
@@ -35,6 +33,7 @@ public class ProgramUsageModel : ObservableObject
         }
     }
     
+    private int _usageMinutes;
     public int UsageMinutes
     {
         get { return _usageMinutes; }
@@ -48,6 +47,7 @@ public class ProgramUsageModel : ObservableObject
         }
     }
     
+    private int _totalUsageSeconds;
     public int TotalUsageSeconds
     {
         get { return _totalUsageSeconds; }
@@ -103,7 +103,7 @@ public class ProgramUsageModel : ObservableObject
         using (SQLiteConnection connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
         {
             connection.Open();
-            string createDetailedTableQuery = "CREATE TABLE IF NOT EXISTS detailed_usage (time DATETIME, program TEXT, windowtitle TEXT)";
+            string createDetailedTableQuery = "CREATE TABLE IF NOT EXISTS detailed_usage (time DATETIME, program TEXT, windowtitle TEXT, system BOOLEAN)";
             using (SQLiteCommand command = new SQLiteCommand(createDetailedTableQuery, connection))
             {
                 command.ExecuteNonQuery();
@@ -117,7 +117,7 @@ public class ProgramUsageModel : ObservableObject
             connection.Close();
         }
         
-        this.TotalUsageSeconds = GetUsageSinceMidnight();
+        this.TotalUsageSeconds = GetTotalUsageSinceMidnight();
         TimeSpan totalDayUsage = TimeSpan.FromSeconds(this.TotalUsageSeconds);
         this.UsageHours = (int)totalDayUsage.TotalHours;
         this.UsageMinutes = (int)totalDayUsage.Minutes;
@@ -138,8 +138,12 @@ public class ProgramUsageModel : ObservableObject
         string processName = currentWindowDetails[2];
         string windowTitle = currentWindowDetails[3];
         AppendProgramDetails(executablePath, processName);
-        LogToDatabase(processName, windowTitle, DateTime.Now);
-        this.TotalUsageSeconds = GetUsageSinceMidnight();
+        CheckIfNewDay();
+        bool system;
+        try { system = GetKnownPrograms()[processName].system; }
+        catch { system = false; }
+        LogToDatabase(processName, windowTitle, DateTime.Now, system);
+        this.TotalUsageSeconds = GetTotalUsageSinceMidnight();
         TimeSpan totalDayUsage = TimeSpan.FromSeconds(this.TotalUsageSeconds);
         this.UsageHours = (int)totalDayUsage.TotalHours;
         this.UsageMinutes = (int)totalDayUsage.Minutes;
@@ -153,77 +157,66 @@ public class ProgramUsageModel : ObservableObject
         return (JsonConvert.DeserializeObject<Dictionary<string, ProgramDetails>>(File.ReadAllText("user\\programlist.json")));
     }
 
-     public void UpdateDashboardText()
-     {
-        Settings userSettings = SettingsModel.GetUserSettings();
-        DateTime currentTime = DateTime.Now;string input = userSettings.UserName;
-
-        if (currentTime.Hour >= 5 && currentTime.Hour < 12)
-        {
-            this.DashboardText = "Good morning, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
-        }
-        else if (currentTime.Hour >= 12 && currentTime.Hour < 17)
-        {
-            this.DashboardText = "Good afternoon, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
-        }
-        else if (currentTime.Hour >= 17 && currentTime.Hour < 22)
-        {
-            this.DashboardText = "Good evening, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
-        }
-        else
-        {
-            this.DashboardText = "Good night, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
-        }
+    public void UpdateDashboardText()
+    {
         if (this.UsageHours == 1)
+    {
+        this.DashboardText = this.UsageHours + " hour, ";
+    }
+    else
+    {
+        this.DashboardText = this.UsageHours + " hours, ";
+    }
+    if (this.UsageMinutes == 1)
+    {
+        this.DashboardText += this.UsageMinutes + " minute.";
+    }
+    else
+    {
+        this.DashboardText += this.UsageMinutes + " minutes.";
+    }
+    }
+    
+    public static int GetTotalUsageSinceMidnight()
+    {
+        int secondCount;
+        using (var connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
         {
-            this.DashboardText += this.UsageHours + " hour, ";
+            connection.Open();
+            string query;
+            if (SettingsModel.GetUserSettings().SystemApps)
+            {
+                query = "SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time;";
+            }
+            else
+            {
+                query = "SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time AND system = 0;";
+            }
+            using (var command = new SQLiteCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@specified_time", DateTime.Now.Date.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"));
+                secondCount = Convert.ToInt32(command.ExecuteScalar());
+            }
         }
-        else
-        {
-            this.DashboardText += this.UsageHours + " hours, ";
-        }
-        if (this.UsageMinutes == 1)
-        {
-            this.DashboardText += this.UsageMinutes + " minute.";
-        }
-        else
-        {
-            this.DashboardText += this.UsageMinutes + " minutes.";
-        }
-     }
-    // implement system apps toggle here
-     public int GetUsageSinceMidnight()
-     {
-         int secondCount;
-         using (var connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
-         {
-             connection.Open();
-             string query = "SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time;";
-             using (var command = new SQLiteCommand(query, connection))
-             {
-                 command.Parameters.AddWithValue("@specified_time", DateTime.Now.Date.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"));
-                 secondCount = Convert.ToInt32(command.ExecuteScalar());
-             }
-         }
-         return secondCount;
-     }
+        return secondCount;
+    }
 
-     public static int GetProgramUsageSinceMidnight(string name)
-     {
-         int secondCount;
-         using (var connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
-         {
-             connection.Open();
-             string query = "SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time AND program = @program_name;";
-             using (var command = new SQLiteCommand(query, connection))
-             {
-                 command.Parameters.AddWithValue("@specified_time", DateTime.Now.Date.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"));
-                 command.Parameters.AddWithValue("@program_name", name);
-                 secondCount = Convert.ToInt32(command.ExecuteScalar());
-             }
-         }
-         return secondCount;
-     }
+    public static int GetProgramUsageSinceMidnight(string name)
+    {
+        int secondCount;
+        using (var connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
+        {
+            connection.Open();
+            string query = "SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time AND program = @program_name;";
+            using (var command = new SQLiteCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@specified_time", DateTime.Now.Date.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"));
+                command.Parameters.AddWithValue("@program_name", name);
+                secondCount = Convert.ToInt32(command.ExecuteScalar());
+            }
+        }
+        return secondCount;
+    }
 
     static List<string> GetActiveWindowDetails()
     {
@@ -257,7 +250,7 @@ public class ProgramUsageModel : ObservableObject
         return new List<string>{((int)processId).ToString(), processPath, processName, windowTitle};
     }
 
-    static void LogToDatabase(string program, string windowtitle, DateTime datetime)
+    static void LogToDatabase(string program, string windowtitle, DateTime datetime, Boolean system)
     {
         DateTime currentTime = datetime.ToUniversalTime();
         using (SQLiteConnection connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
@@ -265,12 +258,13 @@ public class ProgramUsageModel : ObservableObject
             connection.Open();
             
             /* Update detailed usage database with timestamp, program at current second, and window title. */
-            string insertDetailedQuery = "INSERT INTO detailed_usage (time, program, windowtitle) VALUES (@time, @program, @windowtitle)";
+            string insertDetailedQuery = "INSERT INTO detailed_usage (time, program, windowtitle, system) VALUES (@time, @program, @windowtitle, @system)";
             using (SQLiteCommand detailedcommand = new SQLiteCommand(insertDetailedQuery, connection))
             {
                 detailedcommand.Parameters.AddWithValue("@time", currentTime);
                 detailedcommand.Parameters.AddWithValue("@program", program);
                 detailedcommand.Parameters.AddWithValue("@windowtitle", windowtitle);
+                detailedcommand.Parameters.AddWithValue("@system", system);
                 detailedcommand.ExecuteNonQuery();
             }
             
@@ -379,6 +373,41 @@ public class ProgramUsageModel : ObservableObject
                     writer.WriteLine(JsonConvert.SerializeObject(knownPrograms));
                 }
             }
+        }
+    }
+
+    public void CheckIfNewDay()
+    {
+        bool currentDateIsAfterLatestEntry = false;
+        DateTime currentDate = DateTime.Now.ToLocalTime().Date;
+        using (SQLiteConnection connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
+        {
+            connection.Open();
+            string query1 = "SELECT MAX(time) FROM detailed_usage";
+            using (SQLiteCommand command = new SQLiteCommand(query1, connection))
+            {
+                object result = command.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    DateTime latestDateTimeEntry = Convert.ToDateTime(result).ToLocalTime().Date;
+                    int compareResult = DateTime.Compare(currentDate, latestDateTimeEntry);
+                    currentDateIsAfterLatestEntry = compareResult > 0;
+                }
+            }
+            connection.Close();
+        }
+        if (currentDateIsAfterLatestEntry){
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
+            {
+                connection.Open();
+                string query = "DELETE FROM detailed_usage WHERE time < DATE('now', '-10 days')";
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+            BlocksModel.WriteBlockStatus(new Dictionary<string, object>());
         }
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              xmlns:local="clr-namespace:WPFUI.MVVM.View"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
@@ -17,7 +18,7 @@
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             
             <TextBlock Text="{Binding PageTitle}"
@@ -26,11 +27,21 @@
                        FontFamily="{StaticResource MainFont}"
                        FontWeight="Medium"
                        HorizontalAlignment="Left"
-                       Margin="20 10 0 15">
+                       Margin="20 10 0 0">
             </TextBlock>
             
-            <Image Grid.Row="1" Grid.Column="0" Source="/Images/chart.png" Width="350" Margin="25 10"></Image>
-            <StackPanel Grid.Row="2" Grid.Column="0" Margin="25 15 0 0">
+            <!--<Image Grid.Row="1" Grid.Column="0" Source="/Images/chart.png" Width="350" Margin="25 10"></Image>-->
+            <UserControl Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left" Width="400" Height="300" VerticalAlignment="Top">
+                <lvc:PieChart Series="{Binding Series}"
+                              LegendPosition="Right"
+                              DrawMargin="{Binding Margin}"
+                              TooltipPosition="Hidden"
+                              LegendTextPaint="{Binding LegendTextPaint}"
+                              LegendTextSize="{StaticResource TextFontSize}">
+                </lvc:PieChart>
+            </UserControl>
+            
+            <!--<StackPanel Grid.Row="2" Grid.Column="0" Margin="25 15 0 0">
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                     <Border Height="15" Width="15" Background="White"></Border>
                     <TextBlock Foreground="White" FontSize="{StaticResource SubheadingFontSize}" FontFamily="{StaticResource MainFont}" FontStyle="Normal"
@@ -49,9 +60,9 @@
                                Margin="10 0 0 0"
                                Text="Category 3 - 8hrs 42mins"></TextBlock>
                 </StackPanel>
-            </StackPanel>
+            </StackPanel>-->
             
-            <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="10 0 0 0">
+            <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Margin="10 0 0 0">
                 <TextBlock Text="Screen time today:"
                            Foreground="White"
                            FontSize="25"

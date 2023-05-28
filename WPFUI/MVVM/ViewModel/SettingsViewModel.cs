@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using WPFUI.Core;
 using WPFUI.MVVM.Model;
@@ -11,21 +13,9 @@ using WPFUI.MVVM.View;
 namespace WPFUI.MVVM.ViewModel
 {
     class SettingsViewModel : IPage
-    {         
-        private Dictionary<PageName, object> SettingsPages { get; }
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
         
-        private Settings _userSettings;   
-        public Settings UserSettings
-        {
-            get => this._userSettings;
-            set 
-            { 
-                this._userSettings = value; 
-                OnPropertyChanged();
-            }
-        }
-
-
         private string _pageTitle;   
         public string PageTitle
         {
@@ -37,98 +27,71 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
         
-        public ICommand SelectSettingsMenuCommand { get; set; }
-
-        private object _currentSettingsMenu;
-        public object CurrentSettingsMenu
+        private Settings _userSettings;
+        public Settings UserSettings
         {
-            get { return _currentSettingsMenu; }
+            get => this._userSettings;
             set
             {
-                _currentSettingsMenu = value;
+                this._userSettings = value;
                 OnPropertyChanged();
             }
         }
 
-        private Dictionary<string, object> _settingsMenus;
-
-        public Dictionary<string, object> SettingsMenus
-        {
-            get { return _settingsMenus; }
-            set
-            {
-                _settingsMenus = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _isUserSettingsSidebarRadioButtonChecked;
-        public bool IsUserSettingsSidebarRadioButtonChecked
-        {
-            get { return _isUserSettingsSidebarRadioButtonChecked; }
-            set
-            {
-                if (_isUserSettingsSidebarRadioButtonChecked != value)
-                {
-                    _isUserSettingsSidebarRadioButtonChecked = value;
-                    OnPropertyChanged(nameof(IsUserSettingsSidebarRadioButtonChecked));
-                }
-            }
-        }
-
-        private bool _isBlocksSettingsSidebarRadioButtonChecked;
-        public bool IsBlocksSettingsSidebarRadioButtonChecked
-        {
-            get { return _isBlocksSettingsSidebarRadioButtonChecked; }
-            set
-            {
-                if (_isBlocksSettingsSidebarRadioButtonChecked != value)
-                {
-                    _isBlocksSettingsSidebarRadioButtonChecked = value;
-                    OnPropertyChanged(nameof(IsBlocksSettingsSidebarRadioButtonChecked));
-                }
-            }
-        }
+        public string lastValidName;
 
         public SettingsViewModel()
         {
-            this.UserSettings = SettingsModel.GetUserSettings();
-
             this.PageTitle = "Settings";
-            this.SettingsMenus = new Dictionary<string, object>
+            this.UserSettings = SettingsModel.GetUserSettings();
+            this.UserSettings.PropertyChanged += UserSettings_PropertyChanged;
+            this.lastValidName = UserSettings.UserName.ToString();
+        }
+        
+        public ObservableCollection<string> BlockTypeComboBoxItems { get; } = new ObservableCollection<string>
+        {
+            "Exit Program",
+            "Minimise Window"
+        };
+
+        private void UserSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // Call the desired function when the UserName property is updated
+            if (e.PropertyName == "UserName")
             {
-                { "User", new SettingsMenu1ViewModel(UserSettings) },
-                { "Blocks", new SettingsMenu2ViewModel(UserSettings) }
-            };
-            
-            CurrentSettingsMenu = SettingsMenus["User"];
-            UpdateSettingsRadioButtonIsChecked();
-            SelectSettingsMenuCommand = new RelayCommand(ChangeSettingsMenu);
+                if (string.IsNullOrEmpty(this.UserSettings.UserName))
+                {
+                    this.UserSettings.UserName = lastValidName;
+                    MessageBox.Show("Name cannot be empty");
+                    return;
+                }
+                Regex regex1 = new Regex(@"^[a-zA-Z0-9]+$");
+                if (!regex1.IsMatch(this.UserSettings.UserName))
+                {
+                    this.UserSettings.UserName = lastValidName;
+                    MessageBox.Show("Name can only contain alphanumeric characters and cannot contain spaces");
+                    return;
+                }
+                Regex regex2 = new Regex(@"[a-zA-Z]");
+                if (!regex2.IsMatch(this.UserSettings.UserName))
+                {
+                    this.UserSettings.UserName = lastValidName;
+                    MessageBox.Show("Name must contain at least one alphabetical character");
+                    return;
+                }
+                SettingsModel.WriteSettings(this.UserSettings);
+                this.lastValidName = UserSettings.UserName;
+            }
+            if (e.PropertyName == "SystemApps")
+            {
+                SettingsModel.WriteSettings(this.UserSettings);
+            }
+            if (e.PropertyName == "BlockType")
+            {
+                SettingsModel.WriteSettings(this.UserSettings);
+            }
         }
 
-        public void ChangeSettingsMenu(object param)
-        {
-            this.CurrentSettingsMenu = SettingsMenus[param.ToString()];
-            UpdateSettingsRadioButtonIsChecked();
-        }
-        
-        public void UpdateSettingsRadioButtonIsChecked()
-        {
-            if (this.CurrentSettingsMenu is SettingsMenu1ViewModel)
-            {
-                this.IsUserSettingsSidebarRadioButtonChecked = true;
-            }
-            else if (this.CurrentSettingsMenu is SettingsMenu2ViewModel)
-            {
-                this.IsBlocksSettingsSidebarRadioButtonChecked = true;
-            }
-            else
-            {
-                this.IsUserSettingsSidebarRadioButtonChecked = true;
-            }
-        }
-        
-        public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

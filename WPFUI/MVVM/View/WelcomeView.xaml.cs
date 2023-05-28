@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using WPFUI.Core;
@@ -35,10 +36,24 @@ public partial class WelcomeView : Window
 
     public void InitializeSettings(object parameter)
     {
-        if (this.Name != "")
+        if (string.IsNullOrEmpty(this.Name))
         {
-            SettingsModel.WriteSettings(new Settings{UserName = this.Name, SystemApps = false, BlockType = "exit"});
-            Close();
+            MessageBox.Show("Name cannot be empty");
+            return;
         }
+        Regex regex1 = new Regex(@"[a-zA-Z]");
+        if (!regex1.IsMatch(this.Name))
+        {
+            MessageBox.Show("Name must contain at least one alphabetical character");
+            return;
+        }
+        Regex regex2 = new Regex(@"^[a-zA-Z0-9]+$");
+        if (!regex2.IsMatch(this.Name))
+        {
+            MessageBox.Show("Name can only contain alphanumeric characters and cannot contain spaces");
+            return;
+        }
+        SettingsModel.WriteSettings(new Settings{UserName = this.Name, SystemApps = false, BlockType = "Exit Program"});
+        Close();
     }
 }

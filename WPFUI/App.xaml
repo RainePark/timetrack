@@ -30,13 +30,6 @@
              <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
                  <view:SettingsView></view:SettingsView>
              </DataTemplate>
-             
-             <DataTemplate DataType="{x:Type viewModel:SettingsMenu1ViewModel}">
-                 <view:SettingsMenu1></view:SettingsMenu1>
-             </DataTemplate>
-             <DataTemplate DataType="{x:Type viewModel:SettingsMenu2ViewModel}">
-                 <view:SettingsMenu2></view:SettingsMenu2>
-             </DataTemplate>
          </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -18,11 +18,6 @@ public class CriteriaToStringConverter : IValueConverter
             {
                 return $"{block.Conditions[1].Criteria[0]} hour, {block.Conditions[1].Criteria[1]} minute limit today";
             }
-            
-            using (StreamWriter writer = new StreamWriter("user\\test.txt"))
-            {
-                writer.WriteLine(block.Name);
-            }
         }
         return null;
     }

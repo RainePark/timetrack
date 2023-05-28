@@ -7,18 +7,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Add no block created warning">
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/CriteriaToStringConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/TimeCriteriaToStringConverter.cs" afterDir="false" />
+    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Stuff works now I guess">
+      <change afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/CountToVisibilityConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/App.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Images/chart.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Images/test1.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Images/test2.ico" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/BlockToPathConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/BlockToPathConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/SettingsModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/SettingsModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/CriteriaToStringConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/CriteriaToStringConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/BlocksViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/BlocksViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu1.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu2.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsMenu2.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/WelcomeView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/WelcomeView.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/EditBlockViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/EditBlockViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu1ViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsMenu2ViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/UsageViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/UsageViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MainWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/WPFUI.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,9 +55,14 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9cc0fd93f11dc3f0f139a3dc823e71117f934342f6f7f7af21d70fa694bc762/IMultiValueConverter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b6f38579d53ac41e10383ded5e9159339cd0ffd18fb4d756faea93154ba/Window.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f3b9684f72bc2cc435eb694f7cc86eca8c240d2d1cefa1e8697a61f1f2f27f/SafeFileHandle.Windows.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/Model/BlocksModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/BlocksView.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MVVM/View/DashboardView.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/DashboardView.xaml" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/View/EditBlockView.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Raine/Desktop/timetrack/WPFUI/MVVM/ViewModel/BlocksViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/MainWindow.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/WPFUI/Theme/DashboardActiveBlocksTheme.xaml" root0="FORCE_HIGHLIGHTING" />
@@ -150,13 +172,6 @@
       <workItem from="1684980753475" duration="5608000" />
       <workItem from="1684998326628" duration="10528000" />
       <workItem from="1685070133401" duration="14343000" />
-    </task>
-    <task id="LOCAL-00001" summary="Rebase git before work resumes">
-      <created>1681714671916</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1681714671916</updated>
     </task>
     <task id="LOCAL-00002" summary="Finish exit button">
       <created>1682062655969</created>
@@ -494,7 +509,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685004386172</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Stuff works now I guess">
+      <created>1685249713686</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1685249713687</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +558,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Refactor menu code" />
     <MESSAGE value="Update dependencies" />
     <MESSAGE value="Update build settings" />
     <MESSAGE value="Add program tracking" />
@@ -561,7 +582,8 @@
     <MESSAGE value="Fix inactive block bug" />
     <MESSAGE value="Create startup menu" />
     <MESSAGE value="Add no block created warning" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add no block created warning" />
+    <MESSAGE value="Stuff works now I guess" />
+    <option name="LAST_COMMIT_MESSAGE" value="Stuff works now I guess" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -569,6 +591,7 @@
         <watch expression="state" />
         <watch expression="state" />
         <watch expression="state" />
+        <watch expression="$exception" />
       </configuration>
     </watches-manager>
   </component>

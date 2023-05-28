@@ -55,6 +55,7 @@ namespace WPFUI.MVVM.ViewModel
         public ICommand AddExecutablePathCommand { get; set; }
         public ICommand RemoveExecutablePathCommand { get; set; }
         public ICommand SaveBlockCommand { get; set; }
+        public ICommand DeleteBlockCommand { get; set; }
         public ICommand RefreshBlocksCommand { get; set; }
         public ICommand BlockTypeChangedCommand { get; set; }
 
@@ -63,6 +64,7 @@ namespace WPFUI.MVVM.ViewModel
             string originalBlockName = block.Name;
             UpdatedBlockData = new UpdatedBlockData(block, originalBlockName);
             SaveBlockCommand = new RelayCommand(SaveBlock_Click);
+            DeleteBlockCommand = new RelayCommand(DeleteBlock_Click);
             AddExecutablePathCommand = new RelayCommand(AddExecutablePath);
             RemoveExecutablePathCommand = new RelayCommand(RemoveExecutablePath);
             BlockTypeChangedCommand = new RelayCommand(BlockTypeChanged);
@@ -81,12 +83,17 @@ namespace WPFUI.MVVM.ViewModel
                     MessageBox.Show("Block name cannot be empty");
                     return;
                 }
+                if (!Regex.IsMatch(UpdatedBlockData.Block.Name, @"[a-zA-Z]"))
+                {
+                    MessageBox.Show("Block name must contain at least one alphabetical character");
+                    return;
+                }
                 if (BlocksModel.GetAllBlocks().ContainsKey(UpdatedBlockData.Block.Name) && UpdatedBlockData.Block.Name != UpdatedBlockData.OriginalBlockName)
                 {
                     MessageBox.Show("There is already a block with this name");
                     return;
                 }
-                if (!Regex.IsMatch(UpdatedBlockData.Block.Name, @"^[a-zA-Z0-9]+$"))
+                if (!Regex.IsMatch(UpdatedBlockData.Block.Name, @"^(?=.*\S)[a-zA-Z0-9 ]+$"))
                 {
                     MessageBox.Show("Block name can only contain alphanumeric characters");
                     return;
@@ -177,6 +184,32 @@ namespace WPFUI.MVVM.ViewModel
             CloseWindow();
         }
 
+        private void DeleteBlock_Click(object parameter)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this block?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+            UpdatedBlockData UpdatedBlockData = (UpdatedBlockData)parameter;
+            if (UpdatedBlockData.OriginalBlockName != null)
+            {
+                if (UpdatedBlockData.Block != null)
+                {
+                    BlocksModel.DeleteBlock(UpdatedBlockData.OriginalBlockName);
+                    BlocksModel.DeleteBlockStatus(UpdatedBlockData.OriginalBlockName);
+                }
+            }
+            if (Parent is BlocksViewModel)
+            {
+                if (RefreshBlocksCommand != null)
+                {
+                    RefreshBlocksCommand.Execute(null);
+                }
+            }
+            CloseWindow();
+        }
+
         public void AddExecutablePath(object parameter)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -191,7 +224,8 @@ namespace WPFUI.MVVM.ViewModel
                  create some lag when adding programs to a block and was unncessary as I have not found 
                  an instance where the process name is not the file name anyways. */
                 //string processName = GetProcessName(programPath);
-
+                
+                ProgramUsageModel.AppendProgramDetails(programPath, processName);
                 if (processName == "TimeTrack")
                 {
                     MessageBox.Show("TimeTrack cannot be added as a blocked application.");
@@ -206,7 +240,6 @@ namespace WPFUI.MVVM.ViewModel
                 {
                     return;
                 }
-                ProgramUsageModel.AppendProgramDetails(programPath, processName);
                 UpdatedBlockData.Block.Programs.Add(processName);
                 UpdatedBlockData.Programs = new ObservableCollection<string>(UpdatedBlockData.Block.Programs);
                 BlocksModel.UpdateBlockStatus(UpdatedBlockData.Block, processName, 0);

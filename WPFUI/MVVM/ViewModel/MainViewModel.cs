@@ -17,8 +17,22 @@ namespace WPFUI.MVVM.ViewModel
     {
         public ICommand SelectPageCommand { get; set; }
         public ICommand EditBlockCommand { get; set; }
-
+        
         private Dictionary<PageName, IPage> Pages { get; }
+        
+        private ProgramUsageModel _programUsageModel;
+        public ProgramUsageModel ProgramUsageModel
+        {
+            get => this._programUsageModel;
+            set 
+            { 
+                if (_programUsageModel != value)
+                {
+                    this._programUsageModel = value; 
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private IPage _selectedPage;   
         public IPage SelectedPage
@@ -33,6 +47,7 @@ namespace WPFUI.MVVM.ViewModel
                 }
             }
         }
+
         public MainViewModel()
         {
             SelectPageCommand = new RelayCommand(SelectPage);
@@ -89,10 +104,11 @@ namespace WPFUI.MVVM.ViewModel
                 WelcomeView welcomeView = new WelcomeView();
                 welcomeView.ShowDialog();
             }
-            
+
+            _programUsageModel = new ProgramUsageModel();
             this.Pages = new Dictionary<PageName, IPage>
             {
-                { PageName.Dashboard, new DashboardViewModel() },
+                { PageName.Dashboard, new DashboardViewModel(ProgramUsageModel) },
                 { PageName.Usage, new UsageViewModel() },
                 { PageName.Blocks, new BlocksViewModel() },
                 { PageName.Settings, new SettingsViewModel() }
@@ -126,11 +142,13 @@ namespace WPFUI.MVVM.ViewModel
             var mainWindow = Application.Current.MainWindow;
             if (this.SelectedPage.PageTitle == "Dashboard")
             {
+                this.Pages[PageName.Dashboard] = new DashboardViewModel(ProgramUsageModel);
                 var dashboardSidebarRadioButton = (RadioButton)mainWindow.FindName("DashboardSidebarRadioButton");
                 dashboardSidebarRadioButton.IsChecked = true;
             }
             else if (this.SelectedPage.PageTitle == "Usage")
             {
+                this.Pages[PageName.Usage] = new UsageViewModel();
                 var usageSidebarRadioButton = (RadioButton)mainWindow.FindName("UsageSidebarRadioButton");
                 usageSidebarRadioButton.IsChecked = true;
             }
