@@ -54,6 +54,7 @@ namespace WPFUI.MVVM.ViewModel
 
         public ICommand AddExecutablePathCommand { get; set; }
         public ICommand RemoveExecutablePathCommand { get; set; }
+        public ICommand BlockNameTextBoxUnfocused { get; set; } 
         public ICommand SaveBlockCommand { get; set; }
         public ICommand DeleteBlockCommand { get; set; }
         public ICommand RefreshBlocksCommand { get; set; }
@@ -63,6 +64,7 @@ namespace WPFUI.MVVM.ViewModel
         {
             string originalBlockName = block.Name;
             UpdatedBlockData = new UpdatedBlockData(block, originalBlockName);
+            BlockNameTextBoxUnfocused = new RelayCommand(BlockNameTextBox_Unfocused);
             SaveBlockCommand = new RelayCommand(SaveBlock_Click);
             DeleteBlockCommand = new RelayCommand(DeleteBlock_Click);
             AddExecutablePathCommand = new RelayCommand(AddExecutablePath);
@@ -173,6 +175,11 @@ namespace WPFUI.MVVM.ViewModel
                 }
                 BlocksModel.AppendBlockToDatabase(UpdatedBlockData.Block);
                 BlocksModel.RenameBlockStatus(UpdatedBlockData.OriginalBlockName, UpdatedBlockData.Block.Name);
+
+                foreach (string processName in UpdatedBlockData.Block.Programs)
+                {
+                    BlocksModel.UpdateBlockStatus(UpdatedBlockData.Block, processName, 0);
+                }
             }
             if (Parent is BlocksViewModel)
             {
@@ -236,13 +243,13 @@ namespace WPFUI.MVVM.ViewModel
                     MessageBox.Show("System apps cannot be added as blocked application.");
                     return;
                 }
-                if (UpdatedBlockData.Block.Programs.Contains(programPath))
+                if (UpdatedBlockData.Block.Programs.Contains(processName))
                 {
+                    MessageBox.Show("This block already contains this application.");
                     return;
                 }
                 UpdatedBlockData.Block.Programs.Add(processName);
                 UpdatedBlockData.Programs = new ObservableCollection<string>(UpdatedBlockData.Block.Programs);
-                BlocksModel.UpdateBlockStatus(UpdatedBlockData.Block, processName, 0);
             }
         }
         
@@ -312,6 +319,11 @@ namespace WPFUI.MVVM.ViewModel
                 };
                 UpdatedBlockData.Conditions = new ObservableCollection<KeyValuePair<int, BlockCondition>>(UpdatedBlockData.Block.Conditions);
             }
+        }
+
+        private void BlockNameTextBox_Unfocused(object parameter)
+        {
+            UpdatedBlockData.Block.Name = UpdatedBlockData.Block.Name.Trim();
         }
 
         private void CloseWindow()

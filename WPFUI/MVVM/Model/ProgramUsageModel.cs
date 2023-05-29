@@ -142,6 +142,7 @@ public class ProgramUsageModel : ObservableObject
         bool system;
         try { system = GetKnownPrograms()[processName].system; }
         catch { system = false; }
+        if (processName == "Idle"){ system = true; }
         LogToDatabase(processName, windowTitle, DateTime.Now, system);
         this.TotalUsageSeconds = GetTotalUsageSinceMidnight();
         TimeSpan totalDayUsage = TimeSpan.FromSeconds(this.TotalUsageSeconds);

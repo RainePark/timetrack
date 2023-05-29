@@ -110,6 +110,11 @@
                                  Width="250" Height="30" FontSize="20" FontFamily="{StaticResource MainFont}" 
                                  MaxLength="20" 
                                  Text="{Binding UpdatedBlockData.Block.Name, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <cmd:EventToCommand Command="{Binding DataContext.BlockNameTextBoxUnfocused, RelativeSource={RelativeSource AncestorType=Window}}" PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </TextBox>
                     </StackPanel>
                     <TextBlock Text="Applications"

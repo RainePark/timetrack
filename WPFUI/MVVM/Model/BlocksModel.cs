@@ -110,7 +110,8 @@ public class BlocksModel : ObservableObject
                 UpdateBlockStatus(block, program, 1);
             }
         }
-        /* Go through each block again and check if the current program needs to be blocked */
+
+        // Go through each block again and check if the current program needs to be blocked
         foreach (Block block in blockList.Values)
         {
             if (block.Status)

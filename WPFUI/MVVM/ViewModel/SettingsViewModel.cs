@@ -37,7 +37,8 @@ namespace WPFUI.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        
+        public ICommand UserNameTextBoxUnfocused { get; set; } 
         public string lastValidName;
 
         public SettingsViewModel()
@@ -46,6 +47,7 @@ namespace WPFUI.MVVM.ViewModel
             this.UserSettings = SettingsModel.GetUserSettings();
             this.UserSettings.PropertyChanged += UserSettings_PropertyChanged;
             this.lastValidName = UserSettings.UserName.ToString();
+            UserNameTextBoxUnfocused = new RelayCommand(UserNameTextBox_Unfocused);
         }
         
         public ObservableCollection<string> BlockTypeComboBoxItems { get; } = new ObservableCollection<string>
@@ -61,8 +63,6 @@ namespace WPFUI.MVVM.ViewModel
             {
                 if (string.IsNullOrEmpty(this.UserSettings.UserName))
                 {
-                    this.UserSettings.UserName = lastValidName;
-                    MessageBox.Show("Name cannot be empty");
                     return;
                 }
                 Regex regex1 = new Regex(@"^[a-zA-Z0-9]+$");
@@ -80,7 +80,6 @@ namespace WPFUI.MVVM.ViewModel
                     return;
                 }
                 SettingsModel.WriteSettings(this.UserSettings);
-                this.lastValidName = UserSettings.UserName;
             }
             if (e.PropertyName == "SystemApps")
             {
@@ -90,6 +89,18 @@ namespace WPFUI.MVVM.ViewModel
             {
                 SettingsModel.WriteSettings(this.UserSettings);
             }
+        }
+        
+        private void UserNameTextBox_Unfocused(object parameter)
+        {
+            if (string.IsNullOrEmpty(this.UserSettings.UserName))
+            {
+                this.UserSettings.UserName = lastValidName;
+                MessageBox.Show("Name cannot be empty");
+                return;
+            }
+            SettingsModel.WriteSettings(this.UserSettings);
+            this.lastValidName = UserSettings.UserName;
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

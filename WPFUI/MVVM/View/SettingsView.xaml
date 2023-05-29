@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
              xmlns:local="clr-namespace:WPFUI.MVVM.View"
              mc:Ignorable="d"
              d:DesignHeight="565" d:DesignWidth="720" Background="Transparent">
@@ -25,6 +27,11 @@
                              Width="150" FontSize="{StaticResource TextFontSize}" FontFamily="{StaticResource MainFont}" 
                              MaxLength="18" 
                              Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <cmd:EventToCommand Command="{Binding DataContext.UserNameTextBoxUnfocused, RelativeSource={RelativeSource AncestorType=UserControl}}" PassEventArgsToCommand="True" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </TextBox>
                 </StackPanel>
             </ScrollViewer>
@@ -70,11 +77,12 @@
     <Grid Margin="0 3 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="75"></RowDefinition>
-            <RowDefinition Height="485"></RowDefinition>
+            <RowDefinition Height="465"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="230"></ColumnDefinition>
-            <ColumnDefinition Width="490"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="520"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
@@ -87,25 +95,28 @@
                    Margin="20 10 0 15">
         </TextBlock>
         
-        <StackPanel Grid.Row="1" Grid.Column="0">
-            <RadioButton Content="User"
-                         x:Name="UserSettingsSidebarRadioButton"
-                         Height="50"
-                         FontSize="25"
-                         Style="{StaticResource SettingsMenuTheme}"
-                         IsChecked="True">
-            </RadioButton>
-            <RadioButton Content="Blocks"
-                         x:Name="BlocksSettingsSidebarRadioButton"
-                         Height="50"
-                         FontSize="25"
-                         Style="{StaticResource SettingsMenuTheme}">
-            </RadioButton>
-        </StackPanel>
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" BorderThickness="0 0 1 0" Padding="0 0 10 0">
+            <StackPanel>
+                <RadioButton Content="User"
+                             x:Name="UserSettingsSidebarRadioButton"
+                             Height="50"
+                             FontSize="25"
+                             Style="{StaticResource SettingsMenuTheme}"
+                             IsChecked="True">
+                </RadioButton>
+                <RadioButton Content="Blocks"
+                             x:Name="BlocksSettingsSidebarRadioButton"
+                             Height="50"
+                             FontSize="25"
+                             Style="{StaticResource SettingsMenuTheme}">
+                </RadioButton>
+            </StackPanel>
+        </Border>
         
         <ContentControl Grid.Row="1" 
+                        Grid.RowSpan="2"
                         Grid.Column="1"
-                        Margin="0 0 0 0" 
+                        Margin="20 0 0 0" 
                         Width="490" 
                         Height="485" 
                         Content="{Binding UserSettings}"

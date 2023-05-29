@@ -9,124 +9,160 @@
              d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
-        <Grid Margin="0 3 0 0">
+        <Grid Margin="0 13 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="15"></RowDefinition>
             </Grid.RowDefinitions>
             
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="25"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             
-            <TextBlock Text="{Binding PageTitle}"
+            <TextBlock Grid.Row="0" Grid.Column="1" 
+                       Text="{Binding PageTitle}"
                        Foreground="White"
                        FontSize="{StaticResource TitleFontSize}"
                        FontFamily="{StaticResource MainFont}"
                        FontWeight="Medium"
-                       HorizontalAlignment="Left"
-                       Margin="20 10 0 0">
+                       HorizontalAlignment="Left">
             </TextBlock>
             
-            <!--<Image Grid.Row="1" Grid.Column="0" Source="/Images/chart.png" Width="350" Margin="25 10"></Image>-->
-            <UserControl Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left" Width="400" Height="300" VerticalAlignment="Top">
-                <lvc:PieChart Series="{Binding Series}"
-                              LegendPosition="Right"
-                              DrawMargin="{Binding Margin}"
-                              TooltipPosition="Hidden"
-                              LegendTextPaint="{Binding LegendTextPaint}"
-                              LegendTextSize="{StaticResource TextFontSize}">
-                </lvc:PieChart>
-            </UserControl>
-            
-            <!--<StackPanel Grid.Row="2" Grid.Column="0" Margin="25 15 0 0">
-                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <Border Height="15" Width="15" Background="White"></Border>
-                    <TextBlock Foreground="White" FontSize="{StaticResource SubheadingFontSize}" FontFamily="{StaticResource MainFont}" FontStyle="Normal"
-                               Margin="10 0 0 0"
-                               Text="Category 1 - 10hrs 59mins"></TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <Border Height="15" Width="15" Background="#b0b0b0"></Border>
-                    <TextBlock Foreground="White" FontSize="{StaticResource SubheadingFontSize}" FontFamily="{StaticResource MainFont}" FontStyle="Normal"
-                               Margin="10 0 0 0"
-                               Text="Category 2 - 3hrs 14mins"></TextBlock>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <Border Height="15" Width="15" Background="#4b4b4b"></Border>
-                    <TextBlock Foreground="White" FontSize="{StaticResource SubheadingFontSize}" FontFamily="{StaticResource MainFont}" FontStyle="Normal"
-                               Margin="10 0 0 0"
-                               Text="Category 3 - 8hrs 42mins"></TextBlock>
-                </StackPanel>
-            </StackPanel>-->
-            
-            <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Margin="10 0 0 0">
+            <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                        Orientation="Horizontal"
+                        Margin="0 10 0 10">
                 <TextBlock Text="Screen time today:"
                            Foreground="White"
                            FontSize="25"
                            FontFamily="{StaticResource MainFont}"
                            FontWeight="Medium"
-                           HorizontalAlignment="Left">
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center">
                 </TextBlock>
-                <TextBlock Text="23hrs 59mins"
+                <TextBlock Text="{Binding ScreenTimeTodayString}"
                            Foreground="White"
                            Background="Transparent"
                            FontSize="{StaticResource SubheadingFontSize}"
                            FontFamily="{StaticResource MainFont}"
                            FontWeight="Light"
-                           Margin="0 4 0 0">
+                           Margin="10 0 0 0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center">
                 </TextBlock>
-                <TextBlock Text="(average 59mins per active hour)"
+                <TextBlock Text="{Binding AveragePerActiveHourString}"
                            Foreground="White"
                            Background="Transparent"
                            FontSize="{StaticResource TextFontSize}"
                            FontFamily="{StaticResource MainFont}"
                            FontWeight="Light"
-                           Margin="0 4 0 0">
+                           Margin="10 0 0 0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center">
                 </TextBlock>
+            </StackPanel>
+            
+            <UserControl Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                         Width="680" Height="300" 
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Top">
+                <lvc:PieChart Series="{Binding PieSeries}"
+                              LegendPosition="Right"
+                              DrawMargin="{Binding PieMargin}"
+                              TooltipPosition="Top"
+                              LegendTextPaint="{Binding PieLegendTextPaint}"
+                              LegendTextSize="{StaticResource TextFontSize}">
+                </lvc:PieChart>
+            </UserControl>
+            
+            <StackPanel Grid.Row="3" Grid.Column="1">
                 <TextBlock Text="Most used apps"
                            Foreground="White"
                            FontSize="25"
                            FontFamily="{StaticResource MainFont}"
                            FontWeight="Medium"
                            HorizontalAlignment="Left"
-                           Margin="0 20 0 0">
+                           Margin="0 15 0 0">
                 </TextBlock>
-                <TextBlock Text="1. Lucidchart - 10hrs 10mins&#x0a;2. Diagrams.net - 4hrs 48mins&#x0a;3. Stack Overflow - 3hrs 17mins&#x0a;4. Twitch - 2hrs 33mins&#x0a;5. Google Docs - 2hrs 7mins"
-                           Foreground="White"
-                           Background="Transparent"
-                           FontSize="{StaticResource TextFontSize}"
-                           FontFamily="{StaticResource MainFont}"
-                           FontWeight="Light"
-                           Margin="0 4 0 0">
-                </TextBlock>
-                <TextBlock Text="Most launched apps"
+                <ItemsControl ItemsSource="{Binding MostUsedAppsCollection}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"
+                                       TextWrapping="Wrap"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="2 4 0 0">
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="3" Grid.Column="2">
+                <TextBlock Text="Most common windows"
                            Foreground="White"
                            FontSize="25"
                            FontFamily="{StaticResource MainFont}"
                            FontWeight="Medium"
                            HorizontalAlignment="Left"
-                           Margin="0 20 0 0">
+                           Margin="0 15 0 0">
                 </TextBlock>
-                <TextBlock Text="1. Lucidchart - 340 launches&#x0a;2. Diagrams.net - 234 launches&#x0a;3. Stack Overflow - 127 launches&#x0a;4. Twitch - 85 launches&#x0a;5. Google Docs - 78 launches"
-                           Foreground="White"
-                           Background="Transparent"
-                           FontSize="{StaticResource TextFontSize}"
-                           FontFamily="{StaticResource MainFont}"
-                           FontWeight="Light"
-                           Margin="0 4 0 0">
-                </TextBlock>
+                <ItemsControl ItemsSource="{Binding MostCommonWindowTitleCollection}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"
+                                       TextWrapping="Wrap"
+                                       Foreground="White"
+                                       Background="Transparent"
+                                       FontSize="{StaticResource TextFontSize}"
+                                       FontFamily="{StaticResource MainFont}"
+                                       FontWeight="Light"
+                                       Margin="2 4 0 0">
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
                 <TextBlock Text="Usage breakdown"
                            Foreground="White"
                            FontSize="25"
                            FontFamily="{StaticResource MainFont}"
                            FontWeight="Medium"
                            HorizontalAlignment="Left"
-                           Margin="0 20 0 0">
+                           Margin="0 15 0 0">
                 </TextBlock>
-                <Image Source="/Images/placeholder.png" Width="280" Height="100" Stretch="Fill" Margin="0 10"></Image>
+                <UserControl Width="680" Height="150" 
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Top">
+                    <lvc:CartesianChart Series="{Binding ChartSeries}" 
+                                        XAxes="{Binding ChartXAxes}"
+                                        YAxes="{Binding ChartYAxes}">
+                    </lvc:CartesianChart>
+                </UserControl>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
+                <TextBlock Text="{Binding AnalysisTimeString}"
+                           Foreground="#88889f"
+                           Background="Transparent"
+                           FontSize="{StaticResource TextFontSize}"
+                           FontFamily="{StaticResource MainFont}"
+                           FontWeight="Light"
+                           Margin="0 10 0 0"
+                           HorizontalAlignment="Left">
+                </TextBlock>
             </StackPanel>
         </Grid>
     </ScrollViewer>

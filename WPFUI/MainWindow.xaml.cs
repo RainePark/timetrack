@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,6 +13,7 @@ namespace WPFUI
     public partial class MainWindow : Window
     {
         private TaskbarIcon taskbarIcon;
+        private Mutex _mutex;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,6 +30,18 @@ namespace WPFUI
 
             // Handle the TrayMouseDoubleClick event of the TaskbarIcon control
             taskbarIcon.TrayMouseDoubleClick += TaskbarIcon_TrayMouseDoubleClick;
+
+            // Handle multiple instances of the executable being run using a Mutex
+            bool createdNew;
+            _mutex = new Mutex(true, "TimeTrack", out createdNew);
+
+            // Check if the mutex was created successfully
+            if (!createdNew)
+            {
+                // Another instance of the program is already running
+                MessageBox.Show("Another instance of the program is already running.");
+                Close();
+            }
         }
 
         private void TaskbarIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
@@ -35,6 +49,7 @@ namespace WPFUI
             // If the TaskbarIcon control is double-clicked, show the main window
             Show();
             WindowState = WindowState.Normal;
+            Activate();
             taskbarIcon.Visibility = Visibility.Collapsed;
         }
 
@@ -52,6 +67,14 @@ namespace WPFUI
         private void ExitProgram(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            // Release the mutex when the program is finished
+            _mutex.ReleaseMutex();
         }
     }
 }

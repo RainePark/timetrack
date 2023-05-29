@@ -121,6 +121,11 @@ namespace WPFUI.MVVM.ViewModel
             if (param is PageName pageName
                 && this.Pages.TryGetValue(pageName, out IPage _selectedPage))
             {
+                if (_selectedPage.PageTitle == "Usage")
+                {
+                    this.Pages[PageName.Usage] = new UsageViewModel();
+                    _selectedPage = this.Pages[PageName.Usage];
+                }
                 this.SelectedPage = _selectedPage;
                 UpdateRadioButtonIsChecked();
             }
@@ -148,7 +153,6 @@ namespace WPFUI.MVVM.ViewModel
             }
             else if (this.SelectedPage.PageTitle == "Usage")
             {
-                this.Pages[PageName.Usage] = new UsageViewModel();
                 var usageSidebarRadioButton = (RadioButton)mainWindow.FindName("UsageSidebarRadioButton");
                 usageSidebarRadioButton.IsChecked = true;
             }
