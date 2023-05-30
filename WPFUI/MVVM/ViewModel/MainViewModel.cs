@@ -121,6 +121,11 @@ namespace WPFUI.MVVM.ViewModel
             if (param is PageName pageName
                 && this.Pages.TryGetValue(pageName, out IPage _selectedPage))
             {
+                if (_selectedPage.PageTitle == "Dashboard")
+                {
+                    this.Pages[PageName.Dashboard] = new DashboardViewModel(ProgramUsageModel);
+                    _selectedPage = this.Pages[PageName.Dashboard];
+                }
                 if (_selectedPage.PageTitle == "Usage")
                 {
                     this.Pages[PageName.Usage] = new UsageViewModel();
@@ -147,7 +152,6 @@ namespace WPFUI.MVVM.ViewModel
             var mainWindow = Application.Current.MainWindow;
             if (this.SelectedPage.PageTitle == "Dashboard")
             {
-                this.Pages[PageName.Dashboard] = new DashboardViewModel(ProgramUsageModel);
                 var dashboardSidebarRadioButton = (RadioButton)mainWindow.FindName("DashboardSidebarRadioButton");
                 dashboardSidebarRadioButton.IsChecked = true;
             }

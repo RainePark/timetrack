@@ -186,8 +186,14 @@
                                                    FontSize="20"
                                                    FontFamily="{StaticResource MainFont}">
                                         </TextBlock>
-                                        <Button Grid.Column="2" HorizontalAlignment="Right"
-                                                Content="X" 
+                                        <Button Grid.Column="2"
+                                                Width="20"
+                                                Height="20"
+                                                Margin="0 0 5 0"
+                                                BorderThickness="0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+                                                Style="{StaticResource BinSmallButtonTheme}"
                                                 Command="{Binding DataContext.RemoveExecutablePathCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 CommandParameter="{Binding}">
                                         </Button>
@@ -270,7 +276,8 @@
                                                                  HorizontalAlignment="Left"
                                                                  Width="25" Height="20" FontSize="15" FontFamily="{StaticResource MainFont}" 
                                                                  MaxLength="2" 
-                                                                 Text="{Binding Value.Criteria[0], Mode=TwoWay}">
+                                                                 Text="{Binding Value.Criteria[0], Mode=TwoWay}"
+                                                                 LostFocus="BlockTimeTextBox_Unfocused">
                                                         </TextBox>
                                                         <TextBlock Grid.Row="1" 
                                                                    Text="hours,"
@@ -283,7 +290,8 @@
                                                                  HorizontalAlignment="Left"
                                                                  Width="25" Height="20" FontSize="15" FontFamily="{StaticResource MainFont}" 
                                                                  MaxLength="2" 
-                                                                 Text="{Binding Value.Criteria[1], Mode=TwoWay}">
+                                                                 Text="{Binding Value.Criteria[1], Mode=TwoWay}"
+                                                                 LostFocus="BlockTimeTextBox_Unfocused">
                                                         </TextBox>
                                                         <TextBlock Grid.Row="1" 
                                                                    Text="minutes"
@@ -372,7 +380,7 @@
                             </Style>
                         </ContentControl.Style>
                     </ContentControl>
-                    <Button Style="{StaticResource TickButtonTheme}"
+                    <Button Style="{StaticResource BinButtonTheme}"
                             Grid.Column="1"
                             Grid.Row="9"
                             Width="31"
@@ -387,7 +395,7 @@
                             <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
                         </Button.Clip>
                     </Button>
-                    <Button Style="{StaticResource TickButtonTheme}"
+                    <Button Style="{StaticResource SaveButtonTheme}"
                             Grid.Column="1"
                             Grid.Row="9"
                             Width="31"

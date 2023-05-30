@@ -15,16 +15,21 @@
                 <StackPanel>
                     <TextBlock Foreground="White" 
                                FontSize="{StaticResource SubheadingFontSize}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontWeight="Medium"
                                Text="User Settings">
                     </TextBlock>
                     <TextBlock Foreground="White"
                                FontSize="{StaticResource TextFontSize}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontWeight="Light"
                                Text="Name"
                                Margin="0 10 0 0">
                     </TextBlock>
                     <TextBox Margin="0 5 0 0"
                              HorizontalAlignment="Left"
-                             Width="150" FontSize="{StaticResource TextFontSize}" FontFamily="{StaticResource MainFont}" 
+                             Width="150" FontSize="{StaticResource TextFontSize}"
+                             FontFamily="{StaticResource MainFont}" 
                              MaxLength="18" 
                              Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}">
                         <i:Interaction.Triggers>
@@ -42,10 +47,14 @@
                 <StackPanel>
                     <TextBlock Foreground="White" 
                                FontSize="{StaticResource SubheadingFontSize}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontWeight="Medium"
                                Text="Block Settings">
                     </TextBlock>
                     <TextBlock Foreground="White"
                                FontSize="{StaticResource TextFontSize}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontWeight="Light"
                                Text="Block Usage Limit Reached Behaviour"
                                Margin="0 10 0 0">
                     </TextBlock>
@@ -53,16 +62,21 @@
                               SelectedItem="{Binding BlockType, Mode=TwoWay}"
                               Margin="0 5 0 0"
                               HorizontalAlignment="Left"
-                              Width="200" FontSize="{StaticResource TextFontSize}" FontFamily="{StaticResource MainFont}">
+                              Width="200" FontSize="{StaticResource TextFontSize}" 
+                              FontFamily="{StaticResource MainFont}">
                     </ComboBox>
                     <TextBlock Foreground="White" 
                                FontSize="{StaticResource SubheadingFontSize}"
+                               FontFamily="{StaticResource MainFont}"
+                               FontWeight="Medium"
                                Text="Program Usage Settings"
                                Margin="0 30 0 0">
                     </TextBlock>
                     <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
                         <TextBlock Foreground="White"
                                    FontSize="{StaticResource TextFontSize}"
+                                   FontFamily="{StaticResource MainFont}"
+                                   FontWeight="Light"
                                    Text="Include System Apps in Usage Calculations">
                         </TextBlock>
                         <CheckBox Margin="6 2 0 0" 

@@ -39,7 +39,7 @@ namespace WPFUI
             if (!createdNew)
             {
                 // Another instance of the program is already running
-                MessageBox.Show("Another instance of the program is already running.");
+                MessageBox.Show("Another instance of the program is already running. Try checking your taskbar and tray.");
                 Close();
             }
         }

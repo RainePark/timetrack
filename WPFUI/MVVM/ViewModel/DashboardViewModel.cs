@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
@@ -71,24 +72,54 @@ namespace WPFUI.MVVM.ViewModel
         public string CreateDashboardGreeting()
         {
             string dashboardGreeting;
+            int thisIsMyImplementationOfRandomNumberGeneration = new Random().Next(3);
             Settings userSettings = SettingsModel.GetUserSettings();
-            DateTime currentTime = DateTime.Now;string input = userSettings.UserName;
+            string userName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim());
+            string input = userSettings.UserName;
+            DateTime currentTime = DateTime.Now;
 
             if (currentTime.Hour >= 5 && currentTime.Hour < 12)
             {
-                dashboardGreeting = "Good morning, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+                List<string> randomGreetings = new List<string>
+                {
+                    $"Good morning, {userName}.", 
+                    $"Morning, {userName}!", 
+                    $"Rise and shine, {userName}!"
+                };
+                dashboardGreeting = randomGreetings[thisIsMyImplementationOfRandomNumberGeneration] + "\nYour screen time today is\n";
             }
             else if (currentTime.Hour >= 12 && currentTime.Hour < 17)
             {
-                dashboardGreeting = "Good afternoon, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+                List<string> randomGreetings = new List<string>
+                {
+                    $"Good afternoon, {userName}.", 
+                    $"Afternoon, {userName}!", 
+                    $"Good day, {userName}!"
+                };
+                dashboardGreeting = randomGreetings[thisIsMyImplementationOfRandomNumberGeneration] 
+                                    + "\nYour screen time today is\n";
             }
-            else if (currentTime.Hour >= 17 && currentTime.Hour < 22)
+            else if (currentTime.Hour >= 17 && currentTime.Hour < 21)
             {
-                dashboardGreeting = "Good evening, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+                List<string> randomGreetings = new List<string>
+                {
+                    $"Good evening, {userName}.", 
+                    $"Evening, {userName}!", 
+                    $"Time to relax, {userName}."
+                };
+                dashboardGreeting = randomGreetings[thisIsMyImplementationOfRandomNumberGeneration] + 
+                                    "\nYour screen time today is\n";
             }
             else
             {
-                dashboardGreeting = "Good night, " + CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim()) + ".\nYour screen time today is\n";
+                List<string> randomGreetings = new List<string>
+                {
+                    $"Good night, {userName}.",
+                    $"Sleep tight, {userName}!",
+                    $"Nighty night, {userName}!"
+                };
+                dashboardGreeting = randomGreetings[thisIsMyImplementationOfRandomNumberGeneration] +
+                                    "\nYour screen time today is\n";
             }
             return dashboardGreeting;
         }

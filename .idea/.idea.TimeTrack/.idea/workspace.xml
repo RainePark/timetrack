@@ -7,18 +7,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="Stuff works now I guess">
+    <list default="true" id="2b01d8c1-5e1a-436a-b87f-63cc5a1f952a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TimeTrack/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/BlocksModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/Model/ProgramUsageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Core/IPage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Core/IPage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/EditBlockView.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/SettingsView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/View/UsageView.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/DashboardViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/EditBlockViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/EditBlockViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/MainViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/SettingsViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/UsageViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MVVM/ViewModel/UsageViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WPFUI/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/WPFUI/Theme/ButtonThemes.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,20 +157,7 @@
       <workItem from="1684980753475" duration="5608000" />
       <workItem from="1684998326628" duration="10528000" />
       <workItem from="1685070133401" duration="14343000" />
-    </task>
-    <task id="LOCAL-00002" summary="Finish exit button">
-      <created>1682062655969</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1682062655969</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Small fixes">
-      <created>1682069541213</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1682069541213</updated>
+      <workItem from="1685399314044" duration="13019000" />
     </task>
     <task id="LOCAL-00004" summary="Implement basic settings menu">
       <created>1682069575809</created>
@@ -501,7 +488,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685249713687</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Monday work and fixes">
+      <created>1685377914990</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1685377914990</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Update project files">
+      <created>1685377944949</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1685377944949</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +544,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Update dependencies" />
     <MESSAGE value="Update build settings" />
     <MESSAGE value="Add program tracking" />
     <MESSAGE value="Update workspace.xml" />
@@ -557,7 +557,6 @@
     <MESSAGE value="Switch Borders to Buttons" />
     <MESSAGE value="Create dynamic blocks page" />
     <MESSAGE value="Initial commit" />
-    <MESSAGE value="Update project files" />
     <MESSAGE value="Dynamically update block icon" />
     <MESSAGE value="Remove unused converter" />
     <MESSAGE value="Create settings model" />
@@ -568,7 +567,9 @@
     <MESSAGE value="Create startup menu" />
     <MESSAGE value="Add no block created warning" />
     <MESSAGE value="Stuff works now I guess" />
-    <option name="LAST_COMMIT_MESSAGE" value="Stuff works now I guess" />
+    <MESSAGE value="Monday work and fixes" />
+    <MESSAGE value="Update project files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update project files" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -90,11 +90,11 @@
     </Style>
     
     <Style TargetType="{x:Type Button}"
-           x:Key="TickButtonTheme">
+           x:Key="SaveButtonTheme">
         <Style.Setters>
             <Setter Property="Background">
                 <Setter.Value>
-                    <ImageBrush Stretch="UniformToFill" ImageSource="/Images/tick.ico"/>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="/Images/save.ico"/>
                 </Setter.Value>
             </Setter>
             <Setter Property="Template">
@@ -111,7 +111,65 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background">
                     <Setter.Value>
-                        <ImageBrush Stretch="UniformToFill" ImageSource="/Images/tick-hover.ico"/>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="/Images/save-hover.ico"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Button}"
+           x:Key="BinButtonTheme">
+        <Style.Setters>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="/Images/bin.ico"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="/Images/bin-hover.ico"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type Button}"
+           x:Key="BinSmallButtonTheme">
+        <Style.Setters>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="/Images/bin-small.ico"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="/Images/bin-small-hover.ico"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>

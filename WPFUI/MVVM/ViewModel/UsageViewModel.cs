@@ -265,7 +265,12 @@ namespace WPFUI.MVVM.ViewModel
                     MaxLimit = 60, 
                     MinStep = 15, 
                     ForceStepToMin = true, 
-                    LabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255))
+                    LabelsPaint = new SolidColorPaint 
+                    { 
+                        Color = new SKColor(255, 255, 255), 
+                        SKTypeface = SKTypeface.FromFamilyName("Montserrat"), 
+                    },
+                    TextSize = 14
                 }
             };
             this.ChartXAxes = new Axis[] {
@@ -280,7 +285,18 @@ namespace WPFUI.MVVM.ViewModel
                         "20:00", "", "", "23:00"
                     },
                     ForceStepToMin = true,
-                    LabelsPaint = new SolidColorPaint(new SKColor(255, 255, 255))
+                    LabelsPaint = new SolidColorPaint 
+                    { 
+                        Color = new SKColor(255, 255, 255), 
+                        SKTypeface = SKTypeface.FromFamilyName("Montserrat"),
+                    }, 
+                    TextSize = 14,
+                    TicksAtCenter = true, 
+                    TicksPaint = new SolidColorPaint
+                    {
+                        Color = new SKColor(100, 100, 100),
+                        StrokeThickness = 2
+                    }
                 }
             };
         }

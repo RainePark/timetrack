@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -50,6 +51,15 @@ public partial class EditBlockView : Window
             selectedItems.Add(selectedItem.ToString());
         }
         ((EditBlockViewModel)DataContext).SelectedTimeCriteria = selectedItems;
+    }
+    
+    private void BlockTimeTextBox_Unfocused(object sender, RoutedEventArgs e)
+    {
+        TextBox textBox = sender as TextBox;
+        if (!Regex.IsMatch(textBox.Text.Trim(), @"^(\d{0,2})?$")){
+            MessageBox.Show("Please enter a valid number");
+            textBox.Text = "";
+        }
     }
     
     private void CloseWindowButton_OnClick(object sender, RoutedEventArgs e)

@@ -115,7 +115,7 @@ namespace WPFUI.MVVM.ViewModel
                 }
                 if (Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()) > 23)
                 {
-                    if ((Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()) != 24) && (Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1].ToString()) != 0))
+                    if ((Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()) != 24))
                     {
                         MessageBox.Show("There is only 24 hours in a day");
                         return;
@@ -145,6 +145,10 @@ namespace WPFUI.MVVM.ViewModel
                     return;
                 }
                 
+                // Convert string of TextBox to an integer to remove trailing zeroes and then back to string for storage
+                UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0] = Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()).ToString();
+                UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1] = Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1].ToString()).ToString();
+
                 UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].TimeCriteria = SelectedTimeCriteria.OrderBy(day => 
                 {
                     switch (day)
