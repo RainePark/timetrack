@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using LiveChartsCore.SkiaSharpView.Painting;
-using Newtonsoft.Json;
 using SkiaSharp;
 using WPFUI.Core;
 using WPFUI.MVVM.Model;
@@ -28,7 +27,8 @@ namespace WPFUI.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        
+        // Define variables that will be shown on the usage screen
+        // They do not need to implement OnPropertyChanged() as the UI is not updated after it is created
         public DateTime AnalysisTime { get; set; }
         public int UsageHours { get; set; }
         public int UsageMinutes { get; set; }
@@ -55,6 +55,7 @@ namespace WPFUI.MVVM.ViewModel
         
         public UsageViewModel()
         {
+            // Set all the vaariables that will be shown on the usage screen
             this.PageTitle = "Usage";
             this.AnalysisTime = DateTime.Now;
             this.TotalUsageSeconds = ProgramUsageModel.GetTotalUsageSinceMidnight();
@@ -86,6 +87,7 @@ namespace WPFUI.MVVM.ViewModel
 
         public Dictionary<string, int> GetProgramUsageDictionary()
         {
+            // Query to get the program usage data from the database for the current day
             string query = "SELECT program, COUNT(*) as program_count " +
                            "FROM detailed_usage " +
                            "WHERE time >= @specified_time " +
@@ -95,6 +97,7 @@ namespace WPFUI.MVVM.ViewModel
             using (var connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
             {
                 SQLiteCommand command = new SQLiteCommand(query, connection);
+                // Run the command with UTC as that is how times are stored in the database
                 command.Parameters.AddWithValue("@specified_time", DateTime.Now.Date.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"));
                 connection.Open();
                 SQLiteDataReader reader = command.ExecuteReader();
@@ -105,6 +108,7 @@ namespace WPFUI.MVVM.ViewModel
                     programUsage[programName] = programCount;
                 }
             }
+            // Sort the dictonary to be in descending order of usage
             var sortedProgramUsage = programUsage.OrderByDescending(x => x.Value);
             Dictionary<string, int> sortedDictionary = new Dictionary<string, int>();
             foreach (var kvp in sortedProgramUsage)
@@ -116,6 +120,7 @@ namespace WPFUI.MVVM.ViewModel
 
         public Dictionary<string, int> GetWindowTitleUsageDictionary()
         {
+            // Query to get the window title usage data from the database for the current day
             string query = "SELECT windowTitle, COUNT(*) as windowTitle_count " +
                         "FROM detailed_usage " +
                         "WHERE time >= @specified_time " +
@@ -135,6 +140,7 @@ namespace WPFUI.MVVM.ViewModel
                     windowTitleUsage[windowTitle] = windowTitleCount;
                 }
             }
+            // Sort the dictonary to be in descending order of instances
             var sortedWindowTitleUsage = windowTitleUsage.OrderByDescending(x => x.Value);
             Dictionary<string, int> sortedDictionary = new Dictionary<string, int>();
             foreach (var kvp in sortedWindowTitleUsage)
@@ -146,6 +152,7 @@ namespace WPFUI.MVVM.ViewModel
         
         public Dictionary<int, int> GetHourlyUsageCount()
         {
+            // Query to count the hourly usage data from the database since midnight for the current day
             Dictionary<int, int> hourlyItemCount = new Dictionary<int, int>();
             string query = "SELECT strftime('%H', datetime(time, 'localtime')) as hour, COUNT(*) as count " +
                            "FROM detailed_usage " +
@@ -165,15 +172,16 @@ namespace WPFUI.MVVM.ViewModel
                     hourlyItemCount[hour] = count;
                 }
             }
-
             return hourlyItemCount;
         }
 
         public ObservableCollection<string> GenerateMostUsedCollection(Dictionary<string, int> inputDictionary)
         {
             ObservableCollection<string> outputCollection = new ObservableCollection<string>();
+            // Get the top 5 most used programs
             Dictionary<string, int> inputDictionaryTrimmed = inputDictionary.Take(5).ToDictionary(pair => pair.Key, pair => pair.Value);
             int i = 1;
+            // Generate the output string for each program in the format "1. Program Name - 1hr, 30mins"
             foreach (KeyValuePair<string, int> pair in inputDictionaryTrimmed)
             {
                 TimeSpan usageTimeSpan = TimeSpan.FromSeconds(pair.Value);
@@ -187,14 +195,21 @@ namespace WPFUI.MVVM.ViewModel
         public IEnumerable<ISeries> GeneratePieSeries(Dictionary<string, int> inputDictionary)
         {
             List<ISeries> outputSeries = new List<ISeries>();
-            int x = (int)Math.Ceiling(Math.Log(inputDictionary.Count, 2) * 1.6);
+            // Calculate the number of programs to be displayed in the pie chart
+            int x = (int)Math.Ceiling(Math.Log(inputDictionary.Count, 2) * 1.6) + 1;
+            // Get the top x most used programs and add them to the pie chart
             Dictionary<string, int> inputDictionaryTrimmed = inputDictionary.Take(x).ToDictionary(pair => pair.Key, pair => pair.Value);
+            // Get the remaining programs and add them to the "Other" category
             Dictionary<string, int> inputDictionaryRemaining = inputDictionary.Skip(x).ToDictionary(pair => pair.Key, pair => pair.Value);
+            // Add each program to the pie chart
             foreach (KeyValuePair<string, int> pair in inputDictionaryTrimmed)
             {
+                // Truncate the program name if it is too long
                 string key = pair.Key.Length > 30 ? pair.Key.Substring(0, 30) : pair.Key;
+                // Add the program to the pie chart
                 outputSeries.Add(new PieSeries<double> { Values = new double[] { (double)Math.Round(pair.Value / 60.0, 1) }, Name = pair.Key });
             }
+            // Add the "Other" category if there are any remaining programs
             if (inputDictionaryRemaining.Values.ToList().Count > 0)
             {
                 outputSeries.Add(new PieSeries<double> { Values = new double[] { (double)Math.Round(inputDictionaryRemaining.Values.Sum() / 60.0, 1) }, Name = "Other" });
@@ -208,6 +223,7 @@ namespace WPFUI.MVVM.ViewModel
             Dictionary<int, double> hourlyUsage = new Dictionary<int, double>();
             for (int i = 0; i < 24; i++)
             {
+                // If the dictionary contains usage for the ith hour, add the value to the new dictionary
                 if (inputDictionary.ContainsKey(i))
                 {
                     hourlyUsage[i] = Math.Round((double)inputDictionary[i] / 60, 1);
@@ -217,6 +233,7 @@ namespace WPFUI.MVVM.ViewModel
                     hourlyUsage[i] = 0;
                 }
             }
+            // Create a list of values from the dictionary
             IEnumerable<double> values = Enumerable.Range(0, 24).Select(i => hourlyUsage.ContainsKey(i) ? (double)hourlyUsage[i] : 0);
             
             /*// Create series to highlight current hour
@@ -229,6 +246,7 @@ namespace WPFUI.MVVM.ViewModel
                 valuesHourHighlighter[i] = (i == currentHour) ? 60 : 0;
             }*/
 
+            // Create the bar chart
             this.ChartSeries = new ISeries[] {
                 new ColumnSeries<double>
                 {
@@ -238,6 +256,7 @@ namespace WPFUI.MVVM.ViewModel
                     Fill = new SolidColorPaint(SKColors.White),
                     IgnoresBarPosition = true
                 }
+
                 // Code to add background shading to the columns
                 /*new ColumnSeries<double>
                 {
@@ -258,6 +277,8 @@ namespace WPFUI.MVVM.ViewModel
                     IgnoresBarPosition = true
                 }*/
             };
+
+            // Style the Y axis of the chart
             this.ChartYAxes = new Axis[] { 
                 new Axis
                 {
@@ -273,6 +294,8 @@ namespace WPFUI.MVVM.ViewModel
                     TextSize = 14
                 }
             };
+
+            // Style the X axis of the chart and add labels for each hour of the day
             this.ChartXAxes = new Axis[] {
                 new Axis
                 {

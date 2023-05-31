@@ -12,6 +12,7 @@
         <PackageId>TimeTrack</PackageId>
         <Authors>Raine Park</Authors>
         <ApplicationIcon>Images\logo-ico.ico</ApplicationIcon>
+        <!-- This line toggles the administrator requirement -->
         <!--<ApplicationManifest>app.manifest</ApplicationManifest>-->
     </PropertyGroup>
 
@@ -24,12 +25,7 @@
       <Resource Include="Fonts\*" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Update="MVVM\View\BooleanToStateTextConverter.cs">
-        <DependentUpon>BlocksView.xaml</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
+    <!-- Include nuget packages which are used in the program -->
     <ItemGroup>
       <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
       <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.710" />

@@ -7,12 +7,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WPFUI.Core;
 using WPFUI.MVVM.Model;
@@ -22,8 +20,10 @@ namespace WPFUI.MVVM.ViewModel
 {
     public class EditBlockViewModel : INotifyPropertyChanged
     {
+        // Allow the view to know where it was called from
         public object Parent { get; set; }
 
+        // Update the block in a separate class to retain the original block if the user does not wish to save changes
         private UpdatedBlockData _UpdatedBlockData;
         public UpdatedBlockData UpdatedBlockData
         {
@@ -51,7 +51,8 @@ namespace WPFUI.MVVM.ViewModel
                 }
             }
         }
-
+        
+        // Set up commands for the view to bind to
         public ICommand AddExecutablePathCommand { get; set; }
         public ICommand RemoveExecutablePathCommand { get; set; }
         public ICommand BlockNameTextBoxUnfocused { get; set; } 
@@ -62,6 +63,7 @@ namespace WPFUI.MVVM.ViewModel
 
         public EditBlockViewModel(Block block, object parent, ICommand refreshBlocksCommand= null)
         {
+            // Set up the block to be edited
             string originalBlockName = block.Name;
             UpdatedBlockData = new UpdatedBlockData(block, originalBlockName);
             BlockNameTextBoxUnfocused = new RelayCommand(BlockNameTextBox_Unfocused);
@@ -76,23 +78,27 @@ namespace WPFUI.MVVM.ViewModel
 
         private void SaveBlock_Click(object parameter)
         {
+            // Get the new block data from the view
             UpdatedBlockData UpdatedBlockData = (UpdatedBlockData)parameter;
+            // Validate block is correctly input before adding to the database
             if (UpdatedBlockData.Block != null)
             {
-                // Validate block is correctly input before adding to the database
+                // Check if the block name is empty
                 if (string.IsNullOrEmpty(UpdatedBlockData.Block.Name))
                 {
                     MessageBox.Show("Block name cannot be empty");
                     return;
                 }
-                if (!Regex.IsMatch(UpdatedBlockData.Block.Name, @"[a-zA-Z]"))
-                {
-                    MessageBox.Show("Block name must contain at least one alphabetical character");
-                    return;
-                }
+                // Check if block name is already in use
                 if (BlocksModel.GetAllBlocks().ContainsKey(UpdatedBlockData.Block.Name) && UpdatedBlockData.Block.Name != UpdatedBlockData.OriginalBlockName)
                 {
                     MessageBox.Show("There is already a block with this name");
+                    return;
+                }
+                // Check if block name is valid
+                if (!Regex.IsMatch(UpdatedBlockData.Block.Name, @"[a-zA-Z]"))
+                {
+                    MessageBox.Show("Block name must contain at least one alphabetical character");
                     return;
                 }
                 if (!Regex.IsMatch(UpdatedBlockData.Block.Name, @"^(?=.*\S)[a-zA-Z0-9 ]+$"))
@@ -100,11 +106,13 @@ namespace WPFUI.MVVM.ViewModel
                     MessageBox.Show("Block name can only contain alphanumeric characters");
                     return;
                 }
+                // Check if block contains any programs
                 if (UpdatedBlockData.Block.Programs.Count() < 1)
                 {
                     MessageBox.Show("Block must contain at least 1 application");
                     return;
                 }
+                // Set block criterias to 0 if empty
                 if (String.IsNullOrEmpty(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()))
                 {
                     UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0] = "0";
@@ -113,24 +121,37 @@ namespace WPFUI.MVVM.ViewModel
                 {
                     UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1] = "0";
                 }
+                // Check if the block limit is less than or equal to 24 hours
                 if (Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()) > 23)
                 {
-                    if ((Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()) != 24))
+                    if ((Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()) != 24) && (Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1].ToString()) != 0))
                     {
                         MessageBox.Show("There is only 24 hours in a day");
                         return;
                     }
                 }
+                // Check if the minutes of the block limit is less than 60
                 if (Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1].ToString()) > 59)
                 {
-                    MessageBox.Show("There is only 60 minutes in an hour");
-                    return;
+                    // Add an hour to the block limit if the minutes field is 60 and reset the minutes field to 0
+                    if ((Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1].ToString()) == 60) && Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()) <= 23)
+                    {
+                        UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0] = (Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()) + 1).ToString();
+                        UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1] = "0";
+                    }
+                    else
+                    {
+                        MessageBox.Show("There is only 60 minutes in an hour");
+                        return;
+                    }
                 }
+                // Check if the block limit is less than 0
                 if ((Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()) < 0) || (Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1].ToString()) < 0))
                 {
                     MessageBox.Show("You cannot have negative time!");
                     return;
                 }
+                // Make sure block is active for at least 1 day
                 try
                 {
                     if (SelectedTimeCriteria.Count == 0)
@@ -149,6 +170,7 @@ namespace WPFUI.MVVM.ViewModel
                 UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0] = Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[0].ToString()).ToString();
                 UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1] = Convert.ToInt32(UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].Criteria[1].ToString()).ToString();
 
+                // Order the days of the week in the correct order
                 UpdatedBlockData.Block.Conditions[Convert.ToInt32("1")].TimeCriteria = SelectedTimeCriteria.OrderBy(day => 
                 {
                     switch (day)
@@ -180,11 +202,13 @@ namespace WPFUI.MVVM.ViewModel
                 BlocksModel.AppendBlockToDatabase(UpdatedBlockData.Block);
                 BlocksModel.RenameBlockStatus(UpdatedBlockData.OriginalBlockName, UpdatedBlockData.Block.Name);
 
+                // Update the block status of each program in the block without adding an extra second of usage
                 foreach (string processName in UpdatedBlockData.Block.Programs)
                 {
                     BlocksModel.UpdateBlockStatus(UpdatedBlockData.Block, processName, 0);
                 }
             }
+            // Refresh the blocks list if the window is opened from the blocks tab
             if (Parent is BlocksViewModel)
             {
                 if (RefreshBlocksCommand != null)
@@ -197,12 +221,14 @@ namespace WPFUI.MVVM.ViewModel
 
         private void DeleteBlock_Click(object parameter)
         {
+            // Confirm that the user wants to delete the block
             MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this block?", "Confirmation", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.No)
             {
                 return;
             }
             UpdatedBlockData UpdatedBlockData = (UpdatedBlockData)parameter;
+            // Delete the block from the databases
             if (UpdatedBlockData.OriginalBlockName != null)
             {
                 if (UpdatedBlockData.Block != null)
@@ -211,6 +237,7 @@ namespace WPFUI.MVVM.ViewModel
                     BlocksModel.DeleteBlockStatus(UpdatedBlockData.OriginalBlockName);
                 }
             }
+            // Refresh the blocks list if the window is opened from the blocks tab
             if (Parent is BlocksViewModel)
             {
                 if (RefreshBlocksCommand != null)
@@ -223,11 +250,13 @@ namespace WPFUI.MVVM.ViewModel
 
         public void AddExecutablePath(object parameter)
         {
+            // Open a file explorer to select an executable file
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Executable files (*.exe)|*.exe";
             openFileDialog.Title = "Select an executable file";
             if (openFileDialog.ShowDialog() == true)
             {
+                // Get the path and name of the executable file
                 string programPath = openFileDialog.FileName;
                 string processName = Path.GetFileNameWithoutExtension(programPath);
                 
@@ -236,6 +265,7 @@ namespace WPFUI.MVVM.ViewModel
                  an instance where the process name is not the file name anyways. */
                 //string processName = GetProcessName(programPath);
                 
+                // Stop the user from adding TimeTrack or a system app as a blocked application
                 ProgramUsageModel.AppendProgramDetails(programPath, processName);
                 if (processName == "TimeTrack")
                 {
@@ -247,11 +277,13 @@ namespace WPFUI.MVVM.ViewModel
                     MessageBox.Show("System apps cannot be added as blocked application.");
                     return;
                 }
+                // Stop the user from adding the same application twice
                 if (UpdatedBlockData.Block.Programs.Contains(processName))
                 {
                     MessageBox.Show("This block already contains this application.");
                     return;
                 }
+                // Add the application to the block
                 UpdatedBlockData.Block.Programs.Add(processName);
                 UpdatedBlockData.Programs = new ObservableCollection<string>(UpdatedBlockData.Block.Programs);
             }
@@ -259,6 +291,7 @@ namespace WPFUI.MVVM.ViewModel
         
         string GetProcessName(string executablePath)
         {
+            // Start the process
             ProcessStartInfo startInfo = new ProcessStartInfo(executablePath);
             startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
@@ -290,12 +323,14 @@ namespace WPFUI.MVVM.ViewModel
 
         public void RemoveExecutablePath(object parameter)
         {
+            // Remove the selected application from the block
             string processName = (string)parameter;
             if (UpdatedBlockData.Block.Programs.Contains(processName))
             {
                 UpdatedBlockData.Block.Programs.Remove(processName);
             }
             UpdatedBlockData.Programs = new ObservableCollection<string>(UpdatedBlockData.Block.Programs);
+            // Remove the application from the block status
             Dictionary<string, object> newBlockStatus = BlocksModel.GetBlockStatus();
             if ((UpdatedBlockData.Block.Type == "Usage Limit (Combined)") || (UpdatedBlockData.Block.Type == "Usage Limit (Per App)"))
             {
@@ -311,6 +346,7 @@ namespace WPFUI.MVVM.ViewModel
 
         public void BlockTypeChanged(object parameter)
         {
+            // Reset the block conditions if the block type is changed
             UpdatedBlockData.Conditions.Clear();
             if (UpdatedBlockData.Type == "Usage Limit (Combined)" || UpdatedBlockData.Type == "Usage Limit (Per App)")
             {
@@ -327,9 +363,11 @@ namespace WPFUI.MVVM.ViewModel
 
         private void BlockNameTextBox_Unfocused(object parameter)
         {
+            // Remove any whitespace from the block name
             UpdatedBlockData.Block.Name = UpdatedBlockData.Block.Name.Trim();
         }
 
+        // Close the window of the edit block window
         private void CloseWindow()
         {
             foreach (Window window in Application.Current.Windows)
@@ -366,6 +404,7 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
 
+        // Create an observable collection of the block programs to be displayed in the application list
         private ObservableCollection<string> _programs;
         public ObservableCollection<string> Programs
         {
@@ -377,6 +416,7 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
 
+        // Update the block type of the block object when the type is changed
         private string _type;
         public string Type
         {
@@ -389,6 +429,7 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
         
+        // Update the block conditions of the block object when the conditions are changed
         private ObservableCollection<KeyValuePair<int, BlockCondition>> _conditions;
         public ObservableCollection<KeyValuePair<int, BlockCondition>> Conditions
         {
@@ -407,6 +448,8 @@ namespace WPFUI.MVVM.ViewModel
 
         public UpdatedBlockData(Block block, string originalBlockName)
         {
+            // Set the block data to be shown in the edit block window
+            // Uses default values if it is a new block with no data
             Block = block;
             try { Programs = new ObservableCollection<string>(Block.Programs); }
             catch { Programs = new ObservableCollection<string>(); }

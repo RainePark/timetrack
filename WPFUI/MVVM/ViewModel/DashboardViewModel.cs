@@ -15,6 +15,7 @@ namespace WPFUI.MVVM.ViewModel
 {
     class DashboardViewModel : IPage
     { 
+        // Define properties with OnPropertyChanged() calls to update the UI when they change
         private string _pageTitle;   
         public string PageTitle
         {
@@ -37,6 +38,7 @@ namespace WPFUI.MVVM.ViewModel
             }
         }
         
+        // Allow the view to access the model's ActiveBlocksCollection and DashboardText properties
         private ProgramUsageModel _programUsageModel;
         
         private ObservableCollection<Block> _activeBlocks;   
@@ -64,20 +66,26 @@ namespace WPFUI.MVVM.ViewModel
         public DashboardViewModel(ProgramUsageModel programUsageModel)
         {
             this.PageTitle = "Dashboard";
+            // Generate the greeting message
             this.DashboardGreeting = CreateDashboardGreeting();
+            // Use a program usage model that is shared with the main view model so that only 1 instance of the model is used
+            // This is important as the program usage model is responsible for tracking program usage which would be inaccurate if there were multiple instances
             this._programUsageModel = programUsageModel;
             _programUsageModel.PropertyChanged += ProgramUsageModel_PropertyChanged;
         }
-
+        
+        // Create the greeting message based on the user's name and the time of day
         public string CreateDashboardGreeting()
         {
             string dashboardGreeting;
+            // Implement RNG to select a random greeting WOW!!!!!111!1!1!1!1!!!!! this is so RAD!!! (Rapid Application Development)
             int thisIsMyImplementationOfRandomNumberGeneration = new Random().Next(3);
+            // Get the user name from the settings file
             Settings userSettings = SettingsModel.GetUserSettings();
             string userName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(userSettings.UserName.ToLower().Trim());
-            string input = userSettings.UserName;
+            // Get the current time
             DateTime currentTime = DateTime.Now;
-
+            // Generate a greeting based on time of day, selecting a random greeting from a list of 3 based on the RNG implementation
             if (currentTime.Hour >= 5 && currentTime.Hour < 12)
             {
                 List<string> randomGreetings = new List<string>
@@ -123,7 +131,8 @@ namespace WPFUI.MVVM.ViewModel
             }
             return dashboardGreeting;
         }
-
+        
+        // Implement PropertyChanged to ensure that the UI is updated when the Model and ViewModel changes
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

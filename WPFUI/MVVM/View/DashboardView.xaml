@@ -7,15 +7,18 @@
              xmlns:core="clr-namespace:WPFUI.Core"
              mc:Ignorable="d"
              d:DesignHeight="1000" d:DesignWidth="720" Background="Transparent">
+    <!-- Import all the converters which are used -->
     <UserControl.Resources>
         <local:BlockToPathConverter x:Key="BlockToPathConverter" />
         <local:CriteriaToStringConverter x:Key="CriteriaToStringConverter" />
         <local:TimeCriteriaToStringConverter x:Key="TimeCriteriaToStringConverter" />
         <local:CountToVisibilityConverter x:Key="CountToVisibilityConverter" />
     </UserControl.Resources>
+    <!-- Wrap all elements in a scrollviewer -->
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   Style="{StaticResource ScrollBarTheme}">
         <StackPanel Margin="20 13 0 0">
+            <!-- Show the greeting text -->
             <TextBlock Foreground="White"
                        Text="{Binding DashboardText}"
                        FontSize="{StaticResource TitleFontSize}"
@@ -32,6 +35,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="25"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                <!-- SHow the active blocks heading text -->
                 <TextBlock Text="Active Blocks"
                            Foreground="White"
                            FontSize="{StaticResource HeadingFontSize}"
@@ -39,6 +43,8 @@
                            FontWeight="Medium"
                            HorizontalAlignment="Left">
                 </TextBlock>
+                
+                <!-- Show the button next to the heading that will take the user to the Blocks page -->
                 <Button Grid.Column="1" Style="{StaticResource NextButtonTheme}" 
                         Width="31"
                         Height="31"
@@ -53,17 +59,22 @@
                     </Button.Clip>
                 </Button>
             </Grid>
+
+            <!-- Show all the active blocks -->
             <ItemsControl ItemsSource="{Binding ActiveBlocks}"
                           HorizontalAlignment="Left"
                           Margin="0 0 0 20"
                           x:Name="DashboardBlocksItemsControl">
+                <!-- Set a maximum of 3 blocks in each row -->
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="3"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+                <!-- Template to show the block -->
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
+                    <!-- Set gradient background -->
                         <Border Style="{StaticResource DashboardActiveBlocksTheme}"
                                 Background="{StaticResource GreenBlockGradientBrush}"
                                 Margin="0 15 15 0"
@@ -81,6 +92,7 @@
                                     <ColumnDefinition Width="25"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 
+                                <!-- Show name of block -->
                                 <TextBlock Text="{Binding Name}"
                                    Foreground="White"
                                    Background="Transparent"
@@ -92,6 +104,7 @@
                                    Grid.Column="0"
                                    Grid.ColumnSpan="3">
                                 </TextBlock>
+
                                 <!-- Was originally going to have a button to go to edit the block from here however there it sometimes did not sync with the Blocks page, causing crashes as the Blocks page was confused by where the Blocks were -->
                                 <!-- This is due to my bad implementation of the submenus which use 1 instance of the ViewModels created on launch rather than creating a fresh viewmodel each time the submenu is opened -->
                                 <!-- The advantage of my approach is that it saves the state of the pages and can be faster as I don't need to re-render, but at the tradeoff of being prone to syncing issues with other Views/ViewModels -->
@@ -108,6 +121,8 @@
                                         <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,25,25"></RectangleGeometry>
                                     </Button.Clip>
                                 </Button>-->
+
+                                <!-- Show limit of the block -->
                                 <TextBlock Text="{Binding Path=., Converter={StaticResource CriteriaToStringConverter}}"
                                            Foreground="LightGreen"
                                            Background="Transparent"
@@ -120,6 +135,7 @@
                                            Grid.ColumnSpan="3">
                                 </TextBlock>
                                 
+                                <!-- Show the icon of the block type -->
                                 <Image Source="{Binding Type, Converter={StaticResource BlockToPathConverter}}"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
@@ -129,6 +145,7 @@
                                        Grid.Row="2"
                                        Grid.Column="0">
                                 </Image>
+                                <!-- Show the block type -->
                                 <TextBlock Text="{Binding Type}"
                                            Foreground="White"
                                            Background="Transparent"
@@ -140,6 +157,8 @@
                                            Grid.Column="1"
                                            Grid.ColumnSpan="2">
                                 </TextBlock>
+
+                                <!-- Show the days which the block is active -->
                                 <Image Source="/Images/clock.ico"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
@@ -162,6 +181,7 @@
                                 </TextBlock>
                             </Grid>
                         </Border>
+                        <!-- This code would have changed the gradient of the background of each block depending on if the user reached the usage limit or not -->
                         <!--<DataTemplate.Triggers>
                             <DataTrigger Binding="{Binding Status}" Value="True">
                                 <Setter TargetName="MainBlockBorder" Property="Background" Value="{StaticResource GreenBlockGradientBrush}"></Setter>
@@ -172,6 +192,8 @@
                         </DataTemplate.Triggers>-->
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+                <!-- This sets the visibility of the ItemsControl based on if there are any blocks inside it or not -->
+                <!-- Whilst there is no difference visually, it allows the TextBlock below to know if there are active blocks shown or not -->
                 <ItemsControl.Style>
                     <Style TargetType="ItemsControl">
                         <Setter Property="Visibility" Value="Visible" />
@@ -183,6 +205,7 @@
                     </Style>
                 </ItemsControl.Style>
             </ItemsControl>
+            <!-- Shows the user a warning if there are no active blocks -->
             <TextBlock Text="You currently have no active blocks."
                        HorizontalAlignment="Center" 
                        Foreground="White"

@@ -38,7 +38,7 @@ namespace WPFUI
             // Check if the mutex was created successfully
             if (!createdNew)
             {
-                // Another instance of the program is already running
+                // Show a warning if another instance of the program is already running and close the new instance of the program
                 MessageBox.Show("Another instance of the program is already running. Try checking your taskbar and tray.");
                 Close();
             }
@@ -49,10 +49,13 @@ namespace WPFUI
             // If the TaskbarIcon control is double-clicked, show the main window
             Show();
             WindowState = WindowState.Normal;
+            // Ensure that the window is focused when opened from tray
             Activate();
+            // Hide the taskbar icon when the program is opened
             taskbarIcon.Visibility = Visibility.Collapsed;
         }
 
+        // Minimise the window to the tray when the minimise button is clicked and make the taskbar icon visible
         private void CloseWindowButton_OnClick(object sender, RoutedEventArgs e)
         {
             Hide();

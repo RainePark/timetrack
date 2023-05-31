@@ -7,6 +7,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          <ResourceDictionary>
+             <!-- Define all the theme files to be included in the StaticResources -->
              <ResourceDictionary.MergedDictionaries>
                  <ResourceDictionary Source="Theme/SidebarButtonTheme.xaml"></ResourceDictionary>
                  <ResourceDictionary Source="Theme/ScrollBarTheme.xaml"></ResourceDictionary>
@@ -17,7 +18,7 @@
                  <ResourceDictionary Source="Theme/DashboardActiveBlocksTheme.xaml"></ResourceDictionary>
                  <ResourceDictionary Source="Theme/ToggleButtonTheme.xaml"></ResourceDictionary>
              </ResourceDictionary.MergedDictionaries>
-             
+             <!-- Link all of the ViewModels to their Views -->
              <DataTemplate DataType="{x:Type viewModel:DashboardViewModel}">
                  <view:DashboardView></view:DashboardView>
              </DataTemplate>

@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 namespace WPFUI.Core;
 
+// Implement standard RelayCommand class that is used in the MVVM programming pattern 
 public class RelayCommand : ICommand
 {
     private Action<object> _execute;

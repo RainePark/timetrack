@@ -12,11 +12,13 @@ public class SettingsModel : ObservableObject
 
     }
 
+    // Function to get the user settings from the settings.json file
     public static Settings GetUserSettings()
     {
         return (JsonConvert.DeserializeObject<Settings>(File.ReadAllText("user\\settings.json")));
     }
 
+    // Function to write the user settings to the settings.json file
     public static void WriteSettings(Settings settings)
     {
         using (StreamWriter writer = new StreamWriter("user\\settings.json"))
@@ -26,6 +28,8 @@ public class SettingsModel : ObservableObject
     }
 }
 
+// Class to store the user settings
+// Implements INotifyPropertyChanged to notify the Settings UI of any changes
 public class Settings : INotifyPropertyChanged
     {
         private string _userName;
@@ -61,6 +65,7 @@ public class Settings : INotifyPropertyChanged
             }
         }
 
+        // Create a PropertyChangedEventHandler to allow the UIs to be notified of any changes
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)

@@ -15,11 +15,11 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True">
-    
+    <!-- Set the viewmodel of the main view -->
     <Window.DataContext>
         <viewModel:MainViewModel></viewModel:MainViewModel>
     </Window.DataContext>
-
+    <!-- Set the context menu of the taskbar icon -->
     <Window.Resources>
         <ContextMenu x:Key="TaskbarIconContextMenu">
             <MenuItem Header="Open" Click="TaskbarIcon_TrayMouseDoubleClick"/>
@@ -34,12 +34,50 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="35"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"></RowDefinition>
                 <RowDefinition Height="40"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+            <!-- Show titlebar of the main window, allowing the window to be minimised to tray and moved around -->
+            <Border x:Name="TitleBar"
+                    Grid.Column="1" 
+                    Grid.ColumnSpan="2" 
+                    Grid.Row="0" 
+                    Background="{StaticResource SecondaryColourBrush}" 
+                    CornerRadius="10"
+                    MouseLeftButtonDown="TitleBar_DragWindow">
+            </Border>
+            <TextBlock
+                Grid.Column="1"
+                Grid.Row="0"
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                Margin="0"
+                Text="TimeTrack"
+                FontSize="12"
+                FontFamily="{StaticResource MainFont}"
+                FontWeight="Light"
+                Foreground="White"
+                Background="Transparent"
+                MouseLeftButtonDown="TitleBar_DragWindow">
+            </TextBlock>
+            <Button Style="{StaticResource ExitButtonTheme}"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Width="24"
+                    Height="24"
+                    Margin="0"
+                    Click="CloseWindowButton_OnClick">
+                <Image Style="{StaticResource ExitButtonImageTheme}" 
+                       Width="22"
+                       Height="22"
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       Stretch="Uniform">
+                </Image>
+            </Button>
+            <!-- Show TimeTrack icon in the top left -->
             <StackPanel Grid.Column="0" 
                         Grid.Row="0" 
                         Grid.RowSpan="2" 
@@ -59,8 +97,7 @@
                            Margin="6 0 0 0">
                 </TextBlock>
             </StackPanel>
-            
-            
+            <!-- Sidebar to allow user to switch between menus -->
             <StackPanel Grid.Column="0" Grid.Row="2" >
                 <RadioButton Content="Dashboard"
                              x:Name="DashboardSidebarRadioButton"
@@ -104,47 +141,7 @@
                              Tag="/Images/settings.ico">
                 </RadioButton>
             </StackPanel>
-            
-            <Border x:Name="TitleBar"
-                    Grid.Column="1" 
-                    Grid.ColumnSpan="2" 
-                    Grid.Row="0" 
-                    Background="{StaticResource SecondaryColourBrush}" 
-                    CornerRadius="10"
-                    MouseLeftButtonDown="TitleBar_DragWindow">
-            </Border>
-            
-            <TextBlock
-                Grid.Column="1"
-                Grid.Row="0"
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Center"
-                Margin="0"
-                Text="TimeTrack"
-                FontSize="12"
-                FontFamily="{StaticResource MainFont}"
-                FontWeight="Light"
-                Foreground="White"
-                Background="Transparent"
-                MouseLeftButtonDown="TitleBar_DragWindow">
-            </TextBlock>
-            
-            <Button Style="{StaticResource ExitButtonTheme}"
-                    Grid.Column="2"
-                    Grid.Row="0"
-                    Width="24"
-                    Height="24"
-                    Margin="0"
-                    Click="CloseWindowButton_OnClick">
-                <Image Style="{StaticResource ExitButtonImageTheme}" 
-                       Width="22"
-                       Height="22"
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"
-                       Stretch="Uniform">
-                </Image>
-            </Button>
-            
+            <!-- Content control which shows the menu selected -->
             <ContentControl Grid.Row="1" 
                             Grid.RowSpan="2" 
                             Grid.Column="1" 

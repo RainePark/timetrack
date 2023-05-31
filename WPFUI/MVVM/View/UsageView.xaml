@@ -19,14 +19,12 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="15"></RowDefinition>
             </Grid.RowDefinitions>
-            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="25"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
             <TextBlock Grid.Row="0" Grid.Column="1" 
                        Text="{Binding PageTitle}"
                        Foreground="White"
@@ -35,7 +33,7 @@
                        FontWeight="Medium"
                        HorizontalAlignment="Left">
             </TextBlock>
-            
+            <!-- Show sscreen time of day and average screen timme usage per active hour -->
             <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                         Orientation="Horizontal"
                         Margin="0 10 0 10">
@@ -68,7 +66,7 @@
                            VerticalAlignment="Center">
                 </TextBlock>
             </StackPanel>
-            
+            <!-- Generate pie chart using LiveCharts2 -->
             <UserControl Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
                          Width="680" Height="300" 
                          HorizontalAlignment="Center"
@@ -81,7 +79,7 @@
                               LegendTextSize="{StaticResource TextFontSize}">
                 </lvc:PieChart>
             </UserControl>
-            
+            <!-- Show list of most used applications -->
             <StackPanel Grid.Row="3" Grid.Column="1">
                 <TextBlock Text="Most used apps"
                            Foreground="White"
@@ -107,7 +105,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            
+            <!-- Show list of most common window titles -->
             <StackPanel Grid.Row="3" Grid.Column="2">
                 <TextBlock Text="Most common windows"
                            Foreground="White"
@@ -133,7 +131,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            
+            <!-- Show column graph of screen usage by hour -->
             <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
                 <TextBlock Text="Usage breakdown"
                            Foreground="White"
@@ -152,7 +150,7 @@
                     </lvc:CartesianChart>
                 </UserControl>
             </StackPanel>
-            
+            <!-- Show what time the usage report is generated -->
             <StackPanel Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
                 <TextBlock Text="{Binding AnalysisTimeString}"
                            Foreground="#88889f"

@@ -27,7 +27,7 @@
                 <RowDefinition Height="150"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
-            
+            <!-- Show welcome message -->
             <StackPanel Grid.Column="0"
                         Grid.ColumnSpan="4"
                         Grid.Row="1" 
@@ -43,6 +43,7 @@
                            RenderOptions.BitmapScalingMode="HighQuality"
                            Margin="0 0 8 0">
                 </TextBlock>
+                <!-- Show TimeTrack logo -->
                 <Image Source="/Images/logo.png" 
                        Height="35">
                 </Image>
@@ -56,7 +57,7 @@
                            Margin="6 0 0 0">
                 </TextBlock>
             </StackPanel>
-            
+            <!-- Allow user to enter their name -->
             <StackPanel Grid.Column="0"
                         Grid.ColumnSpan="4"
                         Grid.Row="2"
@@ -78,12 +79,13 @@
                          Width="200" Height="30" FontSize="20" FontFamily="{StaticResource MainFont}" 
                          MaxLength="18" 
                          Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}">
+                    <!-- Continue to the next page if the Enter key is pressed -->
                     <TextBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=StartProgram}" />
                     </TextBox.InputBindings>
                 </TextBox>
             </StackPanel>
-            
+            <!-- Button to start the program and validate name input -->
             <Button Grid.Column="4" Grid.Row="4" Style="{StaticResource NextButtonTheme}" 
                     Width="31"
                     Height="31"
@@ -96,8 +98,7 @@
                     <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
                 </Button.Clip>
             </Button>
-            
-            
+            <!-- Show titlebar for user to move the menu around and close the program if they wish -->
             <Border x:Name="TitleBar"
                     Grid.Column="0" 
                     Grid.ColumnSpan="4" 
@@ -106,7 +107,6 @@
                     CornerRadius="10"
                     MouseLeftButtonDown="TitleBar_DragWindow">
             </Border>
-            
             <TextBlock
                 Grid.Column="0"
                 Grid.ColumnSpan="4"
@@ -122,7 +122,6 @@
                 Background="Transparent"
                 MouseLeftButtonDown="TitleBar_DragWindow">
             </TextBlock>
-            
             <Button Style="{StaticResource ExitButtonTheme}"
                     Grid.Column="4"
                     Grid.Row="0"

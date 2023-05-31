@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace WPFUI.Core;
 
-//Implement INotifyPropertyChanged Interface to update UI when data binding
+// Implement ObservableObject to MVVM programming pattern standards to update UI when data binding
 public class ObservableObject : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;

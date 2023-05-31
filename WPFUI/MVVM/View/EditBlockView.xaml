@@ -16,11 +16,13 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True">
+        <!-- Import the converter for the program icons to be shown -->
     <Window.Resources>
         <local:ProgramToIconConverter x:Key="ProgramToIconConverter" />
     </Window.Resources>
     <Border Background="{StaticResource BGColourBrush}" CornerRadius="10" BorderBrush="White" BorderThickness="2">
         <Grid>
+            <!-- Create title bar to allow the window to be moved around and to be exited -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="*"/>
@@ -68,6 +70,7 @@
                 </Image>
             </Button>
             
+            <!-- Create the main content of the window in a scrollviewer to allow for overflow -->
             <ScrollViewer Grid.Row="1"
                           Grid.Column="0"
                           Grid.ColumnSpan="2"
@@ -89,10 +92,12 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
+                        <!-- Create rows at the bottom of the page for the save and delete buttons -->
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="15"></RowDefinition>
                     </Grid.RowDefinitions>
                     
+                    <!-- Create input for the block name and bind the value to the block element in the viewmodel -->
                     <StackPanel Grid.Column="1"
                                 Grid.Row="1"
                                 Orientation="Vertical"
@@ -110,6 +115,7 @@
                                  Width="250" Height="30" FontSize="20" FontFamily="{StaticResource MainFont}" 
                                  MaxLength="20" 
                                  Text="{Binding UpdatedBlockData.Block.Name, Mode=TwoWay}">
+                            <!-- Runs a command when the user moves away from the box to do input validation -->
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="LostFocus">
                                     <cmd:EventToCommand Command="{Binding DataContext.BlockNameTextBoxUnfocused, RelativeSource={RelativeSource AncestorType=Window}}" PassEventArgsToCommand="True" />
@@ -117,6 +123,8 @@
                             </i:Interaction.Triggers>
                         </TextBox>
                     </StackPanel>
+                    
+                    <!-- Create input for the user to add applications to be monitored/blocked -->
                     <TextBlock Text="Applications"
                                Grid.Column="1"
                                Grid.Row="2"
@@ -129,6 +137,7 @@
                                Margin="0 15 0 0"
                                RenderOptions.BitmapScalingMode="HighQuality">
                     </TextBlock>
+                    <!-- Open a browse menu when this is clicked -->
                     <Button Style="{StaticResource AddButtonTheme}"
                             Grid.Column="1"
                             Grid.Row="2"
@@ -144,6 +153,7 @@
                         </Button.Clip>
                     </Button>
                     <StackPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch">
+                        <!-- Use an ItemsControl to show all of the programs in the block -->
                         <ItemsControl x:Name="EditBlockViewItemsControl"
                                       ItemsSource="{Binding UpdatedBlockData.Programs}"
                                       HorizontalAlignment="Stretch">
@@ -162,6 +172,7 @@
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
+                                        <!-- Program icon -->
                                         <Border Grid.Column="0"
                                                 Height="22"
                                                 Width="22"
@@ -180,12 +191,14 @@
                                                 </ImageBrush>
                                             </Border.Background>
                                         </Border>
+                                        <!-- Name of the program -->
                                         <TextBlock Grid.Column="1" Text="{Binding}"
                                                    Margin="5 0 0 0"
                                                    VerticalAlignment="Center"
                                                    FontSize="20"
                                                    FontFamily="{StaticResource MainFont}">
                                         </TextBlock>
+                                        <!-- Delete program from block button  -->
                                         <Button Grid.Column="2"
                                                 Width="20"
                                                 Height="20"
@@ -202,6 +215,8 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
+
+                    <!-- ComboBox for user to select what mode/type of block they want to create -->
                     <TextBlock Text="Block Type"
                                Grid.Column="1"
                                Grid.Row="4"
@@ -221,12 +236,15 @@
                               Margin="0 5 0 0"
                               HorizontalAlignment="Left"
                               Width="510" Height="30" FontSize="20" FontFamily="{StaticResource MainFont}">
+                              <!-- Runs a command to clear the block criteria when the Block Type is changed -->
                               <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <cmd:EventToCommand Command="{Binding DataContext.BlockTypeChangedCommand, RelativeSource={RelativeSource AncestorType=Window}}" PassEventArgsToCommand="True" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                     </ComboBox>
+
+                    <!-- Box for the user to modify the block criteria -->
                     <TextBlock Text="Block Criteria"
                                Grid.Column="1"
                                Grid.Row="6"
@@ -239,13 +257,16 @@
                                Margin="0 15 0 0"
                                RenderOptions.BitmapScalingMode="HighQuality">
                     </TextBlock>
+                    <!-- This is put in a ContentControl as I originally planned to allow the user to have multiple criteria for block -->
                     <ContentControl Content="{Binding UpdatedBlockData, Mode=TwoWay}"
                                     Grid.Column="1"
                                     Grid.Row="7"
                                     Margin="0 5 0 0">
                         <ContentControl.Resources>
+                            <!-- There would need to be multiple DataTemplates for each type of block as the data for their criteria is saved differently -->
                             <DataTemplate x:Key="UsageBlockTemplate">
                                 <Grid>
+                                    <!-- Input for user to modify the block criteria -->
                                     <ItemsControl ItemsSource="{Binding Conditions, Mode=TwoWay}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
@@ -271,6 +292,8 @@
                                                                FontSize="20"
                                                                FontFamily="{StaticResource MainFont}">
                                                     </TextBlock>
+                                                    <!-- TextBoxes for input of how long they want to limit their usage by -->
+                                                    <!-- Function run on LostFocus for input validation -->
                                                     <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 5 0 0">
                                                         <TextBox Margin="10 0 5 0"
                                                                  HorizontalAlignment="Left"
@@ -307,6 +330,9 @@
                                                                FontSize="20"
                                                                FontFamily="{StaticResource MainFont}">
                                                     </TextBlock>
+                                                    <!-- ListBox for user to select which days they want the block to be active -->
+                                                    <!-- TimeCriteriaListBox_Loaded selects all the days that were previously selected/saved from the database. 
+                                                         This is because the selected items cannot be set from a binding value and must be done from code instead. -->
                                                     <ListBox Grid.Row="4" 
                                                              Margin="10 5 10 0" 
                                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -318,11 +344,13 @@
                                                              x:Name="TimeCriteriaListBox"
                                                              Loaded="TimeCriteriaListBox_Loaded"
                                                              SelectionChanged="TimeCriteriaListBox_SelectionChanged">
+                                                        <!-- Set the ListBox to show items horizontally -->
                                                         <ListBox.ItemsPanel>
                                                             <ItemsPanelTemplate>
                                                                 <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
                                                             </ItemsPanelTemplate>
                                                         </ListBox.ItemsPanel>
+                                                        <!-- Set custom style of ListBox to look better than the default windows look -->
                                                         <ListBox.Resources>
                                                             <Style TargetType="ListBoxItem">
                                                                 <Setter Property="Margin" Value=" 0 0 5 0" />
@@ -343,6 +371,7 @@
                                                                 </Setter>
                                                             </Style>
                                                         </ListBox.Resources>
+                                                        <!-- Set the list of days available to be selected -->
                                                         <ListBox.ItemsSource>
                                                             <x:Array Type="{x:Type sys:String}">
                                                                 <sys:String>Mon</sys:String>
@@ -361,12 +390,14 @@
                                     </ItemsControl>
                                 </Grid>
                             </DataTemplate>
+                            <!-- Stub DataTemplate for other types of blocks -->
                             <DataTemplate x:Key="TimeBlockStatus">
                                 <Grid>
                                     <TextBlock Foreground="White" Text="test"></TextBlock>
                                 </Grid>
                             </DataTemplate>
                         </ContentControl.Resources>
+                        <!-- Set the DataTemplate of the criteria editing menu based on the type of Block to support different types of blocks -->
                         <ContentControl.Style>
                             <Style TargetType="ContentControl">
                                 <Style.Triggers>
@@ -380,6 +411,8 @@
                             </Style>
                         </ContentControl.Style>
                     </ContentControl>
+
+                    <!-- Button to delete the block with a confirmation box -->
                     <Button Style="{StaticResource BinButtonTheme}"
                             Grid.Column="1"
                             Grid.Row="9"
@@ -395,6 +428,8 @@
                             <RectangleGeometry RadiusX="8" RadiusY="8" Rect="0,0,31,31"></RectangleGeometry>
                         </Button.Clip>
                     </Button>
+
+                    <!-- Button to save the block with input validation run when it is clicked -->
                     <Button Style="{StaticResource SaveButtonTheme}"
                             Grid.Column="1"
                             Grid.Row="9"
