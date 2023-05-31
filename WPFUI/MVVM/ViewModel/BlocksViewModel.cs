@@ -338,31 +338,45 @@ namespace WPFUI.MVVM.ViewModel
         // Get the icon of an executable from its path
         public static BitmapImage GetExecutableIcon(string exePath)
         {
-            // Extract the icon from the executable
-            Icon exeIcon = Icon.ExtractAssociatedIcon(exePath);
-            // Convert the icon to a bitmap source
-            BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHIcon(
-                exeIcon.Handle,
-                System.Windows.Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
-            // Convert the bitmap source to a bitmap image
-            BitmapImage bitmapImage = new BitmapImage();
-            using (var stream = new MemoryStream())
+            BitmapImage bitmapImage;
+            try
             {
-                BitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
-                encoder.Save(stream);
-                stream.Position = 0;
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = stream;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
+                // Extract the icon from the executable
+                Icon exeIcon = Icon.ExtractAssociatedIcon(exePath);
+                // Convert the icon to a bitmap source
+                BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHIcon(
+                    exeIcon.Handle,
+                    System.Windows.Int32Rect.Empty,
+                    BitmapSizeOptions.FromEmptyOptions());
+                // Convert the bitmap source to a bitmap image
+                bitmapImage = new BitmapImage();
+                using (var stream = new MemoryStream())
+                {
+                    BitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                    encoder.Save(stream);
+                    stream.Position = 0;
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = stream;
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.EndInit();
+                }
+            }
+            catch (Exception e)
+            {
+                // Logs the error
+                string errorWithTimestamp = $"[E] {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Error getting executable icon from {exePath} - {e}";
+                using (StreamWriter writer = File.AppendText("user\\log.txt"))
+                {
+                    writer.WriteLine(errorWithTimestamp);
+                }
+                bitmapImage = BitmapImageFromUri(new Uri("pack://application:,,,/TimeTrack;component/Images/iconbackground-white.ico"));
             }
             return bitmapImage;
         }
 
         // Function to create a bitmap image from a URI
-        public BitmapImage BitmapImageFromUri(Uri uri)
+        public static BitmapImage BitmapImageFromUri(Uri uri)
         {
             BitmapImage bitmapImage = new BitmapImage();
             bitmapImage.BeginInit();

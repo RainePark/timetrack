@@ -382,7 +382,7 @@ public class ProgramUsageModel : ObservableObject
             // Logs an error if the path is null
             else
             {
-                string errorWithTimestamp = $"[E] {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Could not access new process \"{processName}\"";
+                string errorWithTimestamp = $"[E] {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Exectable \"{processName}\" path is null";
                 using (StreamWriter writer = File.AppendText("user\\log.txt"))
                 {
                     writer.WriteLine(errorWithTimestamp);
@@ -393,42 +393,53 @@ public class ProgramUsageModel : ObservableObject
         else
         {
             ProgramDetails programDetails = knownPrograms[processName];
-            // Create a clone of the program details to compare to the original
-            ProgramDetails newProgramDetails = programDetails.Clone();
-            /* NEED TO CHECK IF PATH ACTUALLY EXISTS FIRST - ALSO NEED TO CHECK ALL REFERENCES TO PATH TO IGNORE PATH NOT FOUND */
-            // path is only really in this function in this file and the other files said in logbook
-            // Updates the path if it has been changed
-            if (programDetails.path != executablePath)
+            // Check if the executable path exists
+            if (File.Exists(programDetails.path))
             {
-                newProgramDetails.path = executablePath;
-            }
-            /* NEED TO CHECK EXECUTABLE PATH HERE */
-            // Get updated executable details based on the new path
-            FileVersionInfo executableDetails = FileVersionInfo.GetVersionInfo(executablePath); 
-            if (String.IsNullOrEmpty(executableDetails.FileDescription))
-            {
-                newProgramDetails.executableDescription = executableDetails.FileName.Split("\\").Last();
+                // Create a clone of the program details to compare to the original
+                ProgramDetails newProgramDetails = programDetails.Clone();
+                // Updates the path if it has been changed
+                if (programDetails.path != executablePath)
+                {
+                    newProgramDetails.path = executablePath;
+                }
+                // Get updated executable details based on the new path
+                FileVersionInfo executableDetails = FileVersionInfo.GetVersionInfo(executablePath); 
+                // Updates the executable description and system status
+                if (String.IsNullOrEmpty(executableDetails.FileDescription))
+                {
+                    newProgramDetails.executableDescription = executableDetails.FileName.Split("\\").Last();
+                }
+                else
+                {
+                    newProgramDetails.executableDescription = executableDetails.FileDescription;
+                }
+                newProgramDetails.system = executablePath.Contains("C:\\Windows\\");
+                
+                // Update the database with the new program details if there are any changes
+                if (!programDetails.HasSameValuesAs(newProgramDetails))
+                {
+                    knownPrograms[processName] = newProgramDetails;
+                    using (StreamWriter writer = new StreamWriter("user\\programlist.json"))
+                    {
+                        writer.WriteLine(JsonConvert.SerializeObject(knownPrograms));
+                    }
+                    string updateWithTimestamp = $"[I] {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} \"{processName}\" has been updated in programlist.json";
+                    using (StreamWriter writer = File.AppendText("user\\log.txt"))
+                    {
+                        writer.WriteLine(updateWithTimestamp);
+                    }
+                }
             }
             else
             {
-                newProgramDetails.executableDescription = executableDetails.FileDescription;
-            }
-            newProgramDetails.system = executablePath.Contains("C:\\Windows\\");
-            
-            // Update the database with the new program details if there are any changes
-            if (!programDetails.HasSameValuesAs(newProgramDetails))
-            {
-                knownPrograms[processName] = newProgramDetails;
-                using (StreamWriter writer = new StreamWriter("user\\programlist.json"))
-                {
-                    writer.WriteLine(JsonConvert.SerializeObject(knownPrograms));
-                }
-                string updateWithTimestamp = $"[I] {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Process \"{processName}\" has been updated in programlist.json";
+                // Log an error if the executable path no longer exists
+                string errorWithTimestamp = $"[E] {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Could not find path {programDetails.path} for executable \"{processName}\"";
                 using (StreamWriter writer = File.AppendText("user\\log.txt"))
                 {
-                    writer.WriteLine(updateWithTimestamp);
+                    writer.WriteLine(errorWithTimestamp);
                 }
-            }
+            }            
         }
     }
 
