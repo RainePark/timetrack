@@ -212,7 +212,11 @@ namespace WPFUI.MVVM.ViewModel
             // Add the "Other" category if there are any remaining programs
             if (inputDictionaryRemaining.Values.ToList().Count > 0)
             {
-                outputSeries.Add(new PieSeries<double> { Values = new double[] { (double)Math.Round(inputDictionaryRemaining.Values.Sum() / 60.0, 1) }, Name = "Other" });
+                // Calculate the total usage of the remaining programs
+                double otherUsage = (double)Math.Round(inputDictionaryRemaining.Values.Sum() / 60.0, 1);
+                // If total usage is rounded to 0, set it to 0.1 to avoid showing 0 on a pie chart
+                if (otherUsage == 0) { otherUsage = 0.1; }
+                outputSeries.Add(new PieSeries<double> { Values = new double[] { (double)otherUsage }, Name = "Other" });
             }
             return outputSeries;
         }
