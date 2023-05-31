@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WPFUI.Core;
@@ -163,12 +166,50 @@ public class BlocksModel : ObservableObject
                             // Checks if the block is active on the current day by checking if the day is in the time criteria
                             if (blockCondition.TimeCriteria.Contains(DateTime.Now.ToString("dddd").Substring(0, 3)))
                             {
+                                // Calculates the seconds of the limit by multiplying the hours by 60*60 and the minutes by 60
+                                int usageLimit = ((Convert.ToInt32(blockCondition.Criteria[0])*60*60)+(Convert.ToInt32(blockCondition.Criteria[1])*60));
+                                // Checks if the block has 10, 30, 60, 300, or 600 seconds left of usage and shows a warning notification
+                                switch (usageLimit - totalUsage)
+                                {
+                                    case 5:
+                                    case 10:
+                                    case 30:
+                                        ShowWarningNotification(
+                                            "TimeTrack Usage Warning",
+                                            "You have " + (usageLimit - totalUsage) + " seconds left of usage for " + program + " and other applications in the " + block.Name + " block."
+                                        );
+                                        break;
+                                    case 60:
+                                        ShowWarningNotification(
+                                            "TimeTrack Usage Warning",
+                                            "You have 1 minute left of usage for " + program + " and other applications in the " + block.Name + " block."
+                                        );
+                                        break;
+                                    case 300:
+                                        ShowWarningNotification(
+                                            "TimeTrack Usage Warning",
+                                            "You have 5 minutes left of usage for " + program + " and other applications in the " + block.Name + " block."
+                                        );
+                                        break;
+                                    case 600:
+                                        ShowWarningNotification(
+                                            "TimeTrack Usage Warning",
+                                            "You have 10 minutes left of usage for " + program + " and other applications in the " + block.Name + " block."
+                                        );
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 // Checks if the usage is greater than the limit
-                                // It calculates the seconds of the limit by multiplying the hours by 60*60 and the minutes by 60
-                                if (totalUsage > ((Convert.ToInt32(blockCondition.Criteria[0])*60*60)+(Convert.ToInt32(blockCondition.Criteria[1])*60)))
+                                if (totalUsage > usageLimit)
                                 {
                                     // Terminates the program if the usage is greater than the limit
                                     TerminateProgramByPID(pid);
+                                    // Shows a warning notification
+                                    ShowWarningNotification(
+                                        "TimeTrack Usage Warning",
+                                        "You have reached the usage limit for the " + block.Name + " block."
+                                    );
                                 }
                             }
                         }
@@ -182,16 +223,80 @@ public class BlocksModel : ObservableObject
                             /// Checks if the block is active on the current day by checking if the day is in the time criteria
                             if (blockCondition.TimeCriteria.Contains(DateTime.Now.ToString("dddd").Substring(0, 3)))
                             {
+                                int usageLimit = ((Convert.ToInt32(blockCondition.Criteria[0])*60*60)+(Convert.ToInt32(blockCondition.Criteria[1])*60));
+                                // Checks if the program has 10, 30, 60, 300, or 600 seconds left of usage and shows a warning notification
+                                switch (usageLimit - Convert.ToInt32(blockDict[program]))
+                                {
+                                    case 5:
+                                    case 10:
+                                    case 30:
+                                        ShowWarningNotification(
+                                            "TimeTrack Usage Warning",
+                                            "You have " + (usageLimit - Convert.ToInt32(blockDict[program])) + " seconds left of usage for " + program + " in the " + block.Name + " block."
+                                        );
+                                        break;
+                                    case 60:
+                                        ShowWarningNotification(
+                                            "TimeTrack Usage Warning",
+                                            "You have 1 minute left of usage for " + program + " in the " + block.Name + " block."
+                                        );
+                                        break;
+                                    case 300:
+                                        ShowWarningNotification(
+                                            "TimeTrack Usage Warning",
+                                            "You have 5 minutes left of usage for " + program + " in the " + block.Name + " block."
+                                        );
+                                        break;
+                                    case 600:
+                                        ShowWarningNotification(
+                                            "TimeTrack Usage Warning",
+                                            "You have 10 minutes left of usage for " + program + " in the " + block.Name + " block."
+                                        );
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 // Checks if the usage of the individual program is greater than the limit
-                                if (blockDict[program] > ((Convert.ToInt32(blockCondition.Criteria[0])*60*60)+(Convert.ToInt32(blockCondition.Criteria[1])*60)))
+                                if (blockDict[program] > usageLimit)
                                 {
                                     // Terminates the program if the usage is greater than the limit
                                     TerminateProgramByPID(pid);
+                                    // Shows a warning notification
+                                    ShowWarningNotification(
+                                        "TimeTrack Usage Warning",
+                                        "You have reached the usage limit for " + program + " in the " + block.Name + " block."
+                                    );
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+
+    // Function that will show a warning notification
+    public static void ShowWarningNotification(string title, string message)
+    {
+        using (NotifyIcon notifyIcon = new NotifyIcon
+               {
+                   Icon = SystemIcons.Warning, 
+                   Visible = true, 
+                   BalloonTipTitle = title, 
+                   BalloonTipText = message
+               })
+        {
+            notifyIcon.ShowBalloonTip(5000);
+            // Create a timer to dispose of the NotifyIcon object after 5 seconds
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Interval = 5000;
+            timer.Elapsed += (sender, e) => notifyIcon.Dispose();
+            timer.Start();
+            // Wait for the timer to elapse before exiting the method
+            while (timer.Enabled)
+            {
+                Application.DoEvents();
+                Thread.Sleep(100);
             }
         }
     }
