@@ -204,9 +204,8 @@ public class ProgramUsageModel : ObservableObject
         // Initiates connection with the database
         using (var connection = new SQLiteConnection("Data Source=user\\usagedata.db"))
         {
-            connection.Open();
             // Gets the total number of program usage entries since midnight, filtering out system apps if the user has chosen to
-            string query = $"SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time AND system = {SettingsModel.GetUserSettings().SystemApps};";
+            string query = $"SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time AND (system = false OR system = {SettingsModel.GetUserSettings().SystemApps});";
             using (var command = new SQLiteCommand(query, connection))
             {
                 // The start time to compare to is set to midnight local time and converted to UTC as that is how it is stored in the database
