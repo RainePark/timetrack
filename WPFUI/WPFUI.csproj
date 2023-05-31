@@ -13,7 +13,7 @@
         <Authors>Raine Park</Authors>
         <ApplicationIcon>Images\logo-ico.ico</ApplicationIcon>
         <!-- This line toggles the administrator requirement -->
-        <!--<ApplicationManifest>app.manifest</ApplicationManifest>-->
+        <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
 
     <ItemGroup>
