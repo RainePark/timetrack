@@ -208,6 +208,7 @@ public class ProgramUsageModel : ObservableObject
             string query = $"SELECT COUNT(*) FROM detailed_usage WHERE time > @specified_time AND (system = false OR system = {SettingsModel.GetUserSettings().SystemApps});";
             using (var command = new SQLiteCommand(query, connection))
             {
+                connection.Open();
                 // The start time to compare to is set to midnight local time and converted to UTC as that is how it is stored in the database
                 // This allows for changes in time zone to still show accurate data for that "day"
                 command.Parameters.AddWithValue("@specified_time", DateTime.Now.Date.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"));
