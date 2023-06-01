@@ -214,6 +214,71 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
+                        
+                        <TextBlock Text="Recommended to Add"
+                                   Foreground="White" 
+                                   FontSize="{StaticResource SubheadingFontSize}"
+                                   FontFamily="{StaticResource MainFont}"
+                                   FontWeight="Medium"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Margin="0 15 0 0"
+                                   RenderOptions.BitmapScalingMode="HighQuality">
+                        </TextBlock>
+                        <ItemsControl ItemsSource="{Binding UpdatedBlockData.RecommendedBlockApplications}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="6"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0 5 10 0">
+                                        <Grid Background="White"
+                                              HorizontalAlignment="Left"
+                                              Height="30"
+                                              Width="80">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <!-- Program icon -->
+                                            <Border Grid.Column="0"
+                                                    Height="22"
+                                                    Width="22"
+                                                    BorderThickness="0"
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Left"
+                                                    Margin="5 0 0 0">
+                                                <Border.Background>
+                                                    <ImageBrush Stretch="UniformToFill">
+                                                        <ImageBrush.ImageSource>
+                                                            <MultiBinding Converter="{StaticResource ProgramToIconConverter}">
+                                                                <Binding Path="." />
+                                                                <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                                                            </MultiBinding>
+                                                        </ImageBrush.ImageSource>
+                                                    </ImageBrush>
+                                                </Border.Background>
+                                            </Border>
+                                            <!-- Delete program from block button  -->
+                                            <Button Grid.Column="2"
+                                                    Width="20"
+                                                    Height="20"
+                                                    Margin="0 0 10 0"
+                                                    BorderThickness="0"
+                                                    HorizontalAlignment="Right"
+                                                    VerticalAlignment="Center"
+                                                    Style="{StaticResource AddSmallButtonTheme}"
+                                                    Command="{Binding DataContext.AddRecommendedExecutableCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                    CommandParameter="{Binding}">
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
 
                     <!-- ComboBox for user to select what mode/type of block they want to create -->

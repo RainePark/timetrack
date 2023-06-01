@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WPFUI.Core;
 using WPFUI.MVVM.Model;
@@ -54,6 +56,7 @@ namespace WPFUI.MVVM.ViewModel
         
         // Set up commands for the view to bind to
         public ICommand AddExecutablePathCommand { get; set; }
+        public ICommand AddRecommendedExecutableCommand { get; set; }
         public ICommand RemoveExecutablePathCommand { get; set; }
         public ICommand BlockNameTextBoxUnfocused { get; set; } 
         public ICommand SaveBlockCommand { get; set; }
@@ -70,6 +73,7 @@ namespace WPFUI.MVVM.ViewModel
             SaveBlockCommand = new RelayCommand(SaveBlock_Click);
             DeleteBlockCommand = new RelayCommand(DeleteBlock_Click);
             AddExecutablePathCommand = new RelayCommand(AddExecutablePath);
+            AddRecommendedExecutableCommand = new RelayCommand(AddRecommendedExecutable);
             RemoveExecutablePathCommand = new RelayCommand(RemoveExecutablePath);
             BlockTypeChangedCommand = new RelayCommand(BlockTypeChanged);
             Parent = parent;
@@ -288,6 +292,33 @@ namespace WPFUI.MVVM.ViewModel
                 UpdatedBlockData.Programs = new ObservableCollection<string>(UpdatedBlockData.Block.Programs);
             }
         }
+
+        public void AddRecommendedExecutable(object parameter)
+        {
+            // Get the process name of the recommended application
+            string processName = (string)parameter;
+                
+            // Stop the user from adding TimeTrack or a system app as a blocked application
+            if (processName == "TimeTrack")
+            {
+                MessageBox.Show("TimeTrack cannot be added as a blocked application.");
+                return;
+            }
+            if (ProgramUsageModel.GetKnownPrograms()[processName].system)
+            {
+                MessageBox.Show("System apps cannot be added as blocked application.");
+                return;
+            }
+            // Stop the user from adding the same application twice
+            if (UpdatedBlockData.Block.Programs.Contains(processName))
+            {
+                MessageBox.Show("This block already contains this application.");
+                return;
+            }
+            // Add the application to the block
+            UpdatedBlockData.Block.Programs.Add(processName);
+            UpdatedBlockData.Programs = new ObservableCollection<string>(UpdatedBlockData.Block.Programs);
+        }
         
         string GetProcessName(string executablePath)
         {
@@ -343,7 +374,7 @@ namespace WPFUI.MVVM.ViewModel
                 BlocksModel.WriteBlockStatus(newBlockStatus);
             }
         }
-
+        
         public void BlockTypeChanged(object parameter)
         {
             // Reset the block conditions if the block type is changed
@@ -415,6 +446,9 @@ namespace WPFUI.MVVM.ViewModel
                 OnPropertyChanged(nameof(Programs));
             }
         }
+        
+        // Create an observable collection of recommended applications to block
+        public ObservableCollection<string> RecommendedBlockApplications { get; set; }
 
         // Update the block type of the block object when the type is changed
         private string _type;
@@ -453,6 +487,7 @@ namespace WPFUI.MVVM.ViewModel
             Block = block;
             try { Programs = new ObservableCollection<string>(Block.Programs); }
             catch { Programs = new ObservableCollection<string>(); }
+            RecommendedBlockApplications = GetRecommendedBlocks(block.Programs);
             try { Type = Block.Type; }
             catch { Type = "Usage Limit (Combined)"; }
             Conditions = new ObservableCollection<KeyValuePair<int, BlockCondition>>(Block.Conditions);
@@ -462,6 +497,39 @@ namespace WPFUI.MVVM.ViewModel
                 "Usage Limit (Combined)",
                 "Usage Limit (Per App)"
             };
+        }
+        
+        public ObservableCollection<string> GetRecommendedBlocks(List<string> currentApplications)
+        {
+            // Get dictionary of most used programs
+            Dictionary<string, int> mostUsedDictionary = UsageViewModel.GetProgramUsageDictionary();
+            ObservableCollection<string> outputCollection = new ObservableCollection<string>();
+            // Loop through and check that none of the programs recommended are already in the block
+            List<string> keysToRemove = new List<string>();
+            foreach (string key in mostUsedDictionary.Keys)
+            {
+                if (currentApplications.Contains(key))
+                {
+                    keysToRemove.Add(key);
+                }
+            }
+            // Remove dupliate programs
+            foreach (string key in keysToRemove)
+            {
+                mostUsedDictionary.Remove(key);
+            }
+            // Remove TimeTrack from recommended programs
+            if (mostUsedDictionary.Keys.Contains("TimeTrack"))
+            {
+                mostUsedDictionary.Remove("TimeTrack");
+            }
+            // Get the top 6 most used programs and add them to the outputCollection for display as a recommendation
+            Dictionary<string, int> mostUsedDictionaryTrimmed = mostUsedDictionary.Take(6).ToDictionary(pair => pair.Key, pair => pair.Value);
+            foreach (KeyValuePair<string, int> pair in mostUsedDictionaryTrimmed)
+            {
+                outputCollection.Add(pair.Key);
+            }
+            return outputCollection;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

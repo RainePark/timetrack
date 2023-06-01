@@ -85,7 +85,7 @@ namespace WPFUI.MVVM.ViewModel
             GenerateBarChart(AppUsageByHour);
         }
 
-        public Dictionary<string, int> GetProgramUsageDictionary()
+        public static Dictionary<string, int> GetProgramUsageDictionary()
         {
             // Query to get the program usage data from the database for the current day
             string query = "SELECT program, COUNT(*) as program_count " +
@@ -196,7 +196,7 @@ namespace WPFUI.MVVM.ViewModel
         {
             List<ISeries> outputSeries = new List<ISeries>();
             // Calculate the number of programs to be displayed in the pie chart
-            int x = (int)Math.Ceiling(Math.Log(inputDictionary.Count, 2) * 1.6) + 1;
+            int x = (int)Math.Floor(Math.Log(inputDictionary.Count, 2) * 1.6) + 1;
             // Get the top x most used programs and add them to the pie chart
             Dictionary<string, int> inputDictionaryTrimmed = inputDictionary.Take(x).ToDictionary(pair => pair.Key, pair => pair.Value);
             // Get the remaining programs and add them to the "Other" category
@@ -207,7 +207,10 @@ namespace WPFUI.MVVM.ViewModel
                 // Truncate the program name if it is too long
                 string key = pair.Key.Length > 30 ? pair.Key.Substring(0, 30) : pair.Key;
                 // Add the program to the pie chart
-                outputSeries.Add(new PieSeries<double> { Values = new double[] { (double)Math.Round(pair.Value / 60.0, 1) }, Name = pair.Key });
+                double progUsage = (double)Math.Round(pair.Value / 60.0, 1);
+                // If total usage is rounded to 0, set it to 0.1 to avoid showing 0 on a pie chart
+                if (progUsage == 0) { progUsage = 0.1; }
+                outputSeries.Add(new PieSeries<double> { Values = new double[] { (double)progUsage }, Name = pair.Key });
             }
             // Add the "Other" category if there are any remaining programs
             if (inputDictionaryRemaining.Values.ToList().Count > 0)
