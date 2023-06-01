@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Windows.Forms;
+using System.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WPFUI.Core;
@@ -278,27 +276,10 @@ public class BlocksModel : ObservableObject
     // Function that will show a warning notification
     public static void ShowWarningNotification(string title, string message)
     {
-        using (NotifyIcon notifyIcon = new NotifyIcon
-               {
-                   Icon = SystemIcons.Warning, 
-                   Visible = true, 
-                   BalloonTipTitle = title, 
-                   BalloonTipText = message
-               })
+        System.Windows.Application.Current.Dispatcher.Invoke(() =>
         {
-            notifyIcon.ShowBalloonTip(5000);
-            // Create a timer to dispose of the NotifyIcon object after 5 seconds
-            System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 5000;
-            timer.Elapsed += (sender, e) => notifyIcon.Dispose();
-            timer.Start();
-            // Wait for the timer to elapse before exiting the method
-            while (timer.Enabled)
-            {
-                Application.DoEvents();
-                Thread.Sleep(100);
-            }
-        }
+            ((MainWindow)System.Windows.Application.Current.MainWindow).MainWindowShowWarningNotification(title, message);
+        });
     }
 
     // Function that will terminate a program by it's process identifier (PID)

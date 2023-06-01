@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows;
@@ -12,7 +13,7 @@ namespace WPFUI
 {
     public partial class MainWindow : Window
     {
-        private TaskbarIcon taskbarIcon;
+        public TaskbarIcon taskbarIcon;
         private Mutex _mutex;
         public MainWindow()
         {
@@ -23,7 +24,6 @@ namespace WPFUI
             StreamResourceInfo streamResourceInfo = Application.GetResourceStream(new Uri("pack://application:,,,/Images/logo-ico.ico"));
             Stream stream = streamResourceInfo.Stream;
             taskbarIcon.Icon = new System.Drawing.Icon(stream);
-            taskbarIcon.Visibility = Visibility.Collapsed;
             ContextMenu contextMenu = (ContextMenu)FindResource("TaskbarIconContextMenu");
             taskbarIcon.ContextMenu = contextMenu;
             taskbarIcon.ToolTipText = "TimeTrack";
@@ -43,7 +43,13 @@ namespace WPFUI
                 Close();
             }
         }
-
+        
+        // Relay a notification from the taskbar icon
+        public void MainWindowShowWarningNotification(string title, string message)
+        {
+            taskbarIcon.ShowBalloonTip(title, message, BalloonIcon.Warning);
+        }
+        
         private void TaskbarIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
         {
             // If the TaskbarIcon control is double-clicked, show the main window
@@ -52,7 +58,7 @@ namespace WPFUI
             // Ensure that the window is focused when opened from tray
             Activate();
             // Hide the taskbar icon when the program is opened
-            taskbarIcon.Visibility = Visibility.Collapsed;
+            // taskbarIcon.Visibility = Visibility.Collapsed;
         }
 
         // Minimise the window to the tray when the minimise button is clicked and make the taskbar icon visible
